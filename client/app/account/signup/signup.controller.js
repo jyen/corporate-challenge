@@ -1,37 +1,43 @@
 'use strict';
 
-angular.module('corporateChallengeApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location, $window) {
-    $scope.user = {};
-    $scope.errors = {};
+(function () {
+    angular.module('corporateChallengeApp').controller('SignupCtrl', SignupCtrl);
+    SignupCtrl.$inject = ['$scope', 'Auth', '$location', '$window'];
 
-    $scope.register = function(form) {
-      $scope.submitted = true;
+    function SignupCtrl($scope, Auth, $location, $window) {
+        var vm = this;
+        $scope.user = {};
+        $scope.errors = {};
 
-      if(form.$valid) {
-        Auth.createUser({
-          name: $scope.user.name,
-          email: $scope.user.email,
-          password: $scope.user.password
-        })
-        .then( function() {
-          // Account created, redirect to home
-          $location.path('/');
-        })
-        .catch( function(err) {
-          err = err.data;
-          $scope.errors = {};
+        vm.register = function (form) {
+            $scope.submitted = true;
 
-          // Update validity of form fields that match the mongoose errors
-          angular.forEach(err.errors, function(error, field) {
-            form[field].$setValidity('mongoose', false);
-            $scope.errors[field] = error.message;
-          });
-        });
-      }
-    };
+            if (form.$valid) {
+                Auth.createUser({
+                    name: $scope.user.name,
+                    email: $scope.user.email,
+                    password: $scope.user.password
+                })
+                    .then(function () {
+                        // Account created, redirect to home
+                        $location.path('/');
+                    })
+                    .catch(function (err) {
+                        err = err.data;
+                        $scope.errors = {};
 
-    $scope.loginOauth = function(provider) {
-      $window.location.href = '/auth/' + provider;
-    };
-  });
+                        // Update validity of form fields that match the mongoose errors
+                        angular.forEach(err.errors, function (error, field) {
+                            form[field].$setValidity('mongoose', false);
+                            $scope.errors[field] = error.message;
+                        });
+                    });
+            }
+        };
+
+        vm.loginOauth = function (provider) {
+            $window.location.href = '/auth/' + provider;
+        };
+    }
+})();
+
