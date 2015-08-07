@@ -1,9 +1,11 @@
 'use strict';
 
 var User = require('./user.model');
+var Company = require('../company/company.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var _ = require('lodash');
 
 var validationError = function (res, err) {
     return res.status(422).json(err);
@@ -26,11 +28,18 @@ exports.index = function (req, res) {
 exports.create = function (req, res, next) {
     var newUser = new User(req.body);
     newUser.provider = 'local';
-    newUser.role = 'user';
-    newUser.save(function (err, user) {
-        if (err) return validationError(res, err);
-        var token = jwt.sign({_id: user._id}, config.secrets.session, {expiresInMinutes: 60 * 5});
-        res.json({token: token});
+    Company.findById(newUser.company, function (err, company) {
+        if (err) return next(err);
+        if (_.contains(company.admins, newUser.email)) {
+            newUser.role = 'admin';
+        } else {
+            newUser.role = 'user';
+        }
+        newUser.save(function (err, user) {
+            if (err) return validationError(res, err);
+            var token = jwt.sign({_id: user._id}, config.secrets.session, {expiresInMinutes: 60 * 5});
+            res.json({token: token});
+        });
     });
 };
 
