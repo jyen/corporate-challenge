@@ -66,10 +66,10 @@
                         <div class="col-md-10">
                             <select class="form-control"
                                     ng-model="signup.user.company"
-                                    ng-minlength="3"
                                     required
                                     name="company"
-                                    mongoose-error>
+                                    mongoose-error
+                                    ng-options="company._id as company.name for company in signup.companies">
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -90,6 +90,7 @@
                     <label>Phone Number</label>
                     <input type="number"
                            class="form-control"
+                           min="0"
                            ng-minlength="10"
                            ng-maxlength="10"
                            id="inputPhone"

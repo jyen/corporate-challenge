@@ -7,6 +7,7 @@
 
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
+var Company = require('../api/company/company.model');
 
 Thing.find({}).remove(function () {
     Thing.create({
@@ -47,3 +48,11 @@ User.find({}).remove(function () {
         }
     );
 });
+
+Company.find({}).remove(function () {
+    Company.create({
+        name: 'CA Technologies',
+        division: 'B',
+        admins: ['jack.yen@ca.com']
+    });
+})
