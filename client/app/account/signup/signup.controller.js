@@ -2,25 +2,25 @@
 
 (function () {
     angular.module('corporateChallengeApp').controller('SignupCtrl', SignupCtrl);
-    SignupCtrl.$inject = ['$scope', 'Auth', '$location', '$window', '$modal'];
+    SignupCtrl.$inject = ['Auth', '$location', '$window', '$modal'];
 
-    function SignupCtrl($scope, Auth, $location, $window, $modal) {
+    function SignupCtrl(Auth, $location, $window, $modal) {
         var vm = this;
-        $scope.user = {};
-        $scope.errors = {};
+        vm.user = {};
+        vm.errors = {};
 
         vm.register = register;
         vm.loginOauth = loginOauth;
         vm.addCompany = addCompany;
 
         function register(form) {
-            $scope.submitted = true;
+            vm.submitted = true;
 
             if (form.$valid) {
                 Auth.createUser({
-                    name: $scope.user.name,
-                    email: $scope.user.email,
-                    password: $scope.user.password
+                    name: vm.user.name,
+                    email: vm.user.email,
+                    password: vm.user.password
                 })
                     .then(function () {
                         // Account created, redirect to home
@@ -28,12 +28,12 @@
                     })
                     .catch(function (err) {
                         err = err.data;
-                        $scope.errors = {};
+                        vm.errors = {};
 
                         // Update validity of form fields that match the mongoose errors
                         angular.forEach(err.errors, function (error, field) {
                             form[field].$setValidity('mongoose', false);
-                            $scope.errors[field] = error.message;
+                            vm.errors[field] = error.message;
                         });
                     });
             }
