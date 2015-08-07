@@ -19,5 +19,9 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 // injector
 @import 'account/login/login.scss';
 @import 'admin/admin.scss';
+@import 'dashboard/dashboard.scss';
 @import 'main/main.scss';
+@import 'participate/participate.scss';
+@import 'view-participants/view-participants.scss';
+@import 'modal/modal.scss';
 // endinjector
