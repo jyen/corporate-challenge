@@ -1,61 +1,95 @@
 <div class="row">
     <div class="col-sm-12">
-        <form class="form" name="form" novalidate>
+        <form class="form" name="createCompany.companyForm" novalidate>
 
-            <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
-                                            'has-error': form.name.$invalid && submitted }">
+            <div class="form-group" ng-class="{ 'has-success': createCompany.companyForm.name.$valid && createCompany.submitted,
+                                            'has-error': createCompany.companyForm.name.$invalid && createCompany.submitted }">
                 <label>Company Name</label>
 
-                <input type="text" name="name" class="form-control" ng-model="user.name"
+                <input type="text" name="name" class="form-control" ng-model="createCompany.company.name"
                        required/>
 
-                <p class="help-block" ng-show="form.name.$error.required && submitted">
+                <p class="help-block"
+                   ng-show="createCompany.companyForm.name.$error.required && createCompany.submitted">
                     A name is required
                 </p>
             </div>
 
-            <div class="form-group" ng-class="{ 'has-success': form.division.$valid && submitted,
-                                            'has-error': form.division.$invalid && submitted }">
+            <div class="form-group" ng-class="{ 'has-success': createCompany.companyForm.division.$valid && createCompany.submitted,
+                                            'has-error': createCompany.companyForm.division.$invalid && createCompany.submitted }">
                 <label>Division</label>
 
-                <select class="form-control" ng-model="company.division"
+                <select class="form-control" ng-model="createCompany.company.division"
                         ng-minlength="3"
+                        name="division"
                         required
                         mongoose-error>
+                    <option value="A">A</option>
+                    <option value="AA">AA</option>
+                    <option value="B">B</option>
+                    <option value="B">BB</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
                 </select>
+
+                <p class="help-block"
+                   ng-show="createCompany.companyForm.division.$error.required && createCompany.submitted">
+                    A division is required
+                </p>
             </div>
 
-            <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
-                                            'has-error': form.email.$invalid && submitted }">
-                <label>Admins' Emails</label>
+            <label>Admins' Emails</label>
 
+            <div class="form-group"
+                 ng-repeat="admin in createCompany.company.admins track by $index"
+                 ng-class="{ 'has-success': createCompany.getEmailFieldByIndex($index).$valid && createCompany.submitted,
+                             'has-error': createCompany.getEmailFieldByIndex($index).$invalid && createCompany.submitted }">
                 <div class="row">
                     <div class="col-md-10">
-                        <input type="email" name="email" class="form-control" ng-model="user.email"
-                               required
-                               mongoose-error/>
+                        <div class="input-group">
+                            <input type="email" name="email{{$index}}" class="form-control"
+                                   ng-model="createCompany.company.admins[$index]"
+                                   required
+                                   mongoose-error/>
+                                <span class="input-group-btn">
+                                    <button style="height: 34px"
+                                            class="btn btn-danger"
+                                            ng-click="createCompany.removeAdmin($index)"
+                                            ng-disabled="createCompany.company.admins.length <= 1"
+                                            type="button">X
+                                    </button>
+                                </span>
+                        </div>
+
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-primary pull-right"
-                                ng-click="signup.addCompany()">Add Company
+                        <button ng-show="$last"
+                                class="btn btn-primary pull-right"
+                                ng-click="createCompany.addMoreAdmins()">Add More
                         </button>
                     </div>
                 </div>
 
-                <p class="help-block" ng-show="form.email.$error.email && submitted">
-                    Doesn't look like a valid email.
+                <p class="help-block"
+                   ng-show="createCompany.getEmailFieldByIndex($index).$error.email && createCompany.submitted">
+                    One or more of email addresses is not valid
                 </p>
 
-                <p class="help-block" ng-show="form.email.$error.required && submitted">
-                    What's your email address?
+                <p class="help-block"
+                   ng-show="createCompany.getEmailFieldByIndex($index).$error.required && createCompany.submitted">
+                    Email field is required
                 </p>
 
-                <p class="help-block" ng-show="form.email.$error.mongoose">
+                <p class="help-block" ng-show="createCompany.getEmailFieldByIndex($index).$error.mongoose">
                     {{ errors.email }}
                 </p>
             </div>
 
-
         </form>
+        <button class="btn btn-inverse"
+                type="submit"
+                ng-click="createCompany.confirmModal()">OK
+        </button>
+        <button class="btn btn-default" ng-click="createCompany.cancelModal()">Cancel</button>
     </div>
 </div>

@@ -37,11 +37,11 @@
                         });
                     });
             }
-        };
+        }
 
         function loginOauth(provider) {
             $window.location.href = '/auth/' + provider;
-        };
+        }
 
         function addCompany() {
             var modalInstance = $modal.open({
