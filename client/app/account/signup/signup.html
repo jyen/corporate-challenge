@@ -62,19 +62,19 @@
                                             'has-error': form.password.$invalid && submitted }">
                     <label>Company</label>
 
-                    <input type="password" name="password" class="form-control" ng-model="user.password"
-                           ng-minlength="3"
-                           required
-                           mongoose-error/>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <select class="form-control" ng-model="user.company"
+                                    ng-minlength="3"
+                                    required
+                                    mongoose-error>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary pull-right">Add Company</button>
+                        </div>
+                    </div>
 
-                    <p class="help-block"
-                       ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
-                        Password must be at least 3 characters.
-                    </p>
-
-                    <p class="help-block" ng-show="form.password.$error.mongoose">
-                        {{ errors.password }}
-                    </p>
                 </div>
 
 
