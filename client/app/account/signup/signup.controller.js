@@ -2,14 +2,18 @@
 
 (function () {
     angular.module('corporateChallengeApp').controller('SignupCtrl', SignupCtrl);
-    SignupCtrl.$inject = ['$scope', 'Auth', '$location', '$window'];
+    SignupCtrl.$inject = ['$scope', 'Auth', '$location', '$window', '$modal'];
 
-    function SignupCtrl($scope, Auth, $location, $window) {
+    function SignupCtrl($scope, Auth, $location, $window, $modal) {
         var vm = this;
         $scope.user = {};
         $scope.errors = {};
 
-        vm.register = function (form) {
+        vm.register = register;
+        vm.loginOauth = loginOauth;
+        vm.addCompany = addCompany;
+
+        function register(form) {
             $scope.submitted = true;
 
             if (form.$valid) {
@@ -35,9 +39,26 @@
             }
         };
 
-        vm.loginOauth = function (provider) {
+        function loginOauth(provider) {
             $window.location.href = '/auth/' + provider;
         };
+
+        function addCompany() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'app/create-company/create-company-modal.html',
+                controller: 'CreateCompanyCtrl',
+                controllerAs: 'createCompany',
+                size: 'lg'
+            });
+
+            modalInstance.result.then(function () {
+                //TODO: Call post for company API and refresh company list
+            }, function () {
+            });
+        }
+
+
     }
 })();
 
