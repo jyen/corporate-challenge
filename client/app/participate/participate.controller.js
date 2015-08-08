@@ -2,11 +2,14 @@
 
 (function () {
     angular.module('corporateChallengeApp').controller('ParticipateCtrl', ParticipateCtrl);
-    ParticipateCtrl.$inject = ['Auth', 'User', 'companyService', '$modal', 'sportService'];
-    function ParticipateCtrl(Auth, User, companyService, $modal, sportService) {
+    ParticipateCtrl.$inject = ['sportService'];
+    function ParticipateCtrl(sportService) {
 
         var vm = this;
         vm.sports = [];
+        vm.selectedSports = {};
+
+        vm.join = join;
 
 
         init();
@@ -22,6 +25,12 @@
                     vm.sports = data;
                     return vm.sports;
                 })
+        }
+
+        function join(sport, participate) {
+            sportService.updateSport(sport, participate).then(function () {
+
+            });
         }
     };
 })();

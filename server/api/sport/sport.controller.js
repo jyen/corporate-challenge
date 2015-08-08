@@ -80,6 +80,7 @@ exports.update = function (req, res) {
     if (req.body._id) {
         delete req.body._id;
     }
+
     Sport.findById(req.params.id, function (err, sport) {
         if (err) {
             return handleError(res, err);
@@ -87,7 +88,25 @@ exports.update = function (req, res) {
         if (!sport) {
             return res.status(404).send('Not Found');
         }
-        var updated = _.merge(sport, req.body);
+
+        var updated;
+        if (typeof req.query.participate !== 'undefined') {
+            if (req.query.participate === 'true') {
+                if (!_.findWhere(sport.members, {'_id': req.user._id})) {
+                    sport.members.push(req.user);
+                    updated = sport;
+                } else {
+                    updated = sport;
+                }
+            } else {
+                _.remove(sport.members, function (member) {
+                    return member.email === req.user.email;
+                }, req.user);
+                updated = sport;
+            }
+        } else {
+            updated = _.merge(sport, req.body);
+        }
         updated.save(function (err) {
             if (err) {
                 return handleError(res, err);

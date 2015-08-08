@@ -48,8 +48,14 @@
 
         }
 
-        function updateSport(sport) {
-            return resource.update({id: sport._id}, sport).$promise
+        function updateSport(sport, participate) {
+            var params = {};
+            params.id = sport._id;
+
+            if (typeof participate !== 'undefined') {
+                params.participate = participate;
+            }
+            return resource.update(params, sport).$promise
                 .then(updateSportComplete)
                 .catch(updateSportFailed);
 

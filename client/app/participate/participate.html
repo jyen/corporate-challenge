@@ -9,7 +9,10 @@
         <div class="input-group">
             <div class="col-md-4" ng-repeat="sport in participate.sports">
                 <label class="checkbox inline">
-                    <input class="checkbox" type="checkbox"/> {{sport.name}}
+                    <input class="checkbox" type="checkbox"
+                           ng-model="participate.selectedSports[sport._id]"
+                           ng-click="participate.join(sport, participate.selectedSports[sport._id])"/>
+                    {{sport.name}}
                 </label>
 
             </div>

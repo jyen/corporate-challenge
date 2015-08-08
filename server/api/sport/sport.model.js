@@ -6,7 +6,8 @@ var MemberSchema = new Schema({
     name: String,
     email: {type: String, lowercase: true},
     birthday: Date,
-    phone: Number
+    phone: Number,
+    gender: String
 
 })
 
