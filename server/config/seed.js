@@ -29,6 +29,7 @@ function createUsers(err, company0, company1) {
                 email: 'admin@admin.com',
                 password: 'admin',
                 role: 'admin',
+                gender: 'M',
                 company: company0._id,
                 phone: 9725149959,
                 birthday: '05/31/1988'
@@ -37,6 +38,7 @@ function createUsers(err, company0, company1) {
                 name: 'Company0 User0',
                 email: 'user0@company0.com',
                 password: 'test',
+                gender: 'F',
                 company: company0._id,
                 phone: 9725149959,
                 birthday: '05/31/1988'
@@ -45,6 +47,7 @@ function createUsers(err, company0, company1) {
                 name: 'Company0 User1',
                 email: 'user1@company0.com',
                 password: 'test',
+                gender: 'F',
                 company: company0._id,
                 phone: 9725149959,
                 birthday: '05/31/1988'
@@ -53,6 +56,7 @@ function createUsers(err, company0, company1) {
                 name: 'Company0 User2',
                 email: 'user2@company0.com',
                 password: 'test',
+                gender: 'M',
                 company: company0._id,
                 phone: 9725149959,
                 birthday: '05/31/1988'
@@ -61,6 +65,7 @@ function createUsers(err, company0, company1) {
                 name: 'Company1 User0',
                 email: 'user0@company1.com',
                 password: 'test',
+                gender: 'M',
                 company: company1._id,
                 phone: 9725149959,
                 birthday: '05/31/1988'
@@ -69,6 +74,7 @@ function createUsers(err, company0, company1) {
                 name: 'Company1 User1',
                 email: 'user1@company1.com',
                 password: 'test',
+                gender: 'M',
                 company: company1._id,
                 phone: 9725149959,
                 birthday: '05/31/1988'
@@ -77,6 +83,7 @@ function createUsers(err, company0, company1) {
                 name: 'Company1 User2',
                 email: 'user2@company1.com',
                 password: 'test',
+                gender: 'F',
                 company: company1._id,
                 phone: 9725149959,
                 birthday: '05/31/1988'
