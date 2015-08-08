@@ -2,8 +2,8 @@
 
 (function () {
     angular.module('corporateChallengeApp').controller('CreateCompanyCtrl', CreateCompanyCtrl);
-    CreateCompanyCtrl.$inject = ['$modalInstance'];
-    function CreateCompanyCtrl($modalInstance) {
+    CreateCompanyCtrl.$inject = ['$modalInstance', 'companyService'];
+    function CreateCompanyCtrl($modalInstance, companyService) {
         var vm = this;
         vm.company = {};
         vm.company.admins = [''];
@@ -32,11 +32,12 @@
             vm.company.admins = tmp;
         }
 
-        function confirmModal() {
+        function confirmModal(company) {
             vm.submitted = true;
             if (!vm.companyForm.$invalid) {
-                console.log(vm.company);
-                $modalInstance.close();
+                companyService.createCompany(company).then(function () {
+                    $modalInstance.close();
+                });
             }
         }
 
