@@ -18,6 +18,32 @@
                     </p>
                 </div>
 
+                <div class="form-group" ng-class="{ 'has-success': signup.form.gender.$valid && signup.submitted,
+                                            'has-error': signup.form.gender.$invalid && signup.submitted }">
+
+                    <label>Gender</label>
+
+                    <div class="radio-inline">
+                        <label>
+                            <input type="radio" name="gender" id="genderM"
+                                   ng-model="signup.user.gender"
+                                   value="M"
+                                   ng-required="!signup.user.gender">
+                            M
+                        </label>
+                    </div>
+                    <div class="radio-inline">
+                        <label>
+                            <input type="radio" name="gender" id="genderF"
+                                   ng-model="signup.user.gender"
+                                   value="F"
+                                   ng-required="!signup.user.gender">
+                            F
+                        </label>
+                    </div>
+                    <p class="help-block" ng-show="signup.form.gender.$error.required && signup.submitted">
+                        Gender is required
+                    </p>
                 <div class="form-group" ng-class="{ 'has-success': signup.form.email.$valid && signup.submitted,
                                             'has-error': signup.form.email.$invalid && signup.submitted }">
                     <label>Email</label>
