@@ -23,7 +23,6 @@
             }
 
             function getCompaniesFailed(error) {
-                logger.error('XHR Failed for getCompanies.' + error.data);
             }
         }
 
@@ -37,7 +36,6 @@
             }
 
             function createCompanyFailed(error) {
-                logger.error('XHR Failed for getCompanies.' + error.data);
             }
         }
 
@@ -54,7 +52,6 @@
             }
 
             function getCompanyFailed(error) {
-                logger.error('XHR Failed for getCompany.' + error.data);
             }
 
         }

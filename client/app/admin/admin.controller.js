@@ -44,17 +44,22 @@
             });
         };
 
-        function editCompanyInfo() {
+        function editCompanyInfo(company) {
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'app/create-company/create-company-modal.html',
-                controller: 'CreateCompanyCtrl',
+                controller: 'EditCompanyCtrl',
                 controllerAs: 'createCompany',
-                size: 'lg'
+                size: 'lg',
+                resolve: {
+                    company: function () {
+                        return company;
+                    }
+                }
             });
 
             modalInstance.result.then(function () {
-                getCompanies();
+                //getCompanies();
             }, function () {
             });
         }
