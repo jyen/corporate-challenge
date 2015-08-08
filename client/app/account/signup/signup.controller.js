@@ -66,7 +66,6 @@
             });
 
             modalInstance.result.then(function () {
-                //TODO: Call post for company API and refresh company list
                 getCompanies();
             }, function () {
             });
