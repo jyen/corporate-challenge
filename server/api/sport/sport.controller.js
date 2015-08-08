@@ -13,11 +13,9 @@ exports.index = function (req, res) {
     if (req.query.enabled) {
         query = query.where('enabled').equals(req.query.enabled);
     }
-    console.log(req.query);
     query.exec(callback);
 
     function callback(err, sports) {
-        console.log(sports);
         if (err) {
             return handleError(res, err);
         }

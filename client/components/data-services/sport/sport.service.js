@@ -4,12 +4,15 @@
     angular.module('corporateChallengeApp').factory('sportService', sportService);
     sportService.$inject = ['$resource'];
     function sportService($resource) {
-        var resource = $resource('/api/sports/:id');
+        var resource = $resource('/api/sports/:id', null, {
+            'update': {method: 'PUT'}
+        });
 
         return {
             getSports: getSports,
             setupSports: setupSports,
-            getSport: getSport
+            getSport: getSport,
+            updateSport: updateSport
         };
 
         function getSports(year, enabled) {
@@ -43,6 +46,19 @@
 
         function getSport() {
 
+        }
+
+        function updateSport(sport) {
+            return resource.update({id: sport._id}, sport).$promise
+                .then(updateSportComplete)
+                .catch(updateSportFailed);
+
+            function updateSportComplete(response) {
+                return response;
+            }
+
+            function updateSportFailed(error) {
+            }
         }
     }
 })();

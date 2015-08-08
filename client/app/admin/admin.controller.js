@@ -13,6 +13,8 @@
         vm.removeUser = removeUser;
         vm.editCompanyInfo = editCompanyInfo;
         vm.setupSports = setupSports;
+        vm.enableSport = enableSport;
+        vm.disableSport = disableSport;
 
 
         init();
@@ -82,6 +84,23 @@
                     vm.sports = data.sports;
                     return vm.sports;
                 })
+        }
+
+        function enableSport(sport) {
+            sport.enabled = true;
+            sportService.updateSport(sport)
+                .then(function () {
+                    getSports
+                })
+        }
+
+        function disableSport(sport) {
+            sport.enabled = false;
+            sportService.updateSport(sport)
+                .then(function () {
+                    getSports
+                })
+
         }
     };
 })();

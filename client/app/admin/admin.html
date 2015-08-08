@@ -23,10 +23,12 @@
             <li class="list-group-item"
                 ng-repeat="sport in admin.sports"
                 ng-class="{'disabled': !sport.enabled}">
-                <a href="" ng-if="!sport.enabled">
+                <a href="" ng-if="!sport.enabled"
+                   ng-click="admin.enableSport(sport)">
                     <span class="glyphicon glyphicon-plus pull-right"></span>
                 </a>
-                <a href="" ng-if="sport.enabled">
+                <a href="" ng-if="sport.enabled"
+                   ng-click="admin.disableSport(sport)">
                     <span class="glyphicon glyphicon-minus pull-right"></span>
                 </a>
                 <strong>{{sport.name}}</strong><br>
