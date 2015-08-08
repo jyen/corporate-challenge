@@ -6,6 +6,7 @@ angular.module('corporateChallengeApp')
             .state('participate', {
                 url: '/participate',
                 templateUrl: 'app/participate/participate.html',
-                controller: 'ParticipateCtrl'
+                controller: 'ParticipateCtrl',
+                controllerAs: 'participate'
             });
     });

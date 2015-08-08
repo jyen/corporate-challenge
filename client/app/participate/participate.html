@@ -1,3 +1,18 @@
-<div class="col-md-12">
-    This is the participate view.
+<div class="container">
+
+    <div ng-if="!participate.sports || participate.sports.length ===0">
+        Contact your Corporate Challange administrators to setup events
+    </div>
+    <div ng-if="participate.sports && participate.sports.length !==0">
+        <h4>Select sport(s) to participate</h4>
+
+        <div class="input-group">
+            <div class="col-md-4" ng-repeat="sport in participate.sports">
+                <label class="checkbox inline">
+                    <input class="checkbox" type="checkbox"/> {{sport.name}}
+                </label>
+
+            </div>
+        </div>
+    </div>
 </div>
