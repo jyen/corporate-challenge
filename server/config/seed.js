@@ -13,7 +13,7 @@ Company.find({}).remove(function () {
     Company.create({
         name: 'Company0',
         division: 'B',
-        admins: ['jack.yen@company0.com']
+        admins: ['jack.yen@company0.com', 'admin@admin.com']
     }, {
         name: 'Company1',
         division: 'A',
@@ -24,6 +24,14 @@ Company.find({}).remove(function () {
 function createUsers(err, company0, company1) {
     User.find({}).remove(function () {
         User.create({
+                provider: 'local',
+                name: 'Test Admin',
+                email: 'admin@admin.com',
+                password: 'admin',
+                company: company0._id,
+                phone: 9725149959,
+                birthday: '05/31/1988'
+            }, {
                 provider: 'local',
                 name: 'Company0 User0',
                 email: 'user0@company0.com',

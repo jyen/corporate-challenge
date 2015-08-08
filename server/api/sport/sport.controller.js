@@ -2,15 +2,25 @@
 
 var _ = require('lodash');
 var Sport = require('./sport.model');
+var Company = require('../company/company.model');
 
 // Get list of sports
 exports.index = function (req, res) {
-    Sport.find(function (err, sports) {
+    var query = Sport.findById(req.user.company);
+    if (req.params.year) {
+        query = query.where({year: req.params.year});
+    }
+    if (req.params.enabled) {
+        query = query.where({enabled: req.params.enabled});
+    }
+    query.exec(callback);
+
+    function callback(err, sports) {
         if (err) {
             return handleError(res, err);
         }
         return res.status(200).json(sports);
-    });
+    }
 };
 
 // Get a single sport
@@ -24,6 +34,29 @@ exports.show = function (req, res) {
         }
         return res.json(sport);
     });
+};
+
+// Creates a new sport in the DB.
+exports.setup = function (req, res) {
+    Company.findById(req.user.company, function (err, company) {
+        if (err) {
+            return handleError(res, err);
+        }
+        var sportsObj = getSportsByDivision(company.division, company._id);
+        Sport.find({
+            year: new Date.getFullYear(),
+            company_id: company._id
+        }, function (err, sports) {
+            if (!sports) {
+                Sport.create(sportsObj, function (err, sports) {
+                    if (err) {
+                        return handleError(res, err);
+                    }
+                    return res.json(sports);
+                })
+            }
+        })
+    })
 };
 
 // Creates a new sport in the DB.
@@ -78,4 +111,34 @@ exports.destroy = function (req, res) {
 
 function handleError(res, err) {
     return res.status(500).send(err);
+}
+
+function getSportsByDivision(division, companyId) {
+    var sports = [];
+    var year = new Date().getFullYear();
+    var sportsName = ['Badminton', 'Basketball', 'Bike Race',
+        'Billiards', 'Bowling', 'Darts', 'Dodgeball',
+        'Dominoes (42)', 'Flag Football', 'Golf',
+        'Horseshoes', 'Kickball', 'Miniature Golf', 'Punt, Pass & Kick',
+        'Soccer', 'Softball', 'Swimming', 'Table Tennis', 'Tennis',
+        'Texas Hold\'Em', 'Volleyball', '5K Run'];
+
+    var ABOnlySports = ['Soccer', 'Swimming', 'Tennis'];
+
+    _.each(sportsName, function (sportName) {
+        var sport = {};
+        sport.year = year;
+        sport.name = sportName;
+        sport.company_id = companyId;
+        if (division !== 'C' || division !== 'D') {
+            sports.push(sport);
+        } else {
+            if (!_.contains(ABOnlySports, sport)) {
+                sports.push(sport);
+            }
+        }
+    });
+
+    return sports;
+
 }

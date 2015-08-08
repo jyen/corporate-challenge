@@ -13,6 +13,8 @@ var MemberSchema = new Schema({
 var SportSchema = new Schema({
     name: String,
     year: Number,
+    company_id: Schema.Types.ObjectId,
+    enabled: {type: Boolean, default: true},
     captains: [MemberSchema],
     members: [MemberSchema]
 });

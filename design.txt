@@ -6,8 +6,8 @@ Company Info - Edit
 
 Retrieve available sport events for current year /sports GET
 
-Retrieve custom events for current year /available-events GET
+Retrieve custom events for current year /events GET
 
-Initialize Sport Events /all-sports POST
+Initialize Sport Events /allsports POST
 
-Create Custom Events /available-events POST
+Create Custom Events /events POST
