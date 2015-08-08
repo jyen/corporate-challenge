@@ -28,6 +28,7 @@ function createUsers(err, company0, company1) {
                 name: 'Test Admin',
                 email: 'admin@admin.com',
                 password: 'admin',
+                role: 'admin',
                 company: company0._id,
                 phone: 9725149959,
                 birthday: '05/31/1988'

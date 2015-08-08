@@ -2,15 +2,17 @@
 
 (function () {
     angular.module('corporateChallengeApp').controller('AdminCtrl', AdminCtrl);
-    AdminCtrl.$inject = ['$scope', 'Auth', 'User', 'companyService', '$modal'];
-    function AdminCtrl($scope, Auth, User, companyService, $modal) {
+    AdminCtrl.$inject = ['$scope', 'Auth', 'User', 'companyService', '$modal', 'sportService'];
+    function AdminCtrl($scope, Auth, User, companyService, $modal, sportService) {
 
         var vm = this;
         vm.users = [];
         vm.company = {};
+        vm.sports = [];
 
         vm.removeUser = removeUser;
         vm.editCompanyInfo = editCompanyInfo;
+        vm.setupSports = setupSports;
 
 
         init();
@@ -18,6 +20,7 @@
         function init() {
             getUsers();
             getCompany();
+            getSports();
         }
         // Use the User $resource to fetch all users
         function getUsers() {
@@ -32,6 +35,15 @@
                 .then(function (data) {
                     vm.company = data;
                     return vm.company;
+                })
+        }
+
+        function getSports() {
+            var year = new Date().getFullYear();
+            return sportService.getSports(year)
+                .then(function (data) {
+                    vm.sports = data;
+                    return vm.sports;
                 })
         }
 
@@ -62,6 +74,14 @@
                 //getCompanies();
             }, function () {
             });
+        }
+
+        function setupSports() {
+            sportService.setupSports()
+                .then(function (data) {
+                    vm.sports = data.sports;
+                    return vm.sports;
+                })
         }
     };
 })();

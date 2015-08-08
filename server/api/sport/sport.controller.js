@@ -6,16 +6,18 @@ var Company = require('../company/company.model');
 
 // Get list of sports
 exports.index = function (req, res) {
-    var query = Sport.findById(req.user.company);
-    if (req.params.year) {
-        query = query.where({year: req.params.year});
+    var query = Sport.find({}).where('company_id').equals(req.user.company);
+    if (req.query.year) {
+        query = query.where('year').equals(req.query.year);
     }
-    if (req.params.enabled) {
-        query = query.where({enabled: req.params.enabled});
+    if (req.query.enabled) {
+        query = query.where('enabled').equals(req.query.enabled);
     }
+    console.log(req.query);
     query.exec(callback);
 
     function callback(err, sports) {
+        console.log(sports);
         if (err) {
             return handleError(res, err);
         }
@@ -43,17 +45,23 @@ exports.setup = function (req, res) {
             return handleError(res, err);
         }
         var sportsObj = getSportsByDivision(company.division, company._id);
+
         Sport.find({
-            year: new Date.getFullYear(),
+            year: new Date().getFullYear(),
             company_id: company._id
         }, function (err, sports) {
-            if (!sports) {
+            if (err) {
+                return handleError(res, err);
+            }
+            if (!sports || sports.length === 0) {
                 Sport.create(sportsObj, function (err, sports) {
                     if (err) {
                         return handleError(res, err);
                     }
-                    return res.json(sports);
+                    return res.json({'sports': sports});
                 })
+            } else {
+                return res.status(500).send({'error': 'Already setup sports for this year'});
             }
         })
     })
