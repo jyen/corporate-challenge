@@ -1,5 +1,17 @@
 <div class="container">
-    <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
+    <h4>Company Info</h4>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <strong>{{admin.company.name}}</strong><br>
+            <span class="text-muted">Division {{admin.company.division}}</span>
+            <a href=""
+               ng-click="admin.editCompanyInfo()">
+                <span class="glyphicon glyphicon-pencil pull-right"></span>
+            </a>
+        </li>
+    </ul>
+
+    <h4>List of Participants</h4>
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="user in admin.users">
             <strong>{{user.name}}</strong><br>

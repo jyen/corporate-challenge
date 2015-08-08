@@ -2,19 +2,22 @@
 
 (function () {
     angular.module('corporateChallengeApp').controller('AdminCtrl', AdminCtrl);
-    AdminCtrl.$inject = ['$scope', 'Auth', 'User'];
-    function AdminCtrl($scope, Auth, User) {
+    AdminCtrl.$inject = ['$scope', 'Auth', 'User', 'companyService', '$modal'];
+    function AdminCtrl($scope, Auth, User, companyService, $modal) {
 
         var vm = this;
         vm.users = [];
+        vm.company = {};
 
         vm.removeUser = removeUser;
+        vm.editCompanyInfo = editCompanyInfo;
 
 
         init();
 
         function init() {
             getUsers();
+            getCompany();
         }
         // Use the User $resource to fetch all users
         function getUsers() {
@@ -22,6 +25,14 @@
                 vm.users = data;
                 return vm.users;
             })
+        }
+
+        function getCompany() {
+            return companyService.getCompany(Auth.getCurrentUser().company)
+                .then(function (data) {
+                    vm.company = data;
+                    return vm.company;
+                })
         }
 
         function removeUser(user) {
@@ -32,5 +43,20 @@
                 }
             });
         };
+
+        function editCompanyInfo() {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'app/create-company/create-company-modal.html',
+                controller: 'CreateCompanyCtrl',
+                controllerAs: 'createCompany',
+                size: 'lg'
+            });
+
+            modalInstance.result.then(function () {
+                getCompanies();
+            }, function () {
+            });
+        }
     };
 })();

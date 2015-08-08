@@ -4,12 +4,13 @@
     angular.module('corporateChallengeApp').factory('companyService', companyService);
     companyService.$inject = ['$resource'];
     function companyService($resource) {
-        var resource = $resource('/api/companies');
+        var resource = $resource('/api/companies/:id');
 
         return {
             getCompanies: getCompanies,
             createCompany: createCompany,
-            updateCompany: updateCompany
+            updateCompany: updateCompany,
+            getCompany: getCompany
         };
 
         function getCompanies() {
@@ -41,6 +42,20 @@
         }
 
         function updateCompany() {
+
+        }
+
+        function getCompany(id) {
+            return resource.get({id: id}).$promise
+                .then(getCompanyComplete)
+                .catch(getCompanyFailed);
+            function getCompanyComplete(response) {
+                return response;
+            }
+
+            function getCompanyFailed(error) {
+                logger.error('XHR Failed for getCompany.' + error.data);
+            }
 
         }
     }
