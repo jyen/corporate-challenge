@@ -32,7 +32,7 @@
         function confirmModal(company) {
             vm.submitted = true;
             if (!vm.companyForm.$invalid) {
-                companyService.createCompany(company).then(function () {
+                companyService.updateCompany(company).then(function () {
                     $modalInstance.close();
                 });
             }

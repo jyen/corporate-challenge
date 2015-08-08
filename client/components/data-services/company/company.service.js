@@ -4,7 +4,9 @@
     angular.module('corporateChallengeApp').factory('companyService', companyService);
     companyService.$inject = ['$resource'];
     function companyService($resource) {
-        var resource = $resource('/api/companies/:id');
+        var resource = $resource('/api/companies/:id', null, {
+            'update': {method: 'PUT'}
+        });
 
         return {
             getCompanies: getCompanies,
@@ -39,8 +41,17 @@
             }
         }
 
-        function updateCompany() {
+        function updateCompany(company) {
+            return resource.update({id: company._id}, company).$promise
+                .then(updateCompanyComplete)
+                .catch(updateCompanyFailed);
 
+            function updateCompanyComplete(response) {
+                return response;
+            }
+
+            function updateCompanyFailed(error) {
+            }
         }
 
         function getCompany(id) {
