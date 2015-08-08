@@ -1,0 +1,13 @@
+Admin Tab
+
+Company Info - Edit
+
+############################
+
+Retrieve available sport events for current year /sports GET
+
+Retrieve custom events for current year /available-events GET
+
+Initialize Sport Events /all-sports POST
+
+Create Custom Events /available-events POST
