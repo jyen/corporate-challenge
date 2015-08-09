@@ -1,3 +1,33 @@
-<div class="col-md-12">
-This is the view-sports view.
+<div class="container">
+    <h4>Available Sports</h4>
+
+    <accordion>
+        <accordion-group ng-repeat="sport in viewSport.sports">
+            <accordion-heading>
+                <span style="cursor: pointer;">{{sport.name}}</span>
+            </accordion-heading>
+            <span>Total Participants: {{sport.members.length}}</span>
+
+            <div class="pull-right">{{viewSport.getCountString(sport.members)}}</div>
+
+            <div>
+                <a href="{{viewSport.getEmailList(sport.members)}}">Email Participants</a>
+
+            </div>
+
+            <table ng-if="sport.members.length !== 0" class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+
+                </tr>
+                <tr ng-repeat="member in sport.members">
+                    <td>{{member.name}}</td>
+                    <td>{{member.email}}</td>
+                    <td>{{member.phone}}</td>
+                </tr>
+            </table>
+        </accordion-group>
+    </accordion>
 </div>
