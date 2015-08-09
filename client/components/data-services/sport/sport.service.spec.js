@@ -7,8 +7,8 @@ describe('Service: sport', function () {
 
     // instantiate service
     var sport;
-    beforeEach(inject(function (_sport_) {
-        sport = _sport_;
+    beforeEach(inject(function (_sportService_) {
+        sport = _sportService_;
     }));
 
     it('should do something', function () {

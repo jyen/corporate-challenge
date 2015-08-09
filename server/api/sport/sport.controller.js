@@ -123,7 +123,7 @@ exports.update = function (req, res) {
             }
             return res.status(200).json(sport);
         });
-    };
+    }
 };
 
 // Deletes a sport from the DB.

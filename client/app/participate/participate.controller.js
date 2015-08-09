@@ -25,7 +25,7 @@
                     vm.sports = data;
                     vm.selectedSports = setSelectedSports(vm.sports);
                     return vm.sports;
-                })
+                });
         }
 
         function join(sport, participate) {
@@ -46,5 +46,5 @@
             return selected;
 
         }
-    };
+    }
 })();

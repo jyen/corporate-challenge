@@ -16,7 +16,7 @@
         };
 
         function getSports(year, enabled) {
-            var queryParams = {}
+            var queryParams = {};
             queryParams.year = year;
             queryParams.enabled = enabled;
             return resource.query(queryParams).$promise

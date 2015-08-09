@@ -22,7 +22,7 @@
           .then(function (data) {
             vm.sports = data;
             return vm.sports;
-          })
+          });
     }
 
     function getCountString(members) {
@@ -51,6 +51,6 @@
       var emailString = emails.join();
       return 'mailto:' + emailString;
     }
-  };
+  }
 
 })();

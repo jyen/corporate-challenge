@@ -29,7 +29,7 @@
             return User.query().$promise.then(function (data) {
                 vm.users = data;
                 return vm.users;
-            })
+            });
         }
 
         function getCompany() {
@@ -37,7 +37,7 @@
                 .then(function (data) {
                     vm.company = data;
                     return vm.company;
-                })
+                });
         }
 
         function getSports() {
@@ -46,7 +46,7 @@
                 .then(function (data) {
                     vm.sports = data;
                     return vm.sports;
-                })
+                });
         }
 
         function removeUser(user) {
@@ -56,7 +56,7 @@
                     vm.users.splice(i, 1);
                 }
             });
-        };
+        }
 
         function editCompanyInfo(company) {
             var modalInstance = $modal.open({
@@ -83,24 +83,24 @@
                 .then(function (data) {
                     vm.sports = data.sports;
                     return vm.sports;
-                })
+                });
         }
 
         function enableSport(sport) {
             sport.enabled = true;
             sportService.updateSport(sport)
                 .then(function () {
-                    getSports
-                })
+                    getSports();
+                });
         }
 
         function disableSport(sport) {
             sport.enabled = false;
             sportService.updateSport(sport)
                 .then(function () {
-                    getSports
-                })
+                    getSports();
+                });
 
         }
-    };
+    }
 })();

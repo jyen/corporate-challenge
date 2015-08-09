@@ -21,9 +21,9 @@
                 .then(function (data) {
                     vm.sports = data;
                     return vm.sports;
-                })
+                });
         }
 
-    };
+    }
 
 })();
