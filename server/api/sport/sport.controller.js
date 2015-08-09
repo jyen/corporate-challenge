@@ -6,7 +6,10 @@ var Company = require('../company/company.model');
 
 // Get list of sports
 exports.index = function (req, res) {
-    var query = Sport.find({}).where('company_id').equals(req.user.company);
+    var query = Sport.find({})
+        .where('company_id')
+        .equals(req.user.company)
+        .sort('name');
     if (req.query.year) {
         query = query.where('year').equals(req.query.year);
     }
@@ -47,7 +50,11 @@ exports.setup = function (req, res) {
         Sport.find({
             year: new Date().getFullYear(),
             company_id: company._id
-        }, function (err, sports) {
+        })
+            .sort('name')
+            .exec(callback);
+
+        function callback(err, sports) {
             if (err) {
                 return handleError(res, err);
             }
@@ -61,7 +68,7 @@ exports.setup = function (req, res) {
             } else {
                 return res.status(500).send({'error': 'Already setup sports for this year'});
             }
-        })
+        }
     })
 };
 
@@ -81,7 +88,9 @@ exports.update = function (req, res) {
         delete req.body._id;
     }
 
-    Sport.findById(req.params.id, function (err, sport) {
+    Sport.findById(req.params.id).sort('name').exec(callback);
+
+    function callback(err, sport) {
         if (err) {
             return handleError(res, err);
         }
@@ -114,7 +123,7 @@ exports.update = function (req, res) {
             }
             return res.status(200).json(sport);
         });
-    });
+    };
 };
 
 // Deletes a sport from the DB.
