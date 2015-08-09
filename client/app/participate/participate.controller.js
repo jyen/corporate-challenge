@@ -2,8 +2,8 @@
 
 (function () {
     angular.module('corporateChallengeApp').controller('ParticipateCtrl', ParticipateCtrl);
-    ParticipateCtrl.$inject = ['sportService'];
-    function ParticipateCtrl(sportService) {
+    ParticipateCtrl.$inject = ['sportService', 'Auth'];
+    function ParticipateCtrl(sportService, Auth) {
 
         var vm = this;
         vm.sports = [];
@@ -23,14 +23,28 @@
             return sportService.getSports(year, true)
                 .then(function (data) {
                     vm.sports = data;
+                    vm.selectedSports = setSelectedSports(vm.sports);
                     return vm.sports;
                 })
         }
 
         function join(sport, participate) {
-            sportService.updateSport(sport, participate).then(function () {
+            sportService.updateSport(sport, participate);
+        }
 
+        function setSelectedSports(sports) {
+            var currentUser = Auth.getCurrentUser();
+            var selected = {};
+            _.each(sports, function (sport) {
+                if (_.findWhere(sport.members, {'_id': currentUser._id})) {
+                    selected[sport._id] = true;
+                } else {
+                    selected[sport._id] = false;
+                }
             });
+
+            return selected;
+
         }
     };
 })();
