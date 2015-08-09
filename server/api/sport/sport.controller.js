@@ -107,7 +107,8 @@ exports.update = function (req, res) {
         } else {
             updated = _.merge(sport, req.body);
         }
-        updated.save(function (err) {
+        updated.markModified('members');
+        updated.save(function (err, sport) {
             if (err) {
                 return handleError(res, err);
             }
