@@ -113,10 +113,10 @@ exports.update = function (req, res) {
                 }, req.user);
                 updated = sport;
             }
+            updated.markModified('members');
         } else {
             updated = _.merge(sport, req.body);
         }
-        updated.markModified('members');
         updated.save(function (err, sport) {
             if (err) {
                 return handleError(res, err);
