@@ -1,0 +1,16 @@
+<div class="panel panel-default bootcards-summary">
+    <div class="panel-heading clearfix">
+        <h3 class="panel-title pull-left">My Sports</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div ng-repeat="sport in sports.mySports" class="col-xs-2 col-sm-2">
+                <div class="bootcards-summary-item">
+                    <h4>{{sport.name}}</h4>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<ui-view></ui-view>

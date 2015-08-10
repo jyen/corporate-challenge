@@ -20,5 +20,11 @@ angular.module('corporateChallengeApp')
                 templateUrl: 'app/dashboard/company/company.html',
                 controller: 'CompanyCtrl',
                 controllerAs: 'company'
+            })
+            .state('dashboard.sports', {
+                url: '/sports',
+                templateUrl: 'app/dashboard/sports/sports.html',
+                controller: 'SportsCtrl',
+                controllerAs: 'sports'
             });
     });
