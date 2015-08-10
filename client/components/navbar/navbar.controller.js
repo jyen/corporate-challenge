@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('corporateChallengeApp')
-    .controller('NavbarCtrl', function ($scope, $location, Auth) {
+    .controller('NavbarCtrl', function ($scope, $location, Auth, $state) {
         $scope.menu = [{
             'title': 'Home',
             'link': '/'
@@ -17,7 +17,7 @@ angular.module('corporateChallengeApp')
             $location.path('/login');
         };
 
-        $scope.isActive = function (route) {
-            return route === $location.path();
+        $scope.isActive = function (state) {
+            return $state.includes(state);
         };
     });
