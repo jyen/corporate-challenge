@@ -10,7 +10,7 @@
 
             <div class="pull-right">{{viewSport.getCountString(sport.members)}}</div>
 
-            <div>
+            <div ng-if="sport.members.length !== 0">
                 <a href="{{viewSport.getEmailList(sport.members)}}">Email Participants</a>
 
             </div>
