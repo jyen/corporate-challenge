@@ -1,3 +1,23 @@
-<div class="col-md-12">
-    This is the view-participants view.
+<div class="container" ng-if="viewParticipants.users.length ===0">
+    No current participants
+</div>
+<div class="container" ng-if="viewParticipants.users.length !==0">
+    <h4>List of Participants</h4>
+
+    <div class="panel panel-default bootcards-summary">
+        <div class="panel-body">
+            <div class="row">
+                <div ng-repeat="user in viewParticipants.users" class="col-xs-4 col-sm-3">
+                    <div class="bootcards-summary-item">
+                        <h4>{{user.name}}</h4>
+
+                        <p>Email: {{user.email}}</p>
+
+                        <p class="text-muted">Phone: {{user.phone}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

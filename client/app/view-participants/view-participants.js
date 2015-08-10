@@ -6,6 +6,7 @@ angular.module('corporateChallengeApp')
             .state('view-participants', {
                 url: '/view-participants',
                 templateUrl: 'app/view-participants/view-participants.html',
-                controller: 'ViewParticipantsCtrl'
+                controller: 'ViewParticipantsCtrl',
+                controllerAs: 'viewParticipants'
             });
     });
