@@ -1,4 +1,7 @@
-<div class="container">
+<div class="container" ng-if="viewSport.sports.length ===0">
+    No current sports
+</div>
+<div class="container" ng-if="viewSport.sports.length !==0">
     <h4>Available Sports</h4>
 
     <accordion>
