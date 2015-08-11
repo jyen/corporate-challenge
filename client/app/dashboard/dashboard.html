@@ -10,29 +10,30 @@
             Contact your Corporate Challange administrators to setup events
         </alert>
     </div>
-</div>
-<div class="panel panel-default bootcards-summary">
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-xs-6 col-sm-4">
-                <a class="bootcards-summary-item" ui-sref="dashboard.profile">
-                    <i class="fa fa-3x fa-user"></i>
-                    <h4>Profile</h4>
-                </a>
-            </div>
-            <div class="col-xs-6 col-sm-4">
-                <a class="bootcards-summary-item" ui-sref="dashboard.company">
-                    <i class="fa fa-3x fa-building-o"></i>
-                    <h4>Companies</h4>
-                </a>
-            </div>
-            <div class="col-xs-6 col-sm-4">
-                <a class="bootcards-summary-item" ui-sref="dashboard.sports">
-                    <i class="fa fa-3x fa-futbol-o"></i>
-                    <h4>Sports <span class="label label-info">{{dashboard.mySports.length}}</span></h4>
-                </a>
+
+    <div class="panel panel-default bootcards-summary">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-6 col-sm-4">
+                    <a class="bootcards-summary-item" ui-sref="dashboard.profile">
+                        <i class="fa fa-3x fa-user"></i>
+                        <h4>Profile</h4>
+                    </a>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <a class="bootcards-summary-item" ui-sref="dashboard.company">
+                        <i class="fa fa-3x fa-building-o"></i>
+                        <h4>Companies</h4>
+                    </a>
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <a class="bootcards-summary-item" ui-sref="dashboard.sports">
+                        <i class="fa fa-3x fa-futbol-o"></i>
+                        <h4>Sports <span class="label label-info">{{dashboard.mySports.length}}</span></h4>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
+    <ui-view></ui-view>
 </div>
-<ui-view></ui-view>
