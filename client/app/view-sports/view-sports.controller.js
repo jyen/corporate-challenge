@@ -2,14 +2,15 @@
 
 (function () {
   angular.module('corporateChallengeApp').controller('ViewSportsCtrl', ViewSportsCtrl);
-  ViewSportsCtrl.$inject = ['sportService'];
-  function ViewSportsCtrl(sportService) {
+  ViewSportsCtrl.$inject = ['sportService', 'Auth'];
+  function ViewSportsCtrl(sportService, Auth) {
 
     var vm = this;
     vm.sports = [];
 
     vm.getCountString = getCountString;
     vm.getEmailList = getEmailList;
+    vm.currentUser = Auth.getCurrentUser();
     init();
 
     function init() {

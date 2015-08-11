@@ -1,8 +1,8 @@
 <div class="container" ng-if="viewParticipants.users.length ===0">
-    No current participants
+    <alert type="danger" close="closeAlert=1" ng-hide="closeAlert">No current team members</alert>
 </div>
 <div class="container" ng-if="viewParticipants.users.length !==0">
-    <h4>List of Participants</h4>
+    <h4>Team Members</h4>
 
     <div class="panel panel-default bootcards-summary">
         <div class="panel-body">

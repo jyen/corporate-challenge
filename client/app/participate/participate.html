@@ -1,10 +1,17 @@
 <div class="container">
 
-    <div ng-if="!participate.sports || participate.sports.length ===0">
-        Contact your Corporate Challange administrators to setup events
+    <div ng-if="!participate.sports || participate.sports.length ===0 && participate.currentUser.role==='user'">
+        <alert type="danger" close="closeAlert=1" ng-hide="closeAlert">Contact your Corporate Challange administrators
+            to setup events
+        </alert>
+    </div>
+    <div ng-if="!participate.sports || participate.sports.length ===0 && participate.currentUser.role==='admin'">
+        <alert type="danger" close="closeAlert=1" ng-hide="closeAlert">Go to "Admin" Tab on the top right corner to
+            setup events for your organization
+        </alert>
     </div>
     <div ng-if="participate.sports && participate.sports.length !==0">
-        <h4>Select sport(s) to participate</h4>
+        <h4>Select event(s) to participate</h4>
 
         <div class="input-group">
             <div class="col-md-4" ng-repeat="sport in participate.sports">

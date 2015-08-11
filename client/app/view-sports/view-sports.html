@@ -1,5 +1,15 @@
-<div class="container" ng-if="viewSport.sports.length ===0">
-    No current sports
+<div class="container">
+    <div ng-if="!viewSport.sports || viewSport.sports.length ===0 && viewSport.currentUser.role==='admin'">
+        <alert type="danger" close="closeAlert=1" ng-hide="closeAlert">
+            Go to "Admin" Tab on the top right corner to setup events for your organization
+        </alert>
+    </div>
+
+    <div ng-if="!viewSport.sports || viewSport.sports.length ===0 && viewSport.currentUser.role==='user'">
+        <alert type="danger" close="closeAlert=1" ng-hide="closeAlert">
+            Contact your Corporate Challange administrators to setup events
+        </alert>
+    </div>
 </div>
 <div class="container" ng-if="viewSport.sports.length !==0">
     <h4>Available Sports</h4>

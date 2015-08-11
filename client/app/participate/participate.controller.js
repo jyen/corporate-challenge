@@ -8,6 +8,7 @@
         var vm = this;
         vm.sports = [];
         vm.selectedSports = {};
+        vm.currentUser = Auth.getCurrentUser();
 
         vm.join = join;
 
