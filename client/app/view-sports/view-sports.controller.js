@@ -2,8 +2,8 @@
 
 (function () {
   angular.module('corporateChallengeApp').controller('ViewSportsCtrl', ViewSportsCtrl);
-  ViewSportsCtrl.$inject = ['sportService', 'Auth'];
-  function ViewSportsCtrl(sportService, Auth) {
+  ViewSportsCtrl.$inject = ['sportService', 'Auth', '$stateParams'];
+  function ViewSportsCtrl(sportService, Auth, $stateParams) {
 
     var vm = this;
     vm.sports = [];
@@ -22,10 +22,30 @@
       var year = new Date().getFullYear();
       return sportService.getSports(year, true)
           .then(function (data) {
-            vm.sports = data;
+            vm.sports = setDefaultOpen(data, $stateParams.id);
             vm.initialized = true;
             return vm.sports;
           });
+    }
+
+    function setDefaultOpen(sports, id) {
+      var newSports = [];
+      if (id) {
+        _.each(sports, function (sport) {
+          if (sport._id === id) {
+            sport.isOpen = true;
+          } else {
+            sport.isOpen = false;
+          }
+          newSports.push(sport);
+
+        });
+      } else {
+        newSports = sports;
+      }
+
+      return newSports;
+
     }
 
     function getCountString(members) {

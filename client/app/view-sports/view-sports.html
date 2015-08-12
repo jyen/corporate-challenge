@@ -15,7 +15,8 @@
     <h4>Click an event to see the participants</h4>
 
     <accordion>
-        <accordion-group ng-repeat="sport in viewSport.sports">
+        <accordion-group ng-repeat="sport in viewSport.sports"
+                         is-open="sport.isOpen">
             <accordion-heading>
                 <span style="cursor: pointer;">{{sport.name}}</span>
             </accordion-heading>
