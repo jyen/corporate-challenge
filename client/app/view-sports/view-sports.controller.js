@@ -11,6 +11,7 @@
     vm.getCountString = getCountString;
     vm.getEmailList = getEmailList;
     vm.currentUser = Auth.getCurrentUser();
+    vm.initialized = false;
     init();
 
     function init() {
@@ -22,6 +23,7 @@
       return sportService.getSports(year, true)
           .then(function (data) {
             vm.sports = data;
+            vm.initialized = true;
             return vm.sports;
           });
     }

@@ -12,6 +12,8 @@
 
         vm.join = join;
 
+        vm.initialized = false;
+
 
         init();
 
@@ -25,6 +27,7 @@
                 .then(function (data) {
                     vm.sports = data;
                     vm.selectedSports = setSelectedSports(vm.sports);
+                    vm.initialized = true;
                     return vm.sports;
                 });
         }

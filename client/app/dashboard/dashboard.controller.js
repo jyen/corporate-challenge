@@ -8,6 +8,7 @@
         var vm = this;
         vm.sports = [];
         vm.mySports = [];
+        vm.initialized = false;
         vm.currentUser = Auth.getCurrentUser();
 
         init();
@@ -22,6 +23,7 @@
                 .then(function (data) {
                     vm.sports = data;
                     vm.mySports = sportUtils.getSportsByUser(vm.sports, vm.currentUser);
+                    vm.initialized = true;
                     return vm.sports;
                 });
         }

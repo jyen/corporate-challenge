@@ -7,6 +7,7 @@
 
         var vm = this;
         vm.users = [];
+        vm.initialized = false;
 
 
         init();
@@ -19,6 +20,7 @@
         function getUsers() {
             return User.query().$promise.then(function (data) {
                 vm.users = data;
+                vm.initialized = true;
                 return vm.users;
             });
         }

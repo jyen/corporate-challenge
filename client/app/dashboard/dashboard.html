@@ -1,11 +1,11 @@
 <div class="container">
-    <div ng-if="!dashboard.sports || dashboard.sports.length ===0 && dashboard.currentUser.role==='admin'">
+    <div ng-if="!dashboard.sports || dashboard.sports.length ===0 && dashboard.currentUser.role==='admin' && dashboard.initialized">
         <alert type="danger" close="closeAlert=1" ng-hide="closeAlert">
-            Go to "Admin" Tab on the top right corner to setup events for your organization
+            Click <a ui-sref="admin">here</a> to setup events for your organization
         </alert>
     </div>
 
-    <div ng-if="!dashboard.sports || dashboard.sports.length ===0 && dashboard.currentUser.role==='user'">
+    <div ng-if="!dashboard.sports || dashboard.sports.length ===0 && dashboard.currentUser.role==='user' && dashboard.initialized">
         <alert type="danger" close="closeAlert=1" ng-hide="closeAlert">
             Contact your Corporate Challange administrators to setup events
         </alert>
@@ -17,7 +17,7 @@
                 <div class="col-xs-6 col-sm-4">
                     <a class="bootcards-summary-item" ui-sref="dashboard.profile">
                         <i class="fa fa-3x fa-user"></i>
-                        <h4>Profile</h4>
+                        <h4>{{dashboard.currentUser.name}}</h4>
                     </a>
                 </div>
                 <div class="col-xs-6 col-sm-4">

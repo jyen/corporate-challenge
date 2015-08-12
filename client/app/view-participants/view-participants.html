@@ -1,5 +1,5 @@
-<div class="container" ng-if="viewParticipants.users.length ===0">
-    <alert type="danger" close="closeAlert=1" ng-hide="closeAlert">No current team members</alert>
+<div class="container" ng-if="viewParticipants.users.length ===0 && viewParticipants.initialized">
+    <alert type="danger" close="closeAlert=1" ng-hide="closeAlert">No one has signed up to participate.</alert>
 </div>
 <div class="container" ng-if="viewParticipants.users.length !==0">
     <h4>Team Members</h4>
