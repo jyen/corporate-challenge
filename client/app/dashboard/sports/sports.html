@@ -5,7 +5,7 @@
         <h3 class="panel-title pull-left">My Sports</h3>
     </div>
     <div class="panel-body">
-        <div class="row" ng-if="sports.mySports.length === 0">
+        <div class="row" ng-if="sports.mySports.length === 0 && sports.initialized">
             To participate in events, click <a ui-sref="participate">here</a>
         </div>
         <div class="row" ng-if="sports.mySports.length !==0">

@@ -10,6 +10,8 @@
         vm.mySports = [];
         vm.currentUser = Auth.getCurrentUser();
 
+        vm.initialized = false;
+
         init();
 
         function init() {
@@ -22,6 +24,7 @@
                 .then(function (data) {
                     vm.sports = data;
                     vm.mySports = sportUtils.getSportsByUser(vm.sports, vm.currentUser);
+                    vm.initialized = true;
                     return vm.sports;
                 });
         }
