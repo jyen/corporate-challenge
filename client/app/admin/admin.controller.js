@@ -1,65 +1,51 @@
 'use strict';
 
 (function () {
-    angular.module('corporateChallengeApp').controller('AdminCtrl', AdminCtrl);
-    AdminCtrl.$inject = ['$scope', 'Auth', 'User', 'companyService', '$modal', 'sportService'];
-    function AdminCtrl($scope, Auth, User, companyService, $modal, sportService) {
+    class AdminCtrl {
+        /*@ngInject*/
+        constructor(Auth, User, companyService, $modal, sportService) {
+            this.Auth = Auth;
+            this.User = User;
+            this.companyService = companyService;
+            this.$modal = $modal;
+            this.sportService = sportService;
 
-        var vm = this;
-        vm.users = [];
-        vm.company = {};
-        vm.sports = [];
+            this.users = [];
+            this.company = {};
+            this.sports = [];
 
-        vm.removeUser = removeUser;
-        vm.editCompanyInfo = editCompanyInfo;
-        vm.setupSports = setupSports;
-        vm.enableSport = enableSport;
-        vm.disableSport = disableSport;
-
-
-        init();
-
-        function init() {
-            getUsers();
-            getCompany();
-            getSports();
+            this.getUsers();
+            this.getCompany();
+            this.getSports();
         }
-        // Use the User $resource to fetch all users
-        function getUsers() {
-            return User.query().$promise.then(function (data) {
-                vm.users = data;
-                return vm.users;
+
+        getUsers() {
+            return this.User.query().$promise.then(data => {
+                this.users = data;
+                return this.users;
             });
         }
 
-        function getCompany() {
-            return companyService.getCompany(Auth.getCurrentUser().company)
-                .then(function (data) {
-                    vm.company = data;
-                    return vm.company;
+        getCompany() {
+            return this.companyService.getCompany(this.Auth.getCurrentUser().company)
+                .then(data => {
+                    this.company = data;
+                    return this.company;
+                }, () => {
                 });
         }
 
-        function getSports() {
+        getSports() {
             var year = new Date().getFullYear();
-            return sportService.getSports(year)
-                .then(function (data) {
-                    vm.sports = data;
-                    return vm.sports;
+            return this.sportService.getSports(year)
+                .then(data => {
+                    this.sports = data;
+                    return this.sports;
                 });
         }
 
-        function removeUser(user) {
-            User.remove({id: user._id});
-            angular.forEach($scope.users, function (u, i) {
-                if (u === user) {
-                    vm.users.splice(i, 1);
-                }
-            });
-        }
-
-        function editCompanyInfo(company) {
-            var modalInstance = $modal.open({
+        editCompanyInfo(company) {
+            var modalInstance = this.$modal.open({
                 animation: true,
                 templateUrl: 'app/create-company/create-company-modal.html',
                 controller: 'EditCompanyCtrl',
@@ -72,35 +58,37 @@
                 }
             });
 
-            modalInstance.result.then(function () {
-                //getCompanies();
-            }, function () {
+            modalInstance.result.then(() => {
+                this.getCompany();
+            }, () => {
             });
         }
 
-        function setupSports() {
-            sportService.setupSports()
-                .then(function (data) {
-                    vm.sports = data.sports;
-                    return vm.sports;
+        setupSports() {
+            this.sportService.setupSports()
+                .then(data => {
+                    this.sports = data.sports;
+                    return this.sports;
                 });
         }
 
-        function enableSport(sport) {
+        enableSport(sport) {
             sport.enabled = true;
-            sportService.updateSport(sport)
-                .then(function () {
-                    getSports();
+            this.sportService.updateSport(sport)
+                .then(() => {
+                    this.getSports();
                 });
         }
 
-        function disableSport(sport) {
+        disableSport(sport) {
             sport.enabled = false;
-            sportService.updateSport(sport)
-                .then(function () {
-                    getSports();
+            this.sportService.updateSport(sport)
+                .then(() => {
+                    this.getSports();
                 });
 
         }
     }
+    angular.module('corporateChallengeApp').controller('AdminCtrl', AdminCtrl);
+
 })();
