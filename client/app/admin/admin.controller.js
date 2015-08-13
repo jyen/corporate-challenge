@@ -45,6 +45,8 @@
         }
 
         editCompanyInfo(company) {
+            //Use this to avoid changing the original object
+            var copyCompany = angular.copy(company);
             var modalInstance = this.$modal.open({
                 animation: true,
                 templateUrl: 'app/create-company/create-company-modal.html',
@@ -53,7 +55,7 @@
                 size: 'lg',
                 resolve: {
                     company: function () {
-                        return company;
+                        return copyCompany;
                     }
                 }
             });
