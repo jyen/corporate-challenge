@@ -1,27 +1,24 @@
 'use strict';
 
 (function () {
-    angular.module('corporateChallengeApp').controller('CompanyCtrl', CompanyCtrl);
-    CompanyCtrl.$inject = ['companyService', 'Auth'];
-    function CompanyCtrl(companyService, Auth) {
 
-        var vm = this;
-        vm.company = {};
-        vm.currentUser = Auth.getCurrentUser();
-
-        init();
-
-        function init() {
-            getCompany(vm.currentUser.company);
+    class CompanyCtrl {
+        /*@ngInject*/
+        constructor(companyService, Auth) {
+            this.companyService = companyService;
+            this.company = {};
+            this.currentUser = Auth.getCurrentUser();
+            this.getCompany(this.currentUser.company);
         }
 
-        function getCompany(company) {
-            return companyService.getCompany(company)
-                .then(function (data) {
-                    vm.company = data;
-                    return vm.company;
+        getCompany(company) {
+            return this.companyService.getCompany(company)
+                .then(data => {
+                    this.company = data;
+                    return this.company;
                 });
         }
     }
+    angular.module('corporateChallengeApp').controller('CompanyCtrl', CompanyCtrl);
 
 })();

@@ -1,34 +1,31 @@
 'use strict';
 
 (function () {
-    angular.module('corporateChallengeApp').controller('SportsCtrl', SportsCtrl);
-    SportsCtrl.$inject = ['sportService', 'Auth', 'sportUtils'];
-    function SportsCtrl(sportService, Auth, sportUtils) {
+    class SportsCtrl {
+        /*@ngInject*/
+        constructor(sportService, Auth, sportUtils) {
+            this.sportService = sportService;
+            this.Auth = Auth;
+            this.sportUtils = sportUtils;
 
-        var vm = this;
-        vm.sports = [];
-        vm.mySports = [];
-        vm.currentUser = Auth.getCurrentUser();
-
-        vm.initialized = false;
-
-        init();
-
-        function init() {
-            getSports();
+            this.sports = [];
+            this.mySports = [];
+            this.currentUser = Auth.getCurrentUser();
+            this.initialized = false;
+            this.getSports();
         }
 
-        function getSports() {
+        getSports() {
             var year = new Date().getFullYear();
-            return sportService.getSports(year)
-                .then(function (data) {
-                    vm.sports = data;
-                    vm.mySports = sportUtils.getSportsByUser(vm.sports, vm.currentUser);
-                    vm.initialized = true;
-                    return vm.sports;
+            return this.sportService.getSports(year)
+                .then(data => {
+                    this.sports = data;
+                    this.mySports = this.sportUtils.getSportsByUser(this.sports, this.currentUser);
+                    this.initialized = true;
+                    return this.sports;
                 });
         }
-
     }
+    angular.module('corporateChallengeApp').controller('SportsCtrl', SportsCtrl);
 
 })();

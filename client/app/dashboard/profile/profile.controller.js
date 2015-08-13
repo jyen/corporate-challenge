@@ -1,12 +1,11 @@
 'use strict';
 
 (function () {
-    angular.module('corporateChallengeApp').controller('ProfileCtrl', ProfileCtrl);
-    ProfileCtrl.$inject = ['Auth'];
-    function ProfileCtrl(Auth) {
-
-        var vm = this;
-        vm.currentUser = Auth.getCurrentUser();
+    class ProfileCtrl {
+        /*@ngInject*/
+        constructor(Auth) {
+            this.currentUser = Auth.getCurrentUser();
+        }
     }
-
+    angular.module('corporateChallengeApp').controller('ProfileCtrl', ProfileCtrl);
 })();

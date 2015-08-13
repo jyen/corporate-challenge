@@ -1,33 +1,29 @@
 'use strict';
 
 (function () {
-    angular.module('corporateChallengeApp').controller('DashboardCtrl', DashboardCtrl);
-    DashboardCtrl.$inject = ['sportService', 'Auth', 'sportUtils'];
-    function DashboardCtrl(sportService, Auth, sportUtils) {
-
-        var vm = this;
-        vm.sports = [];
-        vm.mySports = [];
-        vm.initialized = false;
-        vm.currentUser = Auth.getCurrentUser();
-
-        init();
-
-        function init() {
-            getSports();
+    class DashboardCtrl {
+        /*@ngInject*/
+        constructor(sportService, Auth, sportUtils) {
+            this.sportService = sportService;
+            this.Auth = Auth;
+            this.sportUtils = sportUtils;
+            this.sports = [];
+            this.mySports = [];
+            this.initialized = false;
+            this.currentUser = Auth.getCurrentUser();
+            this.getSports();
         }
 
-        function getSports() {
+        getSports() {
             var year = new Date().getFullYear();
-            return sportService.getSports(year)
-                .then(function (data) {
-                    vm.sports = data;
-                    vm.mySports = sportUtils.getSportsByUser(vm.sports, vm.currentUser);
-                    vm.initialized = true;
-                    return vm.sports;
+            return this.sportService.getSports(year)
+                .then(data => {
+                    this.sports = data;
+                    this.mySports = this.sportUtils.getSportsByUser(this.sports, this.currentUser);
+                    this.initialized = true;
+                    return this.sports;
                 });
         }
-
     }
-
+    angular.module('corporateChallengeApp').controller('DashboardCtrl', DashboardCtrl);
 })();
