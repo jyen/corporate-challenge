@@ -1,25 +1,20 @@
 'use strict';
 
 (function () {
-    angular.module('corporateChallengeApp').factory('sportService', sportService);
-    sportService.$inject = ['$resource'];
-    function sportService($resource) {
-        var resource = $resource('/api/sports/:id', null, {
-            'update': {method: 'PUT'}
-        });
 
-        return {
-            getSports: getSports,
-            setupSports: setupSports,
-            getSport: getSport,
-            updateSport: updateSport
-        };
+    class sportService {
+        /*@ngInject*/
+        constructor($resource) {
+            this.resource = $resource('/api/sports/:id', null, {
+                'update': {method: 'PUT'}
+            });
+        }
 
-        function getSports(year, enabled) {
+        getSports(year, enabled) {
             var queryParams = {};
             queryParams.year = year;
             queryParams.enabled = enabled;
-            return resource.query(queryParams).$promise
+            return this.resource.query(queryParams).$promise
                 .then(getSportsComplete)
                 .catch(getSportsFailed);
 
@@ -31,8 +26,8 @@
             }
         }
 
-        function setupSports() {
-            return resource.save({id: 'all'}, {}).$promise
+        setupSports() {
+            return this.resource.save({id: 'all'}, {}).$promise
                 .then(setupSportsComplete)
                 .catch(setupSportsFailed);
 
@@ -44,18 +39,18 @@
             }
         }
 
-        function getSport() {
+        getSport() {
 
         }
 
-        function updateSport(sport, participate) {
+        updateSport(sport, participate) {
             var params = {};
             params.id = sport._id;
 
             if (typeof participate !== 'undefined') {
                 params.participate = participate;
             }
-            return resource.update(params, sport).$promise
+            return this.resource.update(params, sport).$promise
                 .then(updateSportComplete)
                 .catch(updateSportFailed);
 
@@ -67,4 +62,5 @@
             }
         }
     }
+    angular.module('corporateChallengeApp').service('sportService', sportService);
 })();

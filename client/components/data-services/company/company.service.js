@@ -1,22 +1,17 @@
 'use strict';
 
 (function () {
-    angular.module('corporateChallengeApp').factory('companyService', companyService);
-    companyService.$inject = ['$resource'];
-    function companyService($resource) {
-        var resource = $resource('/api/companies/:id', null, {
-            'update': {method: 'PUT'}
-        });
 
-        return {
-            getCompanies: getCompanies,
-            createCompany: createCompany,
-            updateCompany: updateCompany,
-            getCompany: getCompany
-        };
+    class companyService {
+        /*@ngInject*/
+        constructor($resource) {
+            this.resource = $resource('/api/companies/:id', null, {
+                'update': {method: 'PUT'}
+            });
+        }
 
-        function getCompanies() {
-            return resource.query().$promise
+        getCompanies() {
+            return this.resource.query().$promise
                 .then(getCompaniesComplete)
                 .catch(getCompaniesFailed);
 
@@ -28,8 +23,8 @@
             }
         }
 
-        function createCompany(company) {
-            return resource.save(company).$promise
+        createCompany(company) {
+            return this.resource.save(company).$promise
                 .then(createCompanyComplete)
                 .catch(createCompanyFailed);
 
@@ -41,8 +36,8 @@
             }
         }
 
-        function updateCompany(company) {
-            return resource.update({id: company._id}, company).$promise
+        updateCompany(company) {
+            return this.resource.update({id: company._id}, company).$promise
                 .then(updateCompanyComplete)
                 .catch(updateCompanyFailed);
 
@@ -54,8 +49,8 @@
             }
         }
 
-        function getCompany(id) {
-            return resource.get({id: id}).$promise
+        getCompany(id) {
+            return this.resource.get({id: id}).$promise
                 .then(getCompanyComplete)
                 .catch(getCompanyFailed);
             function getCompanyComplete(response) {
@@ -67,4 +62,5 @@
 
         }
     }
+    angular.module('corporateChallengeApp').service('companyService', companyService);
 })();
