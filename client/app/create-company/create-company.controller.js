@@ -1,53 +1,47 @@
 'use strict';
 
 (function () {
-    angular.module('corporateChallengeApp').controller('CreateCompanyCtrl', CreateCompanyCtrl);
-    CreateCompanyCtrl.$inject = ['$modalInstance', 'companyService'];
-    function CreateCompanyCtrl($modalInstance, companyService) {
-        var vm = this;
-        vm.company = {};
-        vm.company.admins = [''];
-        vm.addMoreAdmins = addMoreAdmins;
-        vm.confirmModal = confirmModal;
-        vm.cancelModal = cancelModal;
-        vm.removeAdmin = removeAdmin;
-
-        vm.getEmailFieldByIndex = getEmailFieldByIndex;
-
-
-        function addMoreAdmins() {
-            vm.company.admins.push('');
+    class CreateCompanyCtrl {
+        /*@ngInject*/
+        constructor($modalInstance, companyService) {
+            this.$modalInstance = $modalInstance;
+            this.companyService = companyService;
+            this.company = {};
+            this.company.admins = [''];
         }
 
+        addMoreAdmins() {
+            this.company.admins.push('');
+        }
 
-        function removeAdmin(index) {
+        removeAdmin(index) {
             var tmp = [];
-            for (var i = 0; i < vm.company.admins.length; i++) {
+            for (var i = 0; i < this.company.admins.length; i++) {
                 var field = 'email' + i;
                 if (i !== index) {
-                    tmp.push(vm.companyForm[field].$viewValue);
+                    tmp.push(this.companyForm[field].$viewValue);
                 }
             }
-
-            vm.company.admins = tmp;
+            this.company.admins = tmp;
         }
 
-        function confirmModal(company) {
-            vm.submitted = true;
-            if (!vm.companyForm.$invalid) {
-                companyService.createCompany(company).then(function () {
-                    $modalInstance.close();
+        confirmModal(company) {
+            this.submitted = true;
+            if (!this.companyForm.$invalid) {
+                this.companyService.createCompany(company).then(() => {
+                    this.$modalInstance.close();
                 });
             }
         }
 
-        function cancelModal() {
-            $modalInstance.dismiss('cancel');
+        cancelModal() {
+            this.$modalInstance.dismiss('cancel');
         }
 
-        function getEmailFieldByIndex(index) {
+        getEmailFieldByIndex(index) {
             var email = 'email' + index;
-            return vm.companyForm[email];
+            return this.companyForm[email];
         }
     }
+    angular.module('corporateChallengeApp').controller('CreateCompanyCtrl', CreateCompanyCtrl);
 })();
