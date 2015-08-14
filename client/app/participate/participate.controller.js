@@ -1,45 +1,37 @@
 'use strict';
 
 (function () {
-    angular.module('corporateChallengeApp').controller('ParticipateCtrl', ParticipateCtrl);
-    ParticipateCtrl.$inject = ['sportService', 'Auth'];
-    function ParticipateCtrl(sportService, Auth) {
-
-        var vm = this;
-        vm.sports = [];
-        vm.selectedSports = {};
-        vm.currentUser = Auth.getCurrentUser();
-
-        vm.join = join;
-
-        vm.initialized = false;
-
-
-        init();
-
-        function init() {
-            getSports();
+    class ParticipateCtrl {
+        /*@ngInject*/
+        constructor(sportService, Auth) {
+            this.sportService = sportService;
+            this.Auth = Auth;
+            this.sports = [];
+            this.selectedSports = {};
+            this.currentUser = Auth.getCurrentUser();
+            this.initialized = false;
+            this.getSports();
         }
 
-        function getSports() {
+        getSports() {
             var year = new Date().getFullYear();
-            return sportService.getSports(year, true)
-                .then(function (data) {
-                    vm.sports = data;
-                    vm.selectedSports = setSelectedSports(vm.sports);
-                    vm.initialized = true;
-                    return vm.sports;
+            return this.sportService.getSports(year, true)
+                .then(data => {
+                    this.sports = data;
+                    this.selectedSports = this.setSelectedSports(this.sports);
+                    this.initialized = true;
+                    return this.sports;
                 });
         }
 
-        function join(sport, participate) {
-            sportService.updateSport(sport, participate);
+        join(sport, participate) {
+            this.sportService.updateSport(sport, participate);
         }
 
-        function setSelectedSports(sports) {
+        setSelectedSports(sports) {
             var currentUser = Auth.getCurrentUser();
             var selected = {};
-            _.each(sports, function (sport) {
+            _.each(sports, sport => {
                 if (_.findWhere(sport.members, {'_id': currentUser._id})) {
                     selected[sport._id] = true;
                 } else {
@@ -51,4 +43,5 @@
 
         }
     }
+    angular.module('corporateChallengeApp').controller('ParticipateCtrl', ParticipateCtrl);
 })();
