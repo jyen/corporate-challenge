@@ -19,7 +19,7 @@
                 return response;
             }
 
-            function getCompaniesFailed(error) {
+            function getCompaniesFailed() {
             }
         }
 
@@ -32,7 +32,7 @@
                 return response;
             }
 
-            function createCompanyFailed(error) {
+            function createCompanyFailed() {
             }
         }
 
@@ -45,7 +45,7 @@
                 return response;
             }
 
-            function updateCompanyFailed(error) {
+            function updateCompanyFailed() {
             }
         }
 
@@ -57,7 +57,7 @@
                 return response;
             }
 
-            function getCompanyFailed(error) {
+            function getCompanyFailed() {
             }
 
         }

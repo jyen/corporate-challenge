@@ -30,10 +30,8 @@ module.exports = function(config) {
     ],
 
     preprocessors: {
-      '**/*.jade': 'ng-jade2js',
       '**/*.html': 'html2js',
-      'client/app/**/*.js': 'babel',
-      '**/*.coffee': 'coffee',
+      'client/{app,components}/**/*.js': 'babel'
     },
 
     ngHtml2JsPreprocessor: {

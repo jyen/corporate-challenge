@@ -29,7 +29,7 @@
         }
 
         setSelectedSports(sports) {
-            var currentUser = Auth.getCurrentUser();
+            var currentUser = this.Auth.getCurrentUser();
             var selected = {};
             _.each(sports, sport => {
                 if (_.findWhere(sport.members, {'_id': currentUser._id})) {
