@@ -1,0 +1,63 @@
+<ion-view title="Add a Car">
+  <ion-content>
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Car Name</span>
+        <input style="text-align: right"
+               type="text"
+               ng-model="create.car.name">
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Year
+        </div>
+        <select ng-model="create.year"
+          ng-options="year for year in create.availableYears"
+          ng-change="create.getAvailableMakes(create.year)">
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Make
+        </div>
+        <select ng-model="create.make"
+          ng-options="make.name for make in create.availableMakes"
+          ng-change="create.getAvailableModels(create.year, create.make.niceName)">
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Model
+        </div>
+        <select ng-model="create.model"
+          ng-options="model.name for model in create.availableModels"
+          ng-change="create.getAvailableStyles(create.year, create.make.niceName, create.model.niceName)">
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Style
+        </div>
+        <select ng-model="create.style"
+          ng-options="style.name for style in create.availableStyles"
+          ng-change="create.getStyle(create.style.id)">
+        </select>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">VIN</span>
+        <input style="text-align: right"
+               type="text"
+               ng-model="create.car.vin">
+      </label>
+      <button class="button button-block button-stable"
+              ng-click="create.createCar(create.car)"
+              ng-disabled="!create.enableAdd()">
+        Add
+      </button>
+      <button class="button button-block button-stable"
+              ui-sref="dashboard.manage">
+        Cancel
+      </button>
+    </div>
+  </ion-content>
+</ion-view>

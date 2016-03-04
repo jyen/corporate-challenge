@@ -1,0 +1,17 @@
+<ion-view view-title="Profile">
+  <ion-content>
+    <ion-list>
+      Hello,
+      {{profile.currentUser.name}}
+    </ion-list>
+
+    <button class="button button-block button-stable"
+            ng-click="">
+      Change Password
+    </button>
+    <button class="button button-block button-stable"
+            ng-click="profile.logout()">
+      Logout
+    </button>
+  </ion-content>
+</ion-view>

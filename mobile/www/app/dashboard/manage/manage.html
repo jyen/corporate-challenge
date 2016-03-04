@@ -1,0 +1,15 @@
+<ion-view view-title="Manage Car">
+  <ion-content>
+    <div ng-repeat="car in manage.myCars"
+         class="list card">
+      <div class="item item-divider"
+           ng-click="manage.actions(car)">
+        {{car.name}} - {{car.info.make.name}} {{car.info.model.name}}
+      </div>
+    </div>
+    <button class="button button-block button-stable"
+            ui-sref="car-create">
+      Add Car
+    </button>
+  </ion-content>
+</ion-view>
