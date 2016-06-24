@@ -5,26 +5,18 @@ angular.module('corporateChallengeApp')
         $stateProvider
             .state('dashboard', {
                 url: '/dashboard',
-                templateUrl: 'app/dashboard/dashboard.html',
-                controller: 'DashboardCtrl',
-                controllerAs: 'dashboard'
+                template: '<dashboard></dashboard>'
             })
             .state('dashboard.profile', {
                 url: '/profile',
-                templateUrl: 'app/dashboard/profile/profile.html',
-                controller: 'ProfileCtrl',
-                controllerAs: 'profile'
+                template: '<dashboard-profile></dashboard-profile>'
             })
             .state('dashboard.company', {
                 url: '/company',
-                templateUrl: 'app/dashboard/company/company.html',
-                controller: 'CompanyCtrl',
-                controllerAs: 'company'
+                template: '<dashboard-company></dashboard-company>'
             })
             .state('dashboard.sports', {
                 url: '/sports',
-                templateUrl: 'app/dashboard/sports/sports.html',
-                controller: 'SportsCtrl',
-                controllerAs: 'sports'
+                template: '<dashboard-sport></dashboard-sport>'
             });
     });
