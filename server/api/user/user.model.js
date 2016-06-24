@@ -13,8 +13,10 @@ var UserSchema = new Schema({
         type: String,
         default: 'user'
     },
-    birthday: Date,
+    birthday: {type: Number, required: false},
     phone: Number,
+    shirtSize: {type: String, enum: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'], required: true},
+    participantType: {type: String, enum: ['Employee', 'Contractor', 'Retiree', 'Spouse'], required: true},
     company: Schema.Types.ObjectId,
     hashedPassword: String,
     provider: String,
@@ -57,6 +59,8 @@ UserSchema
             'email': this.email,
             'phone': this.phone,
             'birthday': this.birthday,
+            'shirtSize': this.shirtSize,
+            'participantType': this.participantType,
             'gender': this.gender
         };
     });

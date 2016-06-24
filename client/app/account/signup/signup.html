@@ -139,16 +139,15 @@
 
                 <div class="form-group" ng-class="{ 'has-success': signup.form.date.$valid && signup.submitted,
                                             'has-error': signup.form.date.$invalid && signup.submitted }">
-                    <label>Birthday</label>
+                    <label>Birth year</label>
 
-                    <input type="date" name="date" class="form-control" ng-model="signup.user.birthday"
-                           ng-minlength="3"
-                           required
+                    <input type="number" name="date" class="form-control" ng-model="signup.user.birthday"
+                           ng-minlength="4"
                            mongoose-error/>
 
                     <p class="help-block"
                        ng-show="(signup.form.password.$error.minlength || signup.form.password.$error.required) && signup.submitted">
-                        Password must be at least 3 characters.
+                        Must be a 4 digits year
                     </p>
 
                     <p class="help-block" ng-show="signup.form.password.$error.mongoose">
