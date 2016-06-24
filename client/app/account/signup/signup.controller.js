@@ -1,65 +1,60 @@
 'use strict';
 
 (function () {
-    angular.module('corporateChallengeApp').controller('SignupCtrl', SignupCtrl);
-    SignupCtrl.$inject = ['Auth', '$location', '$window', '$modal', 'companyService'];
+    class SignupCtrl {
+        /*@ngInject*/
+        constructor(Auth, $location, $window, $modal, companyService) {
+            this.Auth = Auth;
+            this.$location = $location;
+            this.$window = $window;
+            this.$modal = $modal;
+            this.companyService = companyService;
 
-    function SignupCtrl(Auth, $location, $window, $modal, companyService) {
-        var vm = this;
-        vm.user = {};
-        vm.errors = {};
-        vm.companies = [];
+            this.init();
+        }
 
-        vm.register = register;
-        vm.loginOauth = loginOauth;
-        vm.addCompany = addCompany;
+        init() {
+            this.availableSize = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+            this.participantTypes = ['Employee', 'Contractor', 'Retiree', 'Spouse'];
+            this.getCompanies();
+        }
 
-
-        init();
-
-        function register(form) {
-            console.log(vm.user);
-            vm.submitted = true;
+        register(form) {
+            this.submitted = true;
 
             if (form.$valid) {
-                Auth.createUser(vm.user)
-                    .then(function () {
+                this.Auth.createUser(vm.user)
+                    .then(() => {
                         // Account created, redirect to home
-                        $location.path('/');
+                        this.$location.path('/');
                     })
-                    .catch(function (err) {
+                    .catch((err) => {
                         err = err.data;
-                        vm.errors = {};
+                        this.errors = {};
 
                         // Update validity of form fields that match the mongoose errors
-                        angular.forEach(err.errors, function (error, field) {
+                        angular.forEach(err.errors, (error, field) => {
                             form[field].$setValidity('mongoose', false);
-                            vm.errors[field] = error.message;
+                            this.errors[field] = error.message;
                         });
                     });
             }
         }
 
-        function init() {
-            vm.availableSize = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
-            vm.participantTypes = ['Employee', 'Contractor', 'Retiree', 'Spouse'];
-            return getCompanies();
+        loginOauth(provider) {
+            this.$window.location.href = '/auth/' + provider;
         }
 
-        function getCompanies() {
-            return companyService.getCompanies()
-                .then(function (data) {
-                    vm.companies = data;
-                    return vm.companies;
+        getCompanies() {
+            return this.companyService.getCompanies()
+                .then((data) => {
+                    this.companies = data;
+                    return this.companies;
                 });
         }
 
-        function loginOauth(provider) {
-            $window.location.href = '/auth/' + provider;
-        }
-
-        function addCompany() {
-            var modalInstance = $modal.open({
+        addCompany() {
+            var modalInstance = this.$modal.open({
                 animation: true,
                 templateUrl: 'app/create-company/create-company-modal.html',
                 controller: 'CreateCompanyCtrl',
@@ -67,13 +62,12 @@
                 size: 'lg'
             });
 
-            modalInstance.result.then(function () {
-                getCompanies();
-            }, function () {
+            modalInstance.result.then(() => {
+                this.getCompanies();
+            }, () => {
             });
         }
-
-
     }
+    angular.module('corporateChallengeApp').controller('SignupCtrl', SignupCtrl);
 })();
 

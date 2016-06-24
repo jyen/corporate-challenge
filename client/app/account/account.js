@@ -9,9 +9,8 @@ angular.module('corporateChallengeApp')
                 controller: 'LoginCtrl'
             })
             .state('signup', {
-                url: '/signup', templateUrl: 'app/account/signup/signup.html',
-                controller: 'SignupCtrl',
-                controllerAs: 'signup'
+                url: '/signup',
+                template: '<signup></signup>'
             })
             .state('settings', {
                 url: '/settings',
