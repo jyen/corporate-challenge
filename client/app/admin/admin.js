@@ -13,10 +13,10 @@ angular.module('corporateChallengeApp')
             })
             .state('admin.view-shirt-info', {
                 url: '/view-shirt-info',
-                template: 'setup'
+                template: '<view-shirt-info></view-shirt-info>'
             })
             .state('admin.view-participants', {
                 url: '/view-participants',
-                template: 'setup'
+                template: 'IN PROGRESS'
             });
     });

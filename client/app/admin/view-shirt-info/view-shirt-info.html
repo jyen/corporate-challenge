@@ -1,0 +1,37 @@
+<div>
+    <h4>T-Shirt Information</h4>
+    <ul>
+        <li>S: {{shirts.counts.S}}</li>
+        <li>M: {{shirts.counts.M}}</li>
+        <li>L: {{shirts.counts.L}}</li>
+        <li>XL: {{shirts.counts.XL}}</li>
+        <li>XXL: {{shirts.counts.XXL}}</li>
+        <li>XXXL: {{shirts.counts.XXXL}}</li>
+        <li>Total: {{shirts.users.length}}</li>
+    </ul>
+
+    <h4>Individuals</h4>
+    <ul class="list-group">
+        <li class="list-group-item"
+            ng-repeat="user in shirts.users">
+            {{user.name}} : {{user.shirtSize}}
+        </li>
+    </ul>
+
+    <ul class="list-group">
+        <li class="list-group-item"
+            ng-repeat="sport in adminSports.sports"
+            ng-class="{'disabled': !sport.enabled}">
+            <a href="" ng-if="!sport.enabled"
+               ng-click="adminSports.enableSport(sport)">
+                <span class="glyphicon glyphicon-plus pull-right"></span>
+            </a>
+            <a href="" ng-if="sport.enabled"
+               ng-click="adminSports.disableSport(sport)">
+                <span class="glyphicon glyphicon-minus pull-right"></span>
+            </a>
+            <strong>{{sport.name}}</strong><br>
+            <span class="text-muted">Members: {{sport.members.length}}</span>
+        </li>
+    </ul>
+</div>
