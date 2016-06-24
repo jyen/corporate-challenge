@@ -8,6 +8,7 @@
             this.companyService = companyService;
             this.company = {};
             this.company.admins = [''];
+            this.availableDivisions = ['A', 'AA', 'B', 'BB', 'C' , 'D'];
         }
 
         addMoreAdmins() {
