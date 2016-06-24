@@ -23,7 +23,7 @@
             this.submitted = true;
 
             if (form.$valid) {
-                this.Auth.createUser(vm.user)
+                this.Auth.createUser(this.user)
                     .then(() => {
                         // Account created, redirect to home
                         this.$location.path('/dashboard/sports');

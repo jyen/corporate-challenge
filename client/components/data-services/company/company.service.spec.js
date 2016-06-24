@@ -12,7 +12,7 @@ describe('Service: company', function () {
     }));
 
     it('should do something', function () {
-        expect(company).toBe(true);
+        expect(!!company).toBe(true);
     });
 
 });

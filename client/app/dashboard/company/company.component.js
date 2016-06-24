@@ -1,11 +1,11 @@
 'use strict';
 (function () {
-    class dashboardCompany {
+    class DashboardCompany {
         /* ngInject */
         constructor() {
             this.templateUrl = 'app/dashboard/company/company.html';
             this.controller = 'CompanyCtrl as company';
         }
     }
-    angular.module('corporateChallengeApp').component('dashboardCompany', new dashboardCompany());
+    angular.module('corporateChallengeApp').component('dashboardCompany', new DashboardCompany());
 })();

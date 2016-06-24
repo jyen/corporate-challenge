@@ -1,11 +1,11 @@
 'use strict';
 (function () {
-    class admin {
+    class Admin {
         /* ngInject */
         constructor() {
             this.templateUrl = 'app/admin/admin.html';
             this.controller = 'AdminCtrl as admin';
         }
     }
-    angular.module('corporateChallengeApp').component('admin', new admin());
+    angular.module('corporateChallengeApp').component('admin', new Admin());
 })();

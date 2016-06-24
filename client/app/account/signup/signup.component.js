@@ -1,11 +1,11 @@
 'use strict';
 (function () {
-    class signup {
+    class Signup {
         /* ngInject */
         constructor() {
             this.templateUrl = 'app/account/signup/signup.html';
             this.controller = 'SignupCtrl as signup';
         }
     }
-    angular.module('corporateChallengeApp').component('signup', new signup());
+    angular.module('corporateChallengeApp').component('signup', new Signup());
 })();
