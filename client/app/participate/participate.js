@@ -5,8 +5,6 @@ angular.module('corporateChallengeApp')
         $stateProvider
             .state('participate', {
                 url: '/participate',
-                templateUrl: 'app/participate/participate.html',
-                controller: 'ParticipateCtrl',
-                controllerAs: 'participate'
+                template: '<participate></participate>'
             });
     });
