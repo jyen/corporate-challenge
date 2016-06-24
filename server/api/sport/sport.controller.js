@@ -152,8 +152,8 @@ function getSportsByDivision(division, companyId) {
     var sports = [];
     var year = new Date().getFullYear();
     var sportsName = ['Badminton', 'Basketball', 'Bike Race',
-        'Billiards', 'Bowling', 'Darts', 'Dodgeball',
-        'Dominoes (42)', 'Flag Football', 'Golf',
+        'Billiards', 'Bowling', 'Cornhole', 'Darts', 'Dodgeball',
+        'Dominoes (42)', 'Duathlon', 'Flag Football', 'Golf',
         'Horseshoes', 'Kickball', 'Miniature Golf', 'Punt, Pass & Kick',
         'Soccer', 'Softball', 'Swimming', 'Table Tennis', 'Tennis',
         'Texas Hold\'Em', 'Volleyball', '5K Run'];
