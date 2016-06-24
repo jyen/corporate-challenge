@@ -41,6 +41,8 @@
         }
 
         function init() {
+            vm.availableSize = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+            vm.participantTypes = ['Employee', 'Contractor', 'Retiree', 'Spouse'];
             return getCompanies();
         }
 
