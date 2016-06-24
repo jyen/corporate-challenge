@@ -5,8 +5,7 @@ angular.module('corporateChallengeApp')
         $stateProvider
             .state('login', {
                 url: '/login',
-                templateUrl: 'app/account/login/login.html',
-                controller: 'LoginCtrl'
+                template: '<login></login>',
             })
             .state('signup', {
                 url: '/signup',

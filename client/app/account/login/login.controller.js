@@ -1,29 +1,42 @@
 'use strict';
 
-angular.module('corporateChallengeApp')
-    .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
-        $scope.user = {};
-        $scope.errors = {};
+(function () {
+    class LoginCtrl {
+        /*@ngInject*/
+        constructor(Auth, $location, $window) {
+            this.Auth = Auth;
+            this.$location = $location;
+            this.$window = $window;
 
-        $scope.login = function (form) {
-            $scope.submitted = true;
+            this.init();
+        }
+
+        init() {
+            this.user = {};
+            this.errors = {};
+        }
+
+        login (form) {
+            this.submitted = true;
 
             if (form.$valid) {
-                Auth.login({
-                    email: $scope.user.email,
-                    password: $scope.user.password
+                this.Auth.login({
+                    email: this.user.email,
+                    password: this.user.password
                 })
-                    .then(function () {
+                    .then(() => {
                         // Logged in, redirect to home
-                        $location.path('/dashboard');
+                        this.$location.path('/dashboard');
                     })
-                    .catch(function (err) {
-                        $scope.errors.other = err.message;
+                    .catch((err) => {
+                        this.errors.other = err.message;
                     });
             }
-        };
+        }
 
-        $scope.loginOauth = function (provider) {
-            $window.location.href = '/auth/' + provider;
-        };
-    });
+        loginOauth (provider) {
+            this.$window.location.href = '/auth/' + provider;
+        }
+    }
+    angular.module('corporateChallengeApp').controller('LoginCtrl', LoginCtrl);
+})();
