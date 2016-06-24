@@ -228,10 +228,37 @@ module.exports = function (grunt) {
 
     // Automatically inject Bower components into the app
     wiredep: {
-      target: {
+      options: {
+        exclude: [
+          '/bootstrap-sass-official/'
+        ]
+      },
+      client: {
         src: '<%= yeoman.client %>/index.html',
         ignorePath: '<%= yeoman.client %>/',
-        exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/', /bootstrap.css/, /font-awesome.css/, /bootcards/]
+        exclude: [
+          '/bootstrap-sass-official/',
+          /bootcards/
+        ]
+      },
+      test: {
+        devDependencies: true,
+        src: './karma.conf.js',
+        exclude: [
+          '/bootstrap-sass-official/'
+        ],
+        ignorePath: /\.\.\//,
+        fileTypes: {
+          js: {
+            block: /(([\s\t]*)\/\/\s*bower:*(\S*))(\n|\r|.)*?(\/\/\s*endbower)/gi,
+            detect: {
+              js: /'(.*\.js)'/gi
+            },
+            replace: {
+              js: '\'{{filePath}}\','
+            }
+          }
+        }
       }
     },
 
@@ -644,7 +671,8 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:sass', 
+        'injector:sass',
+        'wiredep:test',
         'concurrent:test',
         'injector',
         'autoprefixer',
