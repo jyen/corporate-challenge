@@ -26,7 +26,7 @@
                 })
                     .then(() => {
                         // Logged in, redirect to home
-                        this.$location.path('/dashboard');
+                        this.$location.path('/dashboard/sports');
                     })
                     .catch((err) => {
                         this.errors.other = err.message;

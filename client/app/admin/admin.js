@@ -5,8 +5,18 @@ angular.module('corporateChallengeApp')
         $stateProvider
             .state('admin', {
                 url: '/admin',
-                templateUrl: 'app/admin/admin.html',
-                controller: 'AdminCtrl',
-                controllerAs: 'admin'
+                template: '<admin></admin>'
+            })
+            .state('admin.setup-sports', {
+                url: '/setup-sports',
+                template: '<admin-sport></admin-sport>'
+            })
+            .state('admin.view-shirt-info', {
+                url: '/view-shirt-info',
+                template: 'setup'
+            })
+            .state('admin.view-participants', {
+                url: '/view-participants',
+                template: 'setup'
             });
     });

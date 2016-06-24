@@ -13,7 +13,10 @@
         </div>
         <div class="list-group-item">
             <p class="list-group-item-text">Admins' Emails</p>
-            <h4 class="list-group-item-heading">{{company.company.admins}}</h4>
+            <br>
+            <div ng-repeat="admin in company.company.admins">
+                <h4>{{admin}}</h4>
+            </div>
         </div>
     </div>
 </div>

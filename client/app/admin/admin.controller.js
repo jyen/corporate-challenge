@@ -3,20 +3,17 @@
 (function () {
     class AdminCtrl {
         /*@ngInject*/
-        constructor(Auth, User, companyService, $modal, sportService) {
+        constructor(Auth, User, companyService, $modal) {
             this.Auth = Auth;
             this.User = User;
             this.companyService = companyService;
             this.$modal = $modal;
-            this.sportService = sportService;
 
             this.users = [];
             this.company = {};
-            this.sports = [];
 
             this.getUsers();
             this.getCompany();
-            this.getSports();
         }
 
         getUsers() {
@@ -32,15 +29,6 @@
                     this.company = data;
                     return this.company;
                 }, () => {
-                });
-        }
-
-        getSports() {
-            var year = new Date().getFullYear();
-            return this.sportService.getSports(year)
-                .then(data => {
-                    this.sports = data;
-                    return this.sports;
                 });
         }
 
@@ -64,31 +52,6 @@
                 this.getCompany();
             }, () => {
             });
-        }
-
-        setupSports() {
-            this.sportService.setupSports()
-                .then(data => {
-                    this.sports = data.sports;
-                    return this.sports;
-                });
-        }
-
-        enableSport(sport) {
-            sport.enabled = true;
-            this.sportService.updateSport(sport)
-                .then(() => {
-                    this.getSports();
-                });
-        }
-
-        disableSport(sport) {
-            sport.enabled = false;
-            this.sportService.updateSport(sport)
-                .then(() => {
-                    this.getSports();
-                });
-
         }
     }
     angular.module('corporateChallengeApp').controller('AdminCtrl', AdminCtrl);

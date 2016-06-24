@@ -1,13 +1,13 @@
 <div class="container">
     <div ng-if="!dashboard.sports || dashboard.sports.length ===0 && dashboard.currentUser.role==='admin' && dashboard.initialized">
         <alert type="danger" close="closeAlert=1" ng-hide="closeAlert">
-            Click <a ui-sref="admin">here</a> to setup events for your organization
+            Click <a ui-sref="admin.setup-sports">here</a> to setup events for your organization
         </alert>
     </div>
 
     <div ng-if="!dashboard.sports || dashboard.sports.length ===0 && dashboard.currentUser.role==='user' && dashboard.initialized">
         <alert type="danger" close="closeAlert=1" ng-hide="closeAlert">
-            Contact your Corporate Challange administrators to setup events
+            Contact your Corporate Challenge administrators to setup events
         </alert>
     </div>
 

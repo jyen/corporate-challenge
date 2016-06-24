@@ -26,7 +26,7 @@
                 this.Auth.createUser(vm.user)
                     .then(() => {
                         // Account created, redirect to home
-                        this.$location.path('/');
+                        this.$location.path('/dashboard/sports');
                     })
                     .catch((err) => {
                         err = err.data;

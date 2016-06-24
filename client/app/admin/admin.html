@@ -10,30 +10,16 @@
             </a>
         </li>
     </ul>
-
-    <div ng-if="!admin.sports || admin.sports.length ===0">
-        <button class="btn btn-block"
-                ng-click="admin.setupSports()">
-            Click to set up sports
-        </button>
-    </div>
-    <div ng-if="admin.sports && admin.sports.length !==0">
-        <h4>Available Sports</h4>
-        <ul class="list-group">
-            <li class="list-group-item"
-                ng-repeat="sport in admin.sports"
-                ng-class="{'disabled': !sport.enabled}">
-                <a href="" ng-if="!sport.enabled"
-                   ng-click="admin.enableSport(sport)">
-                    <span class="glyphicon glyphicon-plus pull-right"></span>
-                </a>
-                <a href="" ng-if="sport.enabled"
-                   ng-click="admin.disableSport(sport)">
-                    <span class="glyphicon glyphicon-minus pull-right"></span>
-                </a>
-                <strong>{{sport.name}}</strong><br>
-                <span class="text-muted">Members: {{sport.members.length}}</span>
-            </li>
-        </ul>
-    </div>
+    <ul class="nav nav-tabs">
+        <li role="presentation" ui-sref-active="active">
+            <a ui-sref="admin.setup-sports">Setup Sports</a>
+        </li>
+        <li role="presentation" ui-sref-active="active">
+            <a ui-sref="admin.view-shirt-info">View Shirt Info</a>
+        </li>
+        <li role="presentation" ui-sref-active="active">
+            <a ui-sref="admin.view-participants">View Participant Info</a>
+        </li>
+    </ul>
+    <ui-view></ui-view>
 </div>
