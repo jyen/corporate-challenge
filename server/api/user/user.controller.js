@@ -90,7 +90,7 @@ exports.changePassword = function (req, res, next) {
 }
 
 // Updates an existing sport in the DB.
-exports.update = function (req, res) {
+exports.update = function (req, res, next) {
     var userId = req.user._id;
     User.findOne({
         _id: userId
