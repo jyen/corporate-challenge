@@ -1,8 +1,16 @@
 <div class="panel panel-default">
     <div class="panel-heading clearfix">
         <h3 class="panel-title pull-left">Your Information</h3>
+        <div class="pull-right"
+             ng-if="profile.readOnly">
+            <a ng-click="profile.edit()" href="">
+                <i class="glyphicon glyphicon-pencil"></i>
+            </a>
+        </div>
     </div>
-    <div class="list-group">
+
+    <div ng-if="profile.readOnly"
+         class="list-group">
         <div class="list-group-item">
             <p class="list-group-item-text">Name</p>
             <h4 class="list-group-item-heading">{{profile.currentUser.name}}</h4>
@@ -14,6 +22,7 @@
         <div class="list-group-item">
             <p class="list-group-item-text">Phone</p>
             <h4 class="list-group-item-heading">{{profile.currentUser.phone}}</h4>
+
         </div>
         <div class="list-group-item">
             <p class="list-group-item-text">Participant Type</p>
@@ -27,5 +36,123 @@
             <p class="list-group-item-text">Birth Year</p>
             <h4 class="list-group-item-heading">{{profile.currentUser.birthday}}</h4>
         </div>
+    </div>
+
+
+    <div ng-if="!profile.readOnly">
+        <form class="form" name="profile.form">
+            <div class="form-group">
+                <label>Full Name</label>
+
+                <input type="text"
+                       name="name"
+                       class="form-control"
+                       ng-model="profile.currentUser.name"
+                       disabled/>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+
+                <input type="email"
+                       name="email"
+                       class="form-control"
+                       ng-model="profile.currentUser.email"
+                       disabled/>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-success': profile.form.phone.$valid && profile.form.phone.$touched,
+                                            'has-error': profile.form.phone.$invalid && profile.form.phone.$touched }">
+                <label>Phone Number</label>
+                <input type="number"
+                       class="form-control"
+                       min="0"
+                       ng-minlength="10"
+                       ng-maxlength="10"
+                       id="inputPhone"
+                       name="phone"
+                       placeholder="1234567890"
+                       ng-model="profile.currentUser.phone"
+                       ng-required="true"
+                       mongoose-error>
+
+                <div class="help-block"
+                     ng-show="profile.form.phone.$invalid && profile.form.phone.$touched"
+                     ng-messages="profile.form.phone.$error" role="alert">
+                    <div ng-message="required">Valid phone number is required</div>
+                    <div ng-message="min max">phone number should be 10 digits</div>
+                </div>
+
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-success': profile.form.date.$valid && profile.form.date.$touched,
+                                            'has-error': profile.form.date.$invalid && profile.form.date.$touched }">
+                <label>Birth year (Required only for Run/Bike/Swim)</label>
+
+                <input type="number" name="date" class="form-control" ng-model="profile.currentUser.birthday"
+                       ng-minlength="4"
+                       min="1900"
+                       max="2016"
+                       mongoose-error/>
+
+                <div class="help-block"
+                     ng-show="profile.form.date.$invalid && profile.form.date.$touched"
+                     ng-messages="profile.form.phone.$error" role="alert">
+                    <div ng-message="min max">Must be a 4 digits year</div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-success': profile.form.shirtSize.$valid && profile.form.shirtSize.$touched,
+                                            'has-error': profile.form.shirtSize.$invalid && profile.form.shirtSize.$touched }">
+                <label>Shirt Size</label>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <select class="form-control"
+                                ng-model="profile.currentUser.shirtSize"
+                                required
+                                name="shirtSize"
+                                ng-options="size for size in profile.availableSize">
+                        </select>
+                    </div>
+                </div>
+                <div class="help-block"
+                     ng-show="profile.form.shirtSize.$invalid && profile.form.shirtSize.$touched"
+                     ng-messages="profile.form.shirtSize.$error" role="alert">
+                    <div ng-message="required">Shirt size selection is required</div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-success': profile.form.participantType.$valid && profile.form.participantType.$touched,
+                                            'has-error': profile.form.participantType.$invalid && profile.form.participantType.$touched }">
+                <label>Participant Type</label>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <select class="form-control"
+                                ng-model="profile.currentUser.participantType"
+                                required
+                                name="participantType"
+                                ng-options="type for type in profile.participantTypes">
+                        </select>
+                    </div>
+                </div>
+                <div class="help-block"
+                     ng-show="profile.form.shirtSize.$invalid && profile.form.shirtSize.$touched"
+                     ng-messages="profile.form.shirtSize.$error" role="alert">
+                    <div ng-message="required">Shirt size selection is required</div>
+                </div>
+            </div>
+
+            <button class="btn btn-inverse btn-lg btn-login"
+                    type="submit"
+                    ng-click="profile.save(profile.currentUser)"
+                    ng-disabled="profile.form.$invalid">
+                Save
+            </button>
+            <a class="btn btn-default btn-lg btn-register" ng-click="profile.cancel()">
+                Cancel
+            </a>
+        </form>
     </div>
 </div>

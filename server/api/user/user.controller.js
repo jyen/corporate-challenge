@@ -87,6 +87,25 @@ exports.changePassword = function (req, res, next) {
             res.status(403).send('Forbidden');
         }
     });
+}
+
+// Updates an existing sport in the DB.
+exports.update = function (req, res) {
+    var userId = req.user._id;
+    User.findOne({
+        _id: userId
+    }, '-salt -hashedPassword', function (err, user) { // don't ever give out the password or salt
+        if (err) return next(err);
+        if (!user) return res.status(401).send('Unauthorized');
+
+        var updated = _.merge(user, req.body);
+        updated.save(function (err) {
+            if (err) {
+                return handleError(res, err);
+            }
+            return res.status(200).json(user);
+        })
+    });
 };
 
 /**
@@ -109,3 +128,7 @@ exports.me = function (req, res, next) {
 exports.authCallback = function (req, res, next) {
     res.redirect('/');
 };
+
+function handleError(res, err) {
+    return res.status(500).send(err);
+}
