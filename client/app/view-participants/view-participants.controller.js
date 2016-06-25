@@ -1,28 +1,36 @@
 'use strict';
 
 (function () {
-    angular.module('corporateChallengeApp').controller('ViewParticipantsCtrl', ViewParticipantsCtrl);
-    ViewParticipantsCtrl.$inject = ['User'];
-    function ViewParticipantsCtrl(User) {
+    class ViewParticipantsCtrl {
+        /*@ngInject*/
+        constructor(User) {
+            this.User = User;
 
-        var vm = this;
-        vm.users = [];
-        vm.initialized = false;
-
-
-        init();
-
-        function init() {
-            getUsers();
+            this.users = [];
+            this.initialized = false;
+            this.init();
         }
 
-        // Use the User $resource to fetch all users
-        function getUsers() {
-            return User.query().$promise.then(function (data) {
-                vm.users = data;
-                vm.initialized = true;
-                return vm.users;
+        init() {
+            this.getUsers();
+        }
+
+        getUsers() {
+            return this.User.query().$promise.then((data) => {
+                this.users = data;
+                this.initialized = true;
+                return this.users;
             });
         }
+
+        getEmailList(members) {
+            var emails = [];
+            _.each(members, function (member) {
+                emails.push(member.email);
+            });
+            var emailString = emails.join();
+            return 'mailto:' + emailString;
+        }
     }
+    angular.module('corporateChallengeApp').controller('ViewParticipantsCtrl', ViewParticipantsCtrl);
 })();

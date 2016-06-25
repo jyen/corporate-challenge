@@ -2,7 +2,13 @@
     <alert type="danger" close="closeAlert=1" ng-hide="closeAlert">No one has signed up to participate.</alert>
 </div>
 <div class="container" ng-if="viewParticipants.users.length !==0">
-    <h4>Team Members</h4>
+
+    <h4>Team Members -
+        <a href="{{viewParticipants.getEmailList(viewParticipants.users)}}">
+            <i class="glyphicon glyphicon-envelope"></i>
+            Email all members
+        </a>
+    </h4>
 
     <div class="panel panel-default bootcards-summary">
         <div class="panel-body">
@@ -14,6 +20,7 @@
                         <p>Email: {{user.email}}</p>
 
                         <p class="text-muted">Phone: {{user.phone}}</p>
+                        <p class="text-muted">{{user.participantType}}</p>
                     </div>
                 </div>
             </div>
