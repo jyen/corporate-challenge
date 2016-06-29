@@ -30,6 +30,7 @@
                     })
                     .catch((err) => {
                         this.errors.other = err.message;
+                        form['email'].$setValidity('mongoose', false);
                     });
             }
         }
