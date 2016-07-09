@@ -16,6 +16,8 @@
         init() {
             this.availableSize = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
             this.participantTypes = ['Employee', 'Contractor', 'Retiree', 'Spouse'];
+            this.user = {};
+            this.user.password = '2016';
             this.getCompanies();
         }
 
