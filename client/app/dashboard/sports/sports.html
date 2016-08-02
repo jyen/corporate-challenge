@@ -9,6 +9,7 @@
             <div ng-repeat="sport in sports.mySports" class="col-xs-2 col-sm-2">
                 <a class="bootcards-summary-item" ui-sref="view-sports({id: sport._id})">
                     <h4>{{sport.name}}</h4>
+                    <p>{{sport.date}}</p>
                 </a>
             </div>
             <div class="col-xs-2 col-sm-2">
