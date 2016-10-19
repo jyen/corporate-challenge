@@ -17,7 +17,6 @@ import {Instrumenter} from 'isparta';
 var plugins = gulpLoadPlugins();
 var config;
 
-const clientPath = 'client';
 const serverPath = 'server';
 const paths = {
     server: {
