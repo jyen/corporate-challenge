@@ -1,0 +1,33 @@
+User Creation:
+
+
+
+User:
+
+x1. To join an event
+POST /api/events/:id/members
+x2. To leave an event
+DELETE /api/events/:id/members
+x3. To view all events for an organization
+GET /api/organizations/:id
+x4. To view all members for an event
+GET /api/events/:id
+5. To update user profile
+x6. To view all members from an organization
+GET /api/organizations/:id
+
+
+Admin
+x1. To create an event
+POST /api/organizations/:id/events
+x2. To update an event
+PUT /api/events/:id
+x3. To delete an event
+DELETE /api/events/:id
+4. To add an admin
+5. To remove an admin
+6. To remove an user from an organization
+x7. To create an organization
+POST /api/organizations
+x8. To update an organization
+PUT /api/organizations/:id
