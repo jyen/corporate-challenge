@@ -1,7 +1,11 @@
-import {Http, RequestOptionsArgs, Response, RequestOptions, Headers} from '@angular/http';
+import {
+    Http, RequestOptionsArgs, Response, RequestOptions, Headers, XSRFStrategy,
+    CookieXSRFStrategy
+} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import {Injectable} from "@angular/core";
 import 'rxjs/Rx';
+import {AppComponent} from "../../app.component";
 
 @Injectable()
 export class HttpService {
@@ -17,10 +21,9 @@ export class HttpService {
   }
 
   public post (url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    // const bodyJson = JSON.stringify(body);
-    return this.http.post(url, body)
-        // .map((res: Response) => res.json())
-        // .catch(this.handleErrorResponse);
+    const bodyJson = JSON.stringify(body);
+    return this.http.post(url, bodyJson, this.getRequestOptionArgs(options))
+        .map((res: Response) => res.json())
   }
 
   public put<T>(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
@@ -36,13 +39,14 @@ export class HttpService {
   }
 
   private getRequestOptionArgs(options?: RequestOptionsArgs) : RequestOptionsArgs {
-    console.log('test');
+    // console.log('test');
     if (options == null) {
       options = new RequestOptions();
     }
     if (options.headers == null) {
       options.headers = new Headers();
     }
+    // options.headers.append('Authorization', 'Bearer abc');
     options.headers.append('Content-Type', 'application/json');
     return options;
   }

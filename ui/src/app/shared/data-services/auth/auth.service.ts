@@ -10,12 +10,12 @@ import 'rxjs/Rx';
 @Injectable()
 export class AuthService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpService) { }
 
   public login(credential) {
     console.log('auth');
     return this.http
-        .post(`api/auth/local`, credential)
+        .post(`/auth/local`, credential)
         // .toPromise()
         // .then((test) => {console.log(test)})
         .map((r: Response) => r.json().data)
