@@ -12,11 +12,13 @@ import {Router} from "@angular/router";
 @Injectable()
 export class AuthService {
 
+    private authUrl : string = '/auth/local';
+
   constructor(private http: HttpService, private router: Router) { }
 
   public login(credential) {
     return this.http
-        .post(`/auth/local`, credential)
+        .post(this.authUrl, credential)
         .map((r: Response) => r)
         .catch( err => {
           return Observable.throw(err);

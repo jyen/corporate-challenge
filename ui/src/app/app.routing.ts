@@ -2,10 +2,12 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { loginRoutes } from "./login/login.routing";
+import {homeRoutes} from "./home/home.routing";
 
 
 const appRoutes: Routes = [
-    ...loginRoutes
+    ...loginRoutes,
+    ...homeRoutes
 ];
 
 export const appRoutingProviders: any[] = [
