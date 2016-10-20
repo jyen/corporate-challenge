@@ -1,40 +1,43 @@
 import {
-    Http, RequestOptionsArgs, Response, RequestOptions, Headers, XSRFStrategy,
-    CookieXSRFStrategy
+    Http, RequestOptionsArgs, Response, RequestOptions, Headers
 } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import {Injectable} from "@angular/core";
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 import 'rxjs/Rx';
-import {AppComponent} from "../../app.component";
+import {Router} from "@angular/router";
+import * as _ from 'lodash';
 
 @Injectable()
 export class HttpService {
 
-  constructor(protected http: Http) {
+  constructor(protected http: Http, private router: Router) {
   }
 
 
-  public get<T>(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.http.get(url, this.getRequestOptionArgs(options))
-        .map((res: Response) => <T>res.json())
-        .catch(this.handleErrorResponse);
-  }
-
-  public post (url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    const bodyJson = JSON.stringify(body);
-    return this.http.post(url, bodyJson, this.getRequestOptionArgs(options))
+  public get(url: string, options?: RequestOptionsArgs): Observable<Response> {
+    return this.intercept(this.http.get(url, this.getRequestOptionArgs(options))
         .map((res: Response) => res.json())
-  }
-
-  public put<T>(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.intercept(this.http.put(url, body, this.getRequestOptionArgs(options))
-        .map((res: Response) => <T>res.json())
         .catch(this.handleErrorResponse));
   }
 
-  public delete<T>(url: string, options?: RequestOptionsArgs): Observable<Response> {
+  public post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+    const bodyJson = JSON.stringify(body);
+    return this.intercept(this.http.post(url, bodyJson, this.getRequestOptionArgs(options))
+        .map((res: Response) => res.json())
+        .catch(this.handleErrorResponse));
+  }
+
+  public put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
+    return this.intercept(this.http.put(url, body, this.getRequestOptionArgs(options))
+        .map((res: Response) => res.json())
+        .catch(this.handleErrorResponse));
+  }
+
+  public delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
     return this.intercept(this.http.delete(url, this.getRequestOptionArgs(options))
-        .map((res: Response) => <T>res.json())
+        .map((res: Response) =>
+            res.json())
         .catch(this.handleErrorResponse));
   }
 
@@ -46,24 +49,28 @@ export class HttpService {
     if (options.headers == null) {
       options.headers = new Headers();
     }
-    // options.headers.append('Authorization', 'Bearer abc');
+
+    if (Cookie.get('token')) {
+      options.headers.append('Authorization', 'Bearer ' + Cookie.get('token'));
+    }
+
     options.headers.append('Content-Type', 'application/json');
     return options;
   }
 
-  private handleErrorResponse(res) {
-    return Observable.throw(res.json());
+  private handleErrorResponse(res, err) {
+    return Observable.throw(res);
   }
 
   private intercept(observable: Observable<Response>): Observable<Response> {
-    console.log('INTERCEPT');
-    return observable.catch((err, source) => {
-      // if (err.status  == 401 && !_.endsWith(err.url, 'api/auth/login')) {
-      //   this._router.navigate(['/login']);
-      //   return Observable.empty();
-      // } else {
+    return observable.catch((err) => {
+      if (err.status  == 401 && !_.endsWith(err.url, 'auth/local')) {
+        Cookie.delete('token');
+        this.router.navigate(['/login']);
+        return Observable.empty();
+      } else {
         return Observable.throw(err);
-      // }
+      }
     });
 
   }
