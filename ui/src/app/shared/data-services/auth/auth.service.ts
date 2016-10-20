@@ -7,24 +7,25 @@ import {HttpService} from '../../util/http.service'
 
 import 'rxjs/Rx';
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthService {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private router: Router) { }
 
   public login(credential) {
-    console.log('auth');
     return this.http
         .post(`/auth/local`, credential)
-        .map((r: Response) => r.json().data)
+        .map((r: Response) => r)
         .catch( err => {
-            console.log('token test');
           return Observable.throw(err);
-        })
-        .subscribe( abc => {
-          console.log(abc);
         });
+  }
+
+  public logout() {
+      Cookie.delete('token');
+      this.router.navigate(['/login']);
   }
 
 }
