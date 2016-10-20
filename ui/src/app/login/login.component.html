@@ -1,22 +1,30 @@
-<!--<div class="container">-->
-  <!--<h1>Hero Form</h1>-->
-  <!--<form>-->
-    <!--<div class="form-group">-->
-      <!--<label for="name">Name</label>-->
-      <!--<input type="text" class="form-control" id="name" required>-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-      <!--<label for="alterEgo">Alter Ego</label>-->
-      <!--<input type="text" class="form-control" id="alterEgo">-->
-    <!--</div>-->
-    <!--<button type="submit" class="btn btn-default">Submit</button>-->
-  <!--</form>-->
-<!--</div>-->
-
-
-<div>
-  <label>name: </label>
-  <input [(ngModel)]="credential.email" placeholder="email" />
-  <input [(ngModel)]="credential.password" placeholder="password" />
+<div class="container">
+  <h1>Login</h1>
+  <form>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text"
+             class="form-control"
+             id="email"
+             name="email"
+             required
+             [(ngModel)]="credential.email">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password"
+             class="form-control"
+             id="password"
+             name="password"
+             required
+             [(ngModel)]="credential.password">
+    </div>
+    <button type="submit" class="btn btn-primary"
+            (click)="login(credential)">Login</button>
+    <a type="button"
+       href="/home"
+       class="btn btn-default">
+      Cancel
+    </a>
+  </form>
 </div>
-<button (click)="login(credential)">Back</button>
