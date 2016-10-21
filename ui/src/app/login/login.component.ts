@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {AuthService} from "../shared/data-services/auth/auth.service";
+import {AuthService} from "../shared/auth/auth.service";
 import {Cookie} from "ng2-cookies";
 import {Router} from "@angular/router";
 
@@ -25,11 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login(credential): void {
-    this.authService.login(credential)
-        .subscribe(r => {
-          Cookie.set('token', r.token);
-          this.router.navigate(['/core/dashboard']);
-        });
+    this.authService.login(credential);
   }
 
 }

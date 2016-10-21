@@ -2,8 +2,6 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CoreComponent} from './core.component';
 
-import {NavbarComponent} from '../shared/navbar/navbar.component';
-
 import {DashboardModule} from './dashboard/dashboard.module';
 import {AdminModule} from "./admin/admin.module";
 import {EventsModule} from "./events/events.module";
