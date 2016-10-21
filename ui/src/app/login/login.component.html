@@ -1,29 +1,32 @@
 <div class="container">
-  <h1>Login</h1>
+  <h3>Login</h3>
   <form>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="text"
-             class="form-control"
-             id="email"
-             name="email"
-             required
-             [(ngModel)]="credential.email">
+    <div class="">
+      <div class="input-field col s6">
+        <input type="text"
+               class="validate"
+               id="email"
+               name="email"
+               required
+               [(ngModel)]="credential.email">
+        <label for="email">Email</label>
+      </div>
+      <div class="input-field col s6">
+        <input type="password"
+               class="form-control"
+               id="password"
+               name="password"
+               required
+               [(ngModel)]="credential.password">
+        <label for="password">Password</label>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password"
-             class="form-control"
-             id="password"
-             name="password"
-             required
-             [(ngModel)]="credential.password">
-    </div>
-    <button type="submit" class="btn btn-primary"
+    <button type="submit"
+            class="btn  waves-effect waves-light"
             (click)="login(credential)">Login</button>
     <a type="button"
        href="/home"
-       class="btn btn-default">
+       class="btn teal lighten-4">
       Cancel
     </a>
   </form>

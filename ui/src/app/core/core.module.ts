@@ -23,8 +23,7 @@ import {coreRouting} from "./core.routing";
         coreRouting
     ],
     declarations: [
-        CoreComponent,
-        NavbarComponent
+        CoreComponent
     ]
 })
 export class CoreModule {

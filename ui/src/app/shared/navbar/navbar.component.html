@@ -1,35 +1,43 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
-  <div class="container">
-    <div class="navbar-header">
-      <a href="/" class="navbar-brand">Corporate Challenge</a>
-    </div>
-    <!--<div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">-->
-      <ul class="nav navbar-nav">
-        <li routerLinkActive="active">
-          <a routerLink="/core/dashboard">Dashboard</a>
-        </li>
-        <li routerLinkActive="active">
-          <a routerLink="/core/events">Events</a>
-        </li>
-        <li routerLinkActive="active">
-          <a routerLink="/core/roster">Roster</a>
-        </li>
-        <li routerLinkActive="active">
-          <a routerLink="/core/members">Members</a>
-        </li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/settings"><span
-                class="glyphicon glyphicon-cog"></span></a></li>
-        <li routerLinkActive="active">
-          <a routerLink="/core/admin">
-            Admin
-          </a>
-        <li>
-          <a href="javascript:;" (click)="logout()">Logout</a>
-        </li>
-      </ul>
-    <!--</div>-->
+<nav>
+  <div class="nav-wrapper orange">
+    <a href="#" class="brand-logo">Corporate Challenge</a>
+    <ul id="nav-mobile"
+        class="right hide-on-med-and-down"
+        *ngIf="0">
+      <li routerLinkActive="active">
+        <a routerLink="/core/dashboard">Dashboard</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/core/events">Events</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/core/roster">Roster</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/core/members">Members</a>
+      </li>
+      <!--<li><a href="/settings"><span-->
+              <!--class="fa fa-cog fa-fw"></span></a></li>-->
+      <li routerLinkActive="active">
+        <a routerLink="/core/admin">
+          Admin
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;" (click)="logout()">
+          Logout
+        </a>
+      </li>
+    </ul>
+    <ul id="nav-mobile-home"
+        class="right hide-on-med-and-down"
+        *ngIf="1">
+      <li routerLinkActive="active">
+        <a href="/signup">Sign up</a>
+      </li>
+      <li routerLinkActive="active">
+        <a href="/login">Login</a>
+      </li>
+    </ul>
   </div>
-</div>
+</nav>
