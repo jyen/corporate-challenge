@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Response} from '@angular/http';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 
