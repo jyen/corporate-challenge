@@ -23,7 +23,7 @@ export class AuthService {
   public login(credential) {
     return this.http
         .post(this.authUrl, credential)
-        .map((r) => {
+        .map((r: any) => {
             Cookie.set('token', r.token);
             return this.user.getCurrentUser();
         })
