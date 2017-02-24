@@ -7,19 +7,23 @@ import {AuthService} from "../shared/auth/auth.service";
 
 describe('Component: Login', () => {
 
-  let authServiceMock: AuthService;
+  let authServiceMock;
 
   let currentUser = {};
 
-  authServiceMock.login = jasmine.createSpy('login').and.callFake(
-      () => Promise
-          .resolve(true)
-          .then(() => Object.assign({}, currentUser))
-  );
+  authServiceMock = {
+    login: ()=> {
+      jasmine.createSpy('login').and.callFake(
+          () => Promise
+              .resolve(true)
+              .then(() => Object.assign({}, currentUser))
+      )
+    }
+  };
 
   let routerMock: Router;
   it('should create an instance', () => {
-    let component = new LoginComponent(authServiceMock, routerMock);
+    let component = new LoginComponent(authServiceMock as AuthService, routerMock);
     expect(component).toBeTruthy();
   });
 });
