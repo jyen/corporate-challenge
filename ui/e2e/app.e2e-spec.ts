@@ -1,6 +1,6 @@
 import { UiPage } from './app.po';
 
-describe('ui App', function() {
+describe('ui App', () => {
   let page: UiPage;
 
   beforeEach(() => {

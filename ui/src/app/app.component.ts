@@ -9,9 +9,9 @@ import {UserService} from "./shared/data-services/user/user.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   providers: [
-      AuthService,
-      HttpService,
-      UserService
+    AuthService,
+    HttpService,
+    UserService
   ]
 })
 export class AppComponent {
