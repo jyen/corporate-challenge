@@ -29,6 +29,13 @@ function handleError(res, statusCode) {
 }
 
 // Gets a single Organization from the DB
+export function index(req, res) {
+    return OrganizationService.getOrganizations()
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+}
+
+// Gets a single Organization from the DB
 export function show(req, res) {
     return OrganizationService.getOrganization(req.params.id)
         .then(respondWithResult(res))

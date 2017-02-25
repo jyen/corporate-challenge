@@ -40,8 +40,8 @@ function createOrganization(err, user1, user2) {
             return Organization.create({
                 name: 'CA Technologies',
                 division: 'B',
-                admins: [user1._id],
-                members: [user1._id, user2._id]
+                admins: [],
+                members: []
             })
         });
 }

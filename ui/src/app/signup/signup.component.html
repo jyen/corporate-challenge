@@ -23,33 +23,26 @@
           </div>
         </div>
 
-        <!--<div class="form-group">-->
+        <div class="form-group">
 
-          <!--<label>Gender</label>-->
-          <!--<div class="radio-inline">-->
-            <!--<label>-->
-              <!--<input type="radio" name="gender" id="genderM"-->
-                     <!--ng-model="signup.user.gender"-->
-                     <!--value="M"-->
-                     <!--ng-required="!signup.user.gender">-->
-              <!--M-->
-            <!--</label>-->
-          <!--</div>-->
-          <!--<div class="radio-inline">-->
-            <!--<label>-->
-              <!--<input type="radio" name="gender" id="genderF"-->
-                     <!--ng-model="signup.user.gender"-->
-                     <!--value="F"-->
-                     <!--ng-required="!signup.user.gender">-->
-              <!--F-->
-            <!--</label>-->
-          <!--</div>-->
-          <!--<div class="help-block"-->
-               <!--ng-show="signup.form.gender.$invalid && signup.form.gender.$touched"-->
-               <!--ng-messages="signup.form.gender.$error" role="alert">-->
-            <!--<div ng-message="required">Gender is required</div>-->
-          <!--</div>-->
-        <!--</div>-->
+          <label>Gender</label>
+          <select id="gender"
+                  class="form-control"
+                  name="gender"
+                  [(ngModel)]="user.gender"
+                  required
+                  #gender="ngModel" >
+            <option value="M">M</option>
+            <option value="F">F</option>
+          </select>
+
+          <div *ngIf="gender.errors && gender.touched"
+               class="alert alert-danger">
+            <div [hidden]="!gender.errors.required">
+              Gender selection is required
+            </div>
+          </div>
+        </div>
 
         <div class="form-group">
           <label>Email</label>
@@ -94,109 +87,130 @@
           <!--<div class="row">-->
             <!--<div class="col-md-10">-->
               <!--<select class="form-control"-->
-                      <!--ng-model="signup.user.company"-->
+                      <!--id="organization"-->
+                      <!--class="form-control"-->
+                      <!--name="organization"-->
+                      <!--[(ngModel)]="selectedOrganization"-->
                       <!--required-->
-                      <!--name="company"-->
-                      <!--mongoose-error-->
-                      <!--ng-options="company._id as company.name for company in signup.companies">-->
+                      <!--#organization="ngModel" >-->
+                <!--<option *ngFor="let org of availableOrganizations" [value]="org._id">-->
+                  <!--{{org.name}}-->
+                <!--</option>-->
               <!--</select>-->
             <!--</div>-->
-            <!--<div class="col-md-2">-->
-              <!--<button class="btn btn-primary pull-right hidden"-->
-                      <!--ng-click="signup.addCompany()">Add Company-->
-              <!--</button>-->
+            <!--<div *ngIf="organization.errors && organization.touched"-->
+                 <!--class="alert alert-danger">-->
+              <!--<div [hidden]="!organization.errors.required">-->
+                <!--Organization selection is required-->
+              <!--</div>-->
             <!--</div>-->
           <!--</div>-->
-          <!--<div class="help-block"-->
-               <!--ng-show="signup.form.company.$invalid && signup.form.company.$touched"-->
-               <!--ng-messages="signup.form.company.$error" role="alert">-->
-            <!--<div ng-message="required">Company selection is required</div>-->
-          <!--</div>-->
         <!--</div>-->
 
 
-        <!--<div class="form-group" ng-class="{ 'has-success': signup.form.phone.$valid && signup.form.phone.$touched,-->
-                                            <!--'has-error': signup.form.phone.$invalid && signup.form.phone.$touched }">-->
-          <!--<label>Phone Number</label>-->
-          <!--<input type="number"-->
-                 <!--class="form-control"-->
-                 <!--min="0"-->
-                 <!--ng-minlength="10"-->
-                 <!--ng-maxlength="10"-->
-                 <!--id="inputPhone"-->
-                 <!--name="phone"-->
-                 <!--placeholder="1234567890"-->
-                 <!--ng-model="signup.user.phone"-->
-                 <!--ng-required="true"-->
-                 <!--mongoose-error>-->
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text"
+                 class="form-control"
+                 minlength="10"
+                 maxlength="10"
+                 id="phone"
+                 name="phone"
+                 placeholder="1234567890"
+                 [(ngModel)]="user.phone"
+                 required
+                 number
+                 #phone="ngModel">
 
-          <!--<div class="help-block"-->
-               <!--ng-show="signup.form.phone.$invalid && signup.form.phone.$touched"-->
-               <!--ng-messages="signup.form.phone.$error" role="alert">-->
-            <!--<div ng-message="required">Valid phone number is required</div>-->
-            <!--<div ng-message="min max">phone number should be 10 digits</div>-->
-          <!--</div>-->
+          <div *ngIf="phone.errors && (phone.dirty || phone.touched)"
+               class="alert alert-danger">
+            <div [hidden]="!phone.errors.required">
+              Phone number is required
+            </div>
+            <div [hidden]="!phone.errors.minlength">
+              Phone number should be 10 digits
+            </div>
+            <div [hidden]="!phone.errors.number">
+              Only numbers are allowed
+            </div>
+          </div>
 
-        <!--</div>-->
+        </div>
 
-        <!--<div class="form-group" ng-class="{ 'has-success': signup.form.date.$valid && signup.form.date.$touched,-->
-                                            <!--'has-error': signup.form.date.$invalid && signup.form.date.$touched }">-->
-          <!--<label>Birth year (Required only for Run/Bike/Swim)</label>-->
+        <div class="form-group">
+          <label>Birth Year</label>
+          <input type="text"
+                 class="form-control"
+                 minlength="4"
+                 maxlength="4"
+                 [min]="1900"
+                 [max]="2017"
+                 id="birthyear"
+                 name="birthyear"
+                 placeholder="1988"
+                 [(ngModel)]="user.birthYear"
+                 number
+                 #birthyear="ngModel">
 
-          <!--<input type="number" name="date" class="form-control" ng-model="signup.user.birthday"-->
-                 <!--ng-minlength="4"-->
-                 <!--min="1900"-->
-                 <!--max="2016"-->
-                 <!--mongoose-error/>-->
 
-          <!--<div class="help-block"-->
-               <!--ng-show="signup.form.date.$invalid && signup.form.date.$touched"-->
-               <!--ng-messages="signup.form.phone.$error" role="alert">-->
-            <!--<div ng-message="min max">Must be a 4 digits year</div>-->
-          <!--</div>-->
-        <!--</div>-->
+          <div *ngIf="birthyear.errors && (birthyear.dirty || birthyear.touched)"
+               class="alert alert-danger">
+            <div [hidden]="!birthyear.errors.minlength">
+              Birth year should be 4 digits
+            </div>
+            <div [hidden]="!birthyear.errors.number">
+              Only numbers are allowed
+            </div>
+          </div>
+        </div>
 
-        <!--<div class="form-group" ng-class="{ 'has-success': signup.form.shirtSize.$valid && signup.form.shirtSize.$touched,-->
-                                            <!--'has-error': signup.form.shirtSize.$invalid && signup.form.shirtSize.$touched }">-->
-          <!--<label>Shirt Size</label>-->
+        <div class="form-group">
 
-          <!--<div class="row">-->
-            <!--<div class="col-md-4">-->
-              <!--<select class="form-control"-->
-                      <!--ng-model="signup.user.shirtSize"-->
-                      <!--required-->
-                      <!--name="shirtSize"-->
-                      <!--ng-options="size for size in signup.availableSize">-->
-              <!--</select>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="help-block"-->
-               <!--ng-show="signup.form.shirtSize.$invalid && signup.form.shirtSize.$touched"-->
-               <!--ng-messages="signup.form.shirtSize.$error" role="alert">-->
-            <!--<div ng-message="required">Shirt size selection is required</div>-->
-          <!--</div>-->
-        <!--</div>-->
+          <label>Shirt Size</label>
+          <select id="shirt"
+                  class="form-control"
+                  name="shirt"
+                  [(ngModel)]="user.shirtSize"
+                  required
+                  #shirt="ngModel">
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+            <option value="XXXL">XXXL</option>
+          </select>
 
-        <!--<div class="form-group" ng-class="{ 'has-success': signup.form.participantType.$valid && signup.form.participantType.$touched,-->
-                                            <!--'has-error': signup.form.participantType.$invalid && signup.form.participantType.$touched }">-->
-          <!--<label>Participant Type</label>-->
+          <div *ngIf="shirt.errors && shirt.touched"
+               class="alert alert-danger">
+            <div [hidden]="!shirt.errors.required">
+              Shirt size selection is required
+            </div>
+          </div>
+        </div>
 
-          <!--<div class="row">-->
-            <!--<div class="col-md-4">-->
-              <!--<select class="form-control"-->
-                      <!--ng-model="signup.user.participantType"-->
-                      <!--required-->
-                      <!--name="participantType"-->
-                      <!--ng-options="type for type in signup.participantTypes">-->
-              <!--</select>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="help-block"-->
-               <!--ng-show="signup.form.shirtSize.$invalid && signup.form.shirtSize.$touched"-->
-               <!--ng-messages="signup.form.shirtSize.$error" role="alert">-->
-            <!--<div ng-message="required">Shirt size selection is required</div>-->
-          <!--</div>-->
-        <!--</div>-->
+        <div class="form-group">
+
+          <label>Participant Type</label>
+          <select id="participant"
+                  class="form-control"
+                  name="participant"
+                  [(ngModel)]="user.participantType"
+                  required
+                  #participant="ngModel" >
+            <option value="Employee">Employee</option>
+            <option value="Contractor">Contractor</option>
+            <option value="Retiree">Retiree</option>
+            <option value="Spouse">Spouse</option>
+          </select>
+
+          <div *ngIf="participant.errors && participant.touched"
+               class="alert alert-danger">
+            <div [hidden]="!participant.errors.required">
+              Participant type selection is required
+            </div>
+          </div>
+        </div>
 
         <div>
           <button class="btn btn-inverse btn-lg btn-login"

@@ -2,6 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {NgModule, Provider} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation'
 import {HttpModule, Http} from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import {SignupComponent} from "./signup/signup.component";
   imports: [
     BrowserModule,
     FormsModule,
+    CustomFormsModule,
     HttpModule,
     routing,
     CoreModule

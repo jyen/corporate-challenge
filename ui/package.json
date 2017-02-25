@@ -27,6 +27,7 @@
     "font-awesome": "^4.6.3",
     "jquery": "^3.1.1",
     "ng2-cookies": "latest",
+    "ng2-validation": "^3.8.0",
     "rxjs": "^5.1.0",
     "zone.js": "^0.7.6"
   },

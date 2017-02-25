@@ -34,6 +34,10 @@ export default class OrganizationService {
             .then(org => org.remove());
     }
 
+    static getOrganizations() {
+        return Organization.find({}).exec();
+    }
+
     static getOrganization(id) {
         return Organization.findById(id).exec();
     }

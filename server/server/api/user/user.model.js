@@ -42,6 +42,10 @@ var UserSchema = new Schema({
         enum: ['Employee', 'Contractor', 'Retiree', 'Spouse'],
         required: true
     },
+    organization: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Organization'
+    },
     provider: String,
     salt: String
 });

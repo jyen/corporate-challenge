@@ -32,11 +32,11 @@ var OrganizationSchema = new mongoose.Schema({
     }]
 });
 
-OrganizationSchema
-    .path('admins')
-    .validate(function(admins) {
-        return admins.length;
-    }, 'Must have at least 1 admin');
+// OrganizationSchema
+//     .path('admins')
+//     .validate(function(admins) {
+//         return admins.length;
+//     }, 'Must have at least 1 admin');
 
 OrganizationSchema.methods = {
     addEvent(id) {
