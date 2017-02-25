@@ -4,6 +4,8 @@ import {NgModule, Provider} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation'
 import {HttpModule, Http} from '@angular/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -27,7 +29,8 @@ import {SignupComponent} from "./signup/signup.component";
     CustomFormsModule,
     HttpModule,
     routing,
-    CoreModule
+    CoreModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

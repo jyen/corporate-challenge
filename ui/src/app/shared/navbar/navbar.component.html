@@ -41,49 +41,90 @@
     <!--</ul>-->
   <!--</div>-->
 <!--</nav>-->
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Corporate Challenge</a>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
 
+    <ul class="nav navbar-nav navbar-right">
+      <li class="nav-item"
+          *ngIf="!isLoggedIn()">
+        <a class="nav-link"
+           href="/signup">Sign up</a>
+      </li>
+      <li class="nav-item"
+          *ngIf="!isLoggedIn()">
+        <a class="nav-link"
+           href="/login">Login</a>
+      </li>
+      <!--<li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p></li>-->
+      <li class="nav-item"
+          *ngIf="isLoggedIn()">
+        <a class="nav-link">Admin</a>
+      </li>
+      <li class="nav-item"
+          *ngIf="isLoggedIn()">
+        <a class="nav-link"
+           href="/login" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-<div class="navbar navbar-default navbar-static-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button class="navbar-toggle" type="button">
-              <!--ng-click="isCollapsed = !isCollapsed"-->
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="/" class="navbar-brand">Corporate Challenge</a>
-    </div>
-    <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-      <!--<ul class="nav navbar-nav">-->
-        <!--<li ng-show="!isLoggedIn()" ng-class="{active: isActive('main')}">-->
-          <!--<a href="/">Welcome</a>-->
-        <!--</li>-->
-        <!--<li ng-show="isLoggedIn()" ng-class="{active: isActive('dashboard')}">-->
-          <!--<a href="/dashboard/sports">Dashboard</a>-->
-        <!--</li>-->
-        <!--<li ng-show="isLoggedIn()" ng-class="{active: isActive('participate')}">-->
-          <!--<a href="/participate">Events</a>-->
-        <!--</li>-->
-        <!--<li ng-show="isLoggedIn()" ng-class="{active: isActive('view-sports')}">-->
-          <!--<a href="/view-sports">Event Participants</a>-->
-        <!--</li>-->
-        <!--<li ng-show="isLoggedIn()" ng-class="{active: isActive('view-participants')}">-->
-          <!--<a href="/view-participants">All Participants</a>-->
+<!--<nav class="navbar navbar-default navbar-static-top">-->
+  <!--<div class="container">-->
+    <!--<div class="navbar-header">-->
+      <!--<button class="navbar-toggle" type="button">-->
+              <!--&lt;!&ndash;ng-click="isCollapsed = !isCollapsed"&ndash;&gt;-->
+        <!--<span class="sr-only">Toggle navigation</span>-->
+        <!--<span class="icon-bar"></span>-->
+        <!--<span class="icon-bar"></span>-->
+        <!--<span class="icon-bar"></span>-->
+      <!--</button>-->
+      <!--<a href="/" class="navbar-brand">Corporate Challenge</a>-->
+    <!--</div>-->
+    <!--<div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">-->
+      <!--&lt;!&ndash;<ul class="nav navbar-nav">&ndash;&gt;-->
+        <!--&lt;!&ndash;<li ng-show="!isLoggedIn()" ng-class="{active: isActive('main')}">&ndash;&gt;-->
+          <!--&lt;!&ndash;<a href="/">Welcome</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li ng-show="isLoggedIn()" ng-class="{active: isActive('dashboard')}">&ndash;&gt;-->
+          <!--&lt;!&ndash;<a href="/dashboard/sports">Dashboard</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li ng-show="isLoggedIn()" ng-class="{active: isActive('participate')}">&ndash;&gt;-->
+          <!--&lt;!&ndash;<a href="/participate">Events</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li ng-show="isLoggedIn()" ng-class="{active: isActive('view-sports')}">&ndash;&gt;-->
+          <!--&lt;!&ndash;<a href="/view-sports">Event Participants</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li ng-show="isLoggedIn()" ng-class="{active: isActive('view-participants')}">&ndash;&gt;-->
+          <!--&lt;!&ndash;<a href="/view-participants">All Participants</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+      <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+
+      <!--<ul class="nav navbar-nav navbar-right">-->
+        <!--<li *ngIf="!isLoggedIn()"><a href="/signup">Sign up</a></li>-->
+        <!--<li *ngIf="!isLoggedIn()"><a href="/login">Login</a></li>-->
+        <!--&lt;!&ndash;<li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p></li>&ndash;&gt;-->
+        <!--<li><a href="/settings"><span-->
+                <!--class="glyphicon glyphicon-cog"></span></a></li>-->
+        <!--<li *ngIf="isLoggedIn()"><a>Admin</a></li>-->
+        <!--<li *ngIf="isLoggedIn()"><a href="/login" (click)="logout()">Logout</a>-->
         <!--</li>-->
       <!--</ul>-->
-
-      <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="!isLoggedIn()"><a href="/signup">Sign up</a></li>
-        <li *ngIf="!isLoggedIn()"><a href="/login">Login</a></li>
-        <!--<li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p></li>-->
-        <li><a href="/settings"><span
-                class="glyphicon glyphicon-cog"></span></a></li>
-        <li *ngIf="isLoggedIn()"><a>Admin</a></li>
-        <li *ngIf="isLoggedIn()"><a href="/login" (click)="logout()">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
+    <!--</div>-->
+  <!--</div>-->
+<!--</nav>-->
