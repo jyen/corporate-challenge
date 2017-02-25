@@ -75,13 +75,13 @@
       <!--</ul>-->
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/signup">Sign up</a></li>
-        <li><a href="/login">Login</a></li>
+        <li *ngIf="!isLoggedIn()"><a href="/signup">Sign up</a></li>
+        <li *ngIf="!isLoggedIn()"><a href="/login">Login</a></li>
         <!--<li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p></li>-->
         <li><a href="/settings"><span
                 class="glyphicon glyphicon-cog"></span></a></li>
-        <li><a>Admin</a></li>
-        <li><a href="">Logout</a>
+        <li *ngIf="isLoggedIn()"><a>Admin</a></li>
+        <li *ngIf="isLoggedIn()"><a href="/login" (click)="logout()">Logout</a>
         </li>
       </ul>
     </div>

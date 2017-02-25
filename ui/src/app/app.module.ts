@@ -10,13 +10,15 @@ import { HomeComponent } from './home/home.component';
 import { routing } from "./app.routing";
 import { CoreModule } from "./core/core.module";
 import {NavbarComponent} from "./shared/navbar/navbar.component";
+import {SignupComponent} from "./signup/signup.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

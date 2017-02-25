@@ -15,9 +15,10 @@ export class AuthService {
   private authUrl : string = '/auth/local';
 
   private currentUser;
+  private authErrors;
 
   constructor(private http: HttpService, private router: Router,
-  private user: UserService) {
+  private userService: UserService) {
   }
 
   public login(credential) {
@@ -25,7 +26,7 @@ export class AuthService {
         .post(this.authUrl, credential)
         .map((r: any) => {
             Cookie.set('token', r.token);
-            return this.user.getCurrentUser();
+            return this.userService.getCurrentUser();
         })
         .catch( err => {
           return Observable.throw(err);
@@ -33,13 +34,15 @@ export class AuthService {
         .subscribe(r => {
             this.currentUser = r;
             this.router.navigate(['/core/dashboard']);
+        }, err => {
+            this.authErrors = <any> err.json();
         });
   }
 
   public logout() {
       Cookie.delete('token');
       this.currentUser = null;
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
   }
 
   public isLoggedIn() : boolean {
@@ -48,6 +51,24 @@ export class AuthService {
 
   public setCurrentUser(user): void {
       this.currentUser = user;
+  }
+
+  public getAuthErrors() {
+      return this.authErrors;
+  }
+
+  public createUser(userObject) {
+      this.userService.createUser(userObject)
+          .map(r => {
+              Cookie.set('token', r.token);
+              return this.userService.getCurrentUser();
+          })
+          .subscribe( r => {
+              this.currentUser = r;
+              this.router.navigate(['/core/dashboard']);
+          }, err => {
+              console.log(err.json());
+          });
   }
 
 }

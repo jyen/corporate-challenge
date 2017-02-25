@@ -70,7 +70,7 @@ export class HttpService {
 
   private intercept(observable: Observable<Response>) {
     return observable.catch((err) => {
-      if (err.status  == 401 && !_.endsWith(err.url, 'auth/local')) {
+      if (err.status  == 401 && !_.includes(err.url, 'auth/local')) {
         Cookie.delete('token');
         this.router.navigate(['/login']);
         return Observable.empty();

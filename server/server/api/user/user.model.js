@@ -12,12 +12,34 @@ var UserSchema = new Schema({
         required: true,
         unique: true
     },
+    gender: {
+        type: String,
+        required: true
+    },
+    birthYear: {
+        type: Number,
+        required: false
+    },
+    phone: {
+        type: Number,
+        required: true
+    },
     role: {
         type: String,
         default: 'user'
     },
     password: {
         type: String,
+        required: true
+    },
+    shirtSize: {
+        type: String,
+        enum: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+        required: true
+    },
+    participantType: {
+        type: String,
+        enum: ['Employee', 'Contractor', 'Retiree', 'Spouse'],
         required: true
     },
     provider: String,
