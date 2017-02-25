@@ -69,3 +69,9 @@ export function createEvent(req, res) {
     return OrganizationService.addEvent(req.params.id, req.body)
         .catch(handleError(res));
 }
+
+export function joinMembers(req, res) {
+    return OrganizationService.join(req.params.id, req.user._id)
+        .then(respondWithResult(res, 200))
+        .catch(handleError(res));
+}

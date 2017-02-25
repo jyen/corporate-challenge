@@ -2,12 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import {dashboardRouting} from "./dashboard.routing";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { FormsModule } from '@angular/forms';
+
+import { SetupWorkflowComponent } from './setup-workflow/setup-workflow.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    dashboardRouting
+    dashboardRouting,
+    NgbModule,
+    FormsModule
   ],
-  declarations: [DashboardComponent]
+  declarations: [DashboardComponent, SetupWorkflowComponent]
 })
 export class DashboardModule { }

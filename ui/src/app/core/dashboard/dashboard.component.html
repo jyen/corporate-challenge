@@ -1,0 +1,6 @@
+<div *ngIf="!currentUser?.organization">
+    <app-setup-workflow></app-setup-workflow>
+</div>
+<div *ngIf="currentUser?.organization">
+    Hello
+</div>
