@@ -85,7 +85,8 @@ UserSchema
             'shirtSize': this.shirtSize,
             'participantType': this.participantType,
             'gender': this.gender,
-            'organization': this.organization
+            'organization': this.organization,
+            'role': this.role
         };
     });
 

@@ -10,6 +10,7 @@
 'use strict';
 
 import OrganizationService from './organization.service';
+import UserService from './../user/user.service';
 
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
@@ -45,9 +46,13 @@ export function show(req, res) {
 // Creates a new Organization in the DB
 export function create(req, res) {
     var org = req.body;
-    var userId = req.user._id;
-    org.admins.push(userId);
-    return OrganizationService.create(org)
+    var user = req.user;
+    var orgResult;
+    org.admins.push(user._id);
+    return UserService.setAdmin(user._id, 'admin')
+        .then(() => {
+            return OrganizationService.create(org);
+        })
         .then(respondWithResult(res, 201))
         .catch(handleError(res));
 }

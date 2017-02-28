@@ -19,8 +19,6 @@ export class DashboardComponent implements OnInit {
           this.currentUser = r;
           if(this.currentUser.organization) {
               this.router.navigate(['/core/dashboard/profile'])
-          } else {
-              this.router.navigate(['/core/dashboard/setup-workflow']);
           }
         })
   }

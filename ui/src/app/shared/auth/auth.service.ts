@@ -49,6 +49,10 @@ export class AuthService {
       return this.currentUser ? true : false;
   }
 
+    public isAdmin() : boolean {
+        return this.currentUser.role === 'admin' ? true : false;
+    }
+
   public setCurrentUser(user): void {
       this.currentUser = user;
   }

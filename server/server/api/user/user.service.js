@@ -42,6 +42,18 @@ export default class UserService {
         return User.findById(id).exec();
     }
 
+    static setAdmin(userId, role) {
+        return User.findById(userId).exec()
+            .then(user => {
+                if (user) {
+                    user.role = role;
+                    return user.save();
+                } else {
+                    return Promise.reject('User does not exist');
+                }
+            });
+    }
+
     static joinOrganization(orgId, userId) {
         return User.findById(userId).exec()
             .then(user => {
