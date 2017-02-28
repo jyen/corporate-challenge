@@ -44,7 +44,10 @@ export function show(req, res) {
 
 // Creates a new Organization in the DB
 export function create(req, res) {
-    return OrganizationService.create(req.body)
+    var org = req.body;
+    var userId = req.user._id;
+    org.admins.push(userId);
+    return OrganizationService.create(org)
         .then(respondWithResult(res, 201))
         .catch(handleError(res));
 }
