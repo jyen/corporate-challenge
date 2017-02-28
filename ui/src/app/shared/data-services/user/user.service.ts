@@ -43,4 +43,12 @@ export class UserService {
             });
     }
 
+    public joinOrganization(org) {
+        return this.http.post(`${this.userUrl}/me/join/${org._id}`, org)
+            .map((r: Response) => r)
+            .catch(err => {
+                return Observable.throw(err);
+            });
+    }
+
 }

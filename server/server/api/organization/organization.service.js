@@ -14,6 +14,7 @@
 
 import Organization from './organization.model';
 import EventService from './../event/event.service';
+import UserService from './../user/user.service';
 
 export default class OrganizationService {
     static create(org) {
@@ -46,11 +47,14 @@ export default class OrganizationService {
         return Organization.findById(orgId).exec()
             .then(org => {
                 if (org) {
-                    org.addMember(userId);
+                    org.addMember(userId)
                     return org.save();
                 } else {
                     return Promise.reject('Organization does not exist');
                 }
+            })
+            .then(() => {
+                return UserService.joinOrganization(orgId, userId);
             });
     }
 

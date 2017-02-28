@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {OrganizationService} from "../../../shared/data-services/organization/organization.service";
+import {UserService} from "../../../shared/data-services/user/user.service";
 
 @Component({
   selector: 'app-setup-workflow',
@@ -11,7 +12,7 @@ export class SetupWorkflowComponent implements OnInit {
   public availableOrganizations;
   public selectedOrganization;
 
-  constructor(private organizationService: OrganizationService) { }
+  constructor(private organizationService: OrganizationService, private  userService: UserService) { }
 
   ngOnInit() {
     this.organizationService.getOrganizations()
@@ -21,8 +22,7 @@ export class SetupWorkflowComponent implements OnInit {
   }
 
   public selectOrganization(org) {
-    console.log(org);
-    this.organizationService.joinOrganization(JSON.parse(org))
+    this.userService.joinOrganization(JSON.parse(org))
         .subscribe(r => {
           return console.log(r);
         });

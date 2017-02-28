@@ -74,6 +74,21 @@ UserSchema
         };
     });
 
+UserSchema
+    .virtual('info')
+    .get(function () {
+        return {
+            'name': this.name,
+            'email': this.email,
+            'phone': this.phone,
+            'birthYear': this.birthYear,
+            'shirtSize': this.shirtSize,
+            'participantType': this.participantType,
+            'gender': this.gender,
+            'organization': this.organization
+        };
+    });
+
 /**
  * Validations
  */
@@ -241,6 +256,10 @@ UserSchema.methods = {
                 return callback(null, key.toString('base64'));
             }
         });
+    },
+
+    setOrganization(org) {
+        this.organization = org;
     }
 };
 
