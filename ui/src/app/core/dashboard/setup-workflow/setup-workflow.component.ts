@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {OrganizationService} from "../../../shared/data-services/organization/organization.service";
 import {UserService} from "../../../shared/data-services/user/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-setup-workflow',
@@ -12,7 +13,8 @@ export class SetupWorkflowComponent implements OnInit {
   public availableOrganizations;
   public selectedOrganization;
 
-  constructor(private organizationService: OrganizationService, private  userService: UserService) { }
+  constructor(private organizationService: OrganizationService, private  userService: UserService,
+  private router:Router) { }
 
   ngOnInit() {
     this.organizationService.getOrganizations()
@@ -24,7 +26,7 @@ export class SetupWorkflowComponent implements OnInit {
   public selectOrganization(org) {
     this.userService.joinOrganization(JSON.parse(org))
         .subscribe(r => {
-          return console.log(r);
+            this.router.navigate(['/core/dashboard/profile']);
         });
 
   }

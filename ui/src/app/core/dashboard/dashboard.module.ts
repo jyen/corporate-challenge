@@ -6,7 +6,6 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule } from '@angular/forms';
 
 import { SetupWorkflowComponent } from './setup-workflow/setup-workflow.component';
-import { SetupOrganizationComponent } from './setup-organization/setup-organization.component';
 import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
@@ -16,6 +15,6 @@ import { ProfileComponent } from './profile/profile.component';
     NgbModule,
     FormsModule
   ],
-  declarations: [DashboardComponent, SetupWorkflowComponent, SetupOrganizationComponent, ProfileComponent]
+  declarations: [DashboardComponent, SetupWorkflowComponent, ProfileComponent]
 })
 export class DashboardModule { }

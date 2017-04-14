@@ -15,6 +15,7 @@ export class UserService {
         return this.http.get(`${this.userUrl}/me`)
             .map((r: Response) => r)
             .catch(err => {
+                console.log(err);
                 return Observable.throw(err);
             });
     }

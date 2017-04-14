@@ -18,7 +18,9 @@ export class DashboardComponent implements OnInit {
         .subscribe(r => {
           this.currentUser = r;
           if(this.currentUser.organization) {
-              this.router.navigate(['/core/dashboard/profile'])
+              this.router.navigate(['/core/dashboard/profile']);
+          } else {
+              this.router.navigate(['/core/dashboard/setup-workflow']);
           }
         })
   }

@@ -14,11 +14,14 @@ export class AuthService {
 
   private authUrl : string = '/auth/local';
 
-  private currentUser;
+  public currentUser;
   private authErrors;
+  public redirectUrl: string;
 
   constructor(private http: HttpService, private router: Router,
   private userService: UserService) {
+
+      console.log('test');
   }
 
   public login(credential) {
@@ -26,13 +29,22 @@ export class AuthService {
         .post(this.authUrl, credential)
         .map((r: any) => {
             Cookie.set('token', r.token);
-            return this.userService.getCurrentUser();
+            return r;
         })
         .catch( err => {
-          return Observable.throw(err);
+            return Observable.throw(err);
+        })
+        .flatMap((r: any) => {
+            console.log(r);
+            return this.userService.getCurrentUser();
+        })
+        .map ((r: any) => {
+            console.log(r);
+            return r;
         })
         .subscribe(r => {
-            this.currentUser = r;
+            console.log(r);
+            this.setCurrentUser(r);
             this.router.navigate(['/core/dashboard']);
         }, err => {
             this.authErrors = <any> err.json();
@@ -42,7 +54,7 @@ export class AuthService {
   public logout() {
       Cookie.delete('token');
       this.currentUser = null;
-      //this.router.navigate(['/login']);
+      this.router.navigate(['/login']);
   }
 
   public isLoggedIn() : boolean {

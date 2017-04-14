@@ -8,6 +8,7 @@ import {membersRoutes} from "./members/members.routing";
 import {eventsRoutes} from "./events/events.routing";
 import {adminRoutes} from "./admin/admin.routing";
 import {rosterRoutes} from "./roster/roster.routing";
+import {AuthGuard} from "../shared/auth/auth-guard.service";
 
 
 export const coreRoutes: Routes = [

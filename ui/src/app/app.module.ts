@@ -13,6 +13,11 @@ import { routing } from "./app.routing";
 import { CoreModule } from "./core/core.module";
 import {NavbarComponent} from "./shared/navbar/navbar.component";
 import {SignupComponent} from "./signup/signup.component";
+import {AuthGuard} from "./shared/auth/auth-guard.service";
+import {AuthService} from "app/shared/auth/auth.service";
+import {HttpService} from "./shared/util/http.service";
+import {UserService} from "app/shared/data-services/user/user.service";
+import {OrganizationService} from "./shared/data-services/organization/organization.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +36,13 @@ import {SignupComponent} from "./signup/signup.component";
     CoreModule,
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    HttpService,
+    UserService,
+    AuthGuard,
+    OrganizationService
+  ],
   bootstrap: [AppComponent]
 })
 

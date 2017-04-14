@@ -47,7 +47,6 @@ export function show(req, res) {
 export function create(req, res) {
     var org = req.body;
     var user = req.user;
-    var orgResult;
     org.admins.push(user._id);
     return UserService.setAdmin(user._id, 'admin')
         .then(() => {
