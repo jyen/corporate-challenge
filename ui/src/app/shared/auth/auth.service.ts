@@ -20,8 +20,6 @@ export class AuthService {
 
   constructor(private http: HttpService, private router: Router,
   private userService: UserService) {
-
-      console.log('test');
   }
 
   public login(credential) {
@@ -35,15 +33,13 @@ export class AuthService {
             return Observable.throw(err);
         })
         .flatMap((r: any) => {
-            console.log(r);
             return this.userService.getCurrentUser();
         })
-        .map ((r: any) => {
-            console.log(r);
-            return r;
+        .catch( err => {
+            return Observable.throw(err);
         })
+        .delay(10000)
         .subscribe(r => {
-            console.log(r);
             this.setCurrentUser(r);
             this.router.navigate(['/core/dashboard']);
         }, err => {

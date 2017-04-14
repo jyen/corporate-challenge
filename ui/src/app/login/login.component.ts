@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {AuthService} from "../shared/auth/auth.service";
 import {Credential} from "./credential";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,8 @@ import {Credential} from "./credential";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  busy: Subscription;
+
 
   public credential;
 
@@ -19,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login(credential): void {
-    this.authService.login(credential);
+    this.busy = this.authService.login(credential);
   }
 
 }

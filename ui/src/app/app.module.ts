@@ -18,6 +18,8 @@ import {AuthService} from "app/shared/auth/auth.service";
 import {HttpService} from "./shared/util/http.service";
 import {UserService} from "app/shared/data-services/user/user.service";
 import {OrganizationService} from "./shared/data-services/organization/organization.service";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BusyModule} from 'angular2-busy';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import {OrganizationService} from "./shared/data-services/organization/organizat
     HttpModule,
     routing,
     CoreModule,
+    BrowserAnimationsModule,
+    BusyModule,
     NgbModule.forRoot()
   ],
   providers: [

@@ -1,4 +1,4 @@
-<div class="container">
+<div [ngBusy]="busy" class="container">
   <h3>Login</h3>
   <form class="form" (ngSubmit)="login(credential)" #loginForm="ngForm">
 

@@ -9,7 +9,6 @@ import {AuthGuard} from "../../shared/auth/auth-guard.service";
 export const dashboardRoutes: Routes = [
     {
         path: 'dashboard',
-        canActivate: [AuthGuard],
         component: DashboardComponent,
         children: [{
             path: 'setup-workflow',
