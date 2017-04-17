@@ -19,7 +19,7 @@ export const coreRoutes: Routes = [
     },
     {
         path: 'core',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         component: CoreComponent,
         children: [
             ...dashboardRoutes,

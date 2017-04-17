@@ -6,7 +6,7 @@ import {
 }                           from '@angular/router';
 import { AuthService }      from './auth.service';
 import {Observable} from "rxjs/Observable";
-import {UserService} from "../data-services/user/user.service";
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -21,8 +21,10 @@ export class AuthGuard implements CanActivate {
     }
 
     checkLogin(url: string): boolean {
-        console.log(this.authService.isLoggedIn())
 
+        if (!environment.production) {
+            return true;
+        }
 
         if (this.authService.isLoggedIn()) {
             return true;
