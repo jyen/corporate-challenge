@@ -58,9 +58,9 @@ export function create(req, res) {
 
 // Upserts the given Organization in the DB at the specified ID
 export function upsert(req, res) {
-    if (req.body._id) {
-        delete req.body._id;
-    }
+    // if (req.body._id) {
+    //     delete req.body._id;
+    // }
     return OrganizationService.update(req.body)
         .then(respondWithResult(res))
         .catch(handleError(res));

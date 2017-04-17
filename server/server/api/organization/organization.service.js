@@ -21,8 +21,8 @@ export default class OrganizationService {
         return Organization.create(org);
     }
 
-    static update(orgId, org) {
-        return Organization.findOneAndUpdate({_id: orgId}, org, {
+    static update(org) {
+        return Organization.findOneAndUpdate({_id: org._id}, org, {
             new: true,
             upsert: true,
             setDefaultsOnInsert: true,
@@ -40,7 +40,8 @@ export default class OrganizationService {
     }
 
     static getOrganization(id) {
-        return Organization.findById(id).exec();
+        return Organization.findById(id)
+            .exec();
     }
 
     static join(orgId, userId) {

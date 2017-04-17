@@ -64,6 +64,10 @@ export class AuthService {
       this.currentUser = user;
   }
 
+    public getCurrentUser() {
+        return this.currentUser;
+    }
+
   public getAuthErrors() {
       return this.authErrors;
   }

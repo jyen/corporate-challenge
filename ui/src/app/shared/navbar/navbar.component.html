@@ -76,7 +76,7 @@
            routerLinkActive="active">Login</a>
       </li>
       <!--<li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p></li>-->
-      <li class="nav-item"
+      <li class="nav-item" routerLink="/core/admin" routerLinkActive="active"
           *ngIf="isLoggedIn() && isAdmin()">
         <a class="nav-link">Admin</a>
       </li>

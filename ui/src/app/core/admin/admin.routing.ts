@@ -12,7 +12,11 @@ export const adminRoutes: Routes = [
             path: 'setup-organization',
             component: SetupOrganizationComponent
         }]
+    }, {
+        path: 'admin-setup-organization',
+        component: SetupOrganizationComponent
     }
+
 
 ];
 
