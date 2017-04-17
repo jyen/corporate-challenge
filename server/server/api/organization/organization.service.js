@@ -75,6 +75,9 @@ export default class OrganizationService {
                 } else {
                     return Promise.reject('Organization does not exist');
                 }
+            })
+            .then(() => {
+                return UserService.setAdmin(userId, 'admin');
             });
     }
 

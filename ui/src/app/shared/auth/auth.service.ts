@@ -38,7 +38,6 @@ export class AuthService {
         .catch( err => {
             return Observable.throw(err);
         })
-        .delay(10000)
         .subscribe(r => {
             this.setCurrentUser(r);
             this.router.navigate(['/core/dashboard']);
