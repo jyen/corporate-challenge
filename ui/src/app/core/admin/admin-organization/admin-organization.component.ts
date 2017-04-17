@@ -20,18 +20,15 @@ export class AdminOrganizationComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
-    console.log(this.currentUser);
     this.busy = this.organizationService.getOrganization(this.currentUser.organization._id)
-        .delay(1000)
         .subscribe(r => {
-          console.log(r);
           this.organization = r;
         })
 
   }
 
   saveEdit(org) {
-     this.organizationService.updateOrganization(org)
+     this.busy = this.organizationService.updateOrganization(org)
         .delay(1000)
         .subscribe(() => {
          this.edit = false;
@@ -41,7 +38,6 @@ export class AdminOrganizationComponent implements OnInit {
   startEdit() {
       this.edit = true;
   }
-
 
   cancel() {
       this.edit = false;

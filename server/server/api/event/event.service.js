@@ -15,18 +15,19 @@
 import Event from './event.model';
 
 export default class EventService {
-    static create(event) {
-        return Event.create(event);
+    static create(orgId, event) {
+        return Event.create(event).exec()
+            .then((event) => {
+                return OrganizationService.addEvent(orgId, event._id);
+            });
     }
 
     static update(eventId, event) {
-        return Event.findById(eventId).exec()
-            .then(old => {
-                //update API does not update members
-                event.members = old.members;
-                event._id = eventId;
-                return event.save();
-            });
+        return Event.findByIdAndUpdate(eventId, {$set: {
+            'name': event.name,
+            'info': event.info,
+            'active': event.active}
+        }).exec();
     }
 
     static delete(eventId) {

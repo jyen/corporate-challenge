@@ -74,7 +74,7 @@ export function show(req, res) {
 
 // Creates a new Event in the DB
 export function create(req, res) {
-    return Event.create(req.body)
+    return Event.create(req.user.organization, req.body)
         .then(respondWithResult(res, 201))
         .catch(handleError(res));
 }
@@ -108,11 +108,11 @@ export function destroy(req, res) {
 }
 
 export function join(req, res) {
-    return EventService.join(req.params.id)
+    return EventService.join(req.params.id, req.user._id)
         .catch(handleError(res));
 }
 
 export function leave(req, res) {
-    return EventService.leave(req.params.id)
+    return EventService.leave(req.params.id, req.user._id)
         .catch(handleError(res));
 }
