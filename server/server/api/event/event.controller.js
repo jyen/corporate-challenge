@@ -13,7 +13,6 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import Event from './event.model';
 import EventService from './event.service';
 
 function respondWithResult(res, statusCode) {
@@ -55,26 +54,9 @@ function handleError(res, statusCode) {
     };
 }
 
-// Gets a list of Events
-export function index(req, res) {
-    return Event.find()
-        .populate('members', '-info')
-        .exec()
-        .then(respondWithResult(res))
-        .catch(handleError(res));
-}
-
-// Gets a single Event from the DB
-export function show(req, res) {
-    return Event.findById(req.params.id).exec()
-        .then(handleEntityNotFound(res))
-        .then(respondWithResult(res))
-        .catch(handleError(res));
-}
-
 // Creates a new Event in the DB
 export function create(req, res) {
-    return Event.create(req.user.organization, req.body)
+    return EventService.create(req.user.organization, req.body)
         .then(respondWithResult(res, 201))
         .catch(handleError(res));
 }
@@ -90,16 +72,16 @@ export function upsert(req, res) {
 }
 
 // Updates an existing Event in the DB
-export function patch(req, res) {
-    if (req.body._id) {
-        delete req.body._id;
-    }
-    return Event.findById(req.params.id).exec()
-        .then(handleEntityNotFound(res))
-        .then(patchUpdates(req.body))
-        .then(respondWithResult(res))
-        .catch(handleError(res));
-}
+// export function patch(req, res) {
+//     if (req.body._id) {
+//         delete req.body._id;
+//     }
+//     return Event.findById(req.params.id).exec()
+//         .then(handleEntityNotFound(res))
+//         .then(patchUpdates(req.body))
+//         .then(respondWithResult(res))
+//         .catch(handleError(res));
+// }
 
 // Deletes a Event from the DB
 export function destroy(req, res) {

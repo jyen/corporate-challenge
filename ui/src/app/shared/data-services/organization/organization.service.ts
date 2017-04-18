@@ -51,4 +51,12 @@ export class OrganizationService {
             });
     }
 
+    public createEvent(org, event) {
+        return this.http.post(`${this.orgUrl}/${org._id}/events`, event)
+            .map((r: Response) => r)
+            .catch(err => {
+                return Observable.throw(err);
+            });
+    }
+
 }

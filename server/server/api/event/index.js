@@ -2,16 +2,17 @@
 
 var express = require('express');
 var controller = require('./event.controller');
+import * as auth from '../../auth/auth.service';
 
 var router = express.Router();
 
-router.get('/', controller.index);
-router.get('/:id', controller.show);
-router.post('/', controller.create);
-router.put('/:id', controller.upsert);
-router.patch('/:id', controller.patch);
-router.delete('/:id', controller.destroy);
-router.post('/:id/member', controller.join);
-router.delete('/:id/member', controller.leave);
+// router.get('/', auth.isAuthenticated(), controller.index);
+// router.get('/:id', auth.isAuthenticated(), controller.show);
+router.post('/', auth.isAuthenticated(), controller.create);
+router.put('/:id', auth.isAuthenticated(), controller.upsert);
+// router.patch('/:id', auth.isAuthenticated(), controller.patch);
+router.delete('/:id', auth.isAuthenticated(), controller.destroy);
+router.post('/:id/member', auth.isAuthenticated(), controller.join);
+router.delete('/:id/member', auth.isAuthenticated(), controller.leave);
 
 module.exports = router;

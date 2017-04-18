@@ -20,6 +20,7 @@ import {UserService} from "app/shared/data-services/user/user.service";
 import {OrganizationService} from "./shared/data-services/organization/organization.service";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BusyModule} from 'angular2-busy';
+import {EventService} from "./shared/data-services/event/event.service";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {BusyModule} from 'angular2-busy';
   providers: [
     AuthService,
     HttpService,
+    EventService,
     UserService,
     AuthGuard,
     OrganizationService

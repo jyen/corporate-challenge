@@ -7,6 +7,7 @@
 
 import User from '../api/user/user.model';
 import Organization from '../api/organization/organization.model';
+import Event from '../api/event/event.model';
 import mongoose from 'mongoose';
 User.find({}).remove()
     .then(() => {
@@ -65,6 +66,16 @@ Organization.find({}).remove()
                 division: 'A',
                 admins: [],
                 members: []
+            }]);
+    });
+
+Event.find({}).remove()
+    .then(() => {
+        return Event.create(
+            [{
+                _id: mongoose.Types.ObjectId('4edd40c86762e0fb12000020'),
+                name: 'Swimming',
+                info: '4/20'
             }]);
     });
 

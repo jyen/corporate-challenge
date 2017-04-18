@@ -12,6 +12,7 @@ export class EventService {
   }
 
   public createEvent(event) {
+      console.log(event);
     return this.http.post(`${this.eventUrl}`, event)
         .map((r: Response) => r)
         .catch(err => {
@@ -36,7 +37,7 @@ export class EventService {
   }
 
   public leaveEvent(event) {
-    return this.http.put(`${this.eventUrl}/${event._id}`, event)
+    return this.http.put(`${this.eventUrl}/${event._id}/events`, event)
         .map((r: Response) => r)
         .catch(err => {
           return Observable.throw(err);

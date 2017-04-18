@@ -15,11 +15,8 @@
 import Event from './event.model';
 
 export default class EventService {
-    static create(orgId, event) {
-        return Event.create(event).exec()
-            .then((event) => {
-                return OrganizationService.addEvent(orgId, event._id);
-            });
+    static create(event) {
+        return Event.create(event);
     }
 
     static update(eventId, event) {

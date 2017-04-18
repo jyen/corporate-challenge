@@ -74,6 +74,7 @@ export function destroy(req, res) {
 
 export function createEvent(req, res) {
     return OrganizationService.addEvent(req.params.id, req.body)
+        .then(respondWithResult(res, 200))
         .catch(handleError(res));
 }
 

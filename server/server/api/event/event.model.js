@@ -6,7 +6,8 @@ import mongoose from 'mongoose';
 var EventSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     info: String,
     active: Boolean,
