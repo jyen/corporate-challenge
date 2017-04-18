@@ -53,6 +53,7 @@ export class EventFormComponent implements OnInit {
   addEvent(event) {
     var org = this.authService.getCurrentUser().organization;
     this.busy = this.organizationService.createEvent(org, event)
+        .delay(1000)
         .subscribe(() => {
           this.onEventChange.emit(true);
           this.event = new Event();

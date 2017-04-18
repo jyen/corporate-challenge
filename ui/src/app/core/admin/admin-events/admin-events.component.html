@@ -1,3 +1,6 @@
+<div [ngBusy]="busy">
+
+
 <ngb-accordion [closeOthers]="true" activeIds="add-new">
 
   <ngb-panel id="{{event.name}}" title="{{event.name}}" *ngFor="let event of organization.events">
@@ -14,3 +17,4 @@
     </template>
   </ngb-panel>
 </ngb-accordion>
+</div>
