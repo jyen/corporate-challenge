@@ -9,6 +9,7 @@
                  name="name"
                  class="form-control"
                  [(ngModel)]="event.name"
+                 [disabled]="disabled"
                  required/>
 
           <!--<div *ngIf="name.errors && (name.dirty || name.touched)"-->
@@ -26,21 +27,33 @@
                  name="info"
                  class="form-control"
                  [(ngModel)]="event.info"
+                 [disabled]="disabled"
                  required>
 
           </textarea>
         </div>
 
-        <button class="btn btn-inverse btn-lg btn-login"
+        <button *ngIf="!existingEvent"
+                class="btn btn-inverse btn-lg btn-login"
                 type="submit"
                 [disabled]="!orgForm.form.valid">
           Add
         </button>
-        <!--<button class="btn btn-inverse btn-lg btn-login"-->
-                <!--(click)="startEdit()"-->
-                <!--*ngIf="!edit">-->
-          <!--Edit-->
-        <!--</button>-->
+        <button *ngIf="existingEvent && disabled"
+                class="btn btn-inverse btn-lg btn-login"
+                (click)="startEdit()">
+          Edit
+        </button>
+        <button *ngIf="existingEvent && !disabled"
+                class="btn btn-inverse btn-lg btn-login"
+                (click)="startEdit()">
+          Save
+        </button>
+        <button *ngIf="existingEvent"
+                class="btn btn-inverse btn-lg btn-login"
+                (click)="cancel()">
+          Cancel
+        </button>
         <!--<a class="btn btn-secondary btn-lg btn-register" (click)="cancel()">-->
           <!--Cancel-->
         <!--</a>-->

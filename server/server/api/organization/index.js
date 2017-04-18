@@ -12,6 +12,7 @@ router.post('/', auth.isAuthenticated(), controller.create);
 router.put('/:id', controller.upsert);
 router.delete('/:id', controller.destroy);
 router.post('/:id/events', controller.createEvent);
+router.post('/:id/events/:eventid', controller.removeEvent);
 router.post('/:id/join', auth.isAuthenticated(), controller.joinMembers);
 
 module.exports = router;

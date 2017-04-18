@@ -42,6 +42,7 @@ export default class OrganizationService {
 
     static getOrganization(id) {
         return Organization.findById(id)
+            .populate('events')
             .exec();
     }
 
@@ -107,6 +108,22 @@ export default class OrganizationService {
                 if (org) {
                     org.addEvent(eventId);
                     console.log(org);
+                    return org.save();
+                } else {
+                    return Promise.reject('Organization does not exist');
+                }
+            })
+            .catch(err => Promise.reject(err));
+    }
+
+    static removeEvent(orgId, eventId) {
+        return EventService.delete(eventId)
+            .then(() => {
+                return OrganizationService.getOrganization(orgId);
+            })
+            .then(org => {
+                if (org) {
+                    org.removeEvent(eventId);
                     return org.save();
                 } else {
                     return Promise.reject('Organization does not exist');

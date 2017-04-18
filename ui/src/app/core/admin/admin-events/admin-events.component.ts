@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {AuthService} from "../../../shared/auth/auth.service";
+import {OrganizationService} from "../../../shared/data-services/organization/organization.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-admin-events',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminEventsComponent implements OnInit {
 
-  constructor() { }
+  public currentUser;
+  public busy : Subscription;
+  public organization;
 
-  ngOnInit() {
+  constructor(private authService: AuthService, private organizationService: OrganizationService) {
+    this.organization = {};
   }
 
+  ngOnInit() {
+    this.currentUser = this.authService.getCurrentUser();
+    this.busy = this.organizationService.getOrganization(this.currentUser.organization._id)
+        .subscribe(r => {
+          this.organization = r;
+        })
+
+  }
+
+  onEventChange(change: boolean) {
+    console.log(change);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {EventService} from "../../../../../shared/data-services/event/event.service";
 import {Subscription} from "rxjs";
 import {Event} from "../../../../../shared/data-services/event/event";
@@ -13,20 +13,50 @@ import {AuthService} from "../../../../../shared/auth/auth.service";
 export class EventFormComponent implements OnInit {
 
   busy: Subscription;
-  event: Event;
+
+  existingEvent: boolean;
+
+  disabled: boolean;
+
+  @Input() event;
+
+  @Output() onEventChange = new EventEmitter<boolean>();
+
 
   constructor(private organizationService: OrganizationService, private authService: AuthService) {
-    this.event = new Event();
   }
 
   ngOnInit() {
+    if(!this.event) {
+      this.event = new Event();
+      this.existingEvent = false;
+      this.disabled = false;
+    } else {
+      this.existingEvent = true;
+      this.disabled = true;
+    }
 
+  }
+
+  startEdit() {
+    this.disabled = false;
+  }
+
+  cancel() {
+    this.disabled = true;
+  }
+
+  save() {
+    this.disabled = true;
   }
 
   addEvent(event) {
     var org = this.authService.getCurrentUser().organization;
     this.busy = this.organizationService.createEvent(org, event)
-        .subscribe();
+        .subscribe(() => {
+          this.onEventChange.emit(true);
+          this.event = new Event();
+        });
   }
 
 }
