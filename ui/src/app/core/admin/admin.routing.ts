@@ -7,11 +7,7 @@ import {SetupOrganizationComponent} from "./setup-organization/setup-organizatio
 export const adminRoutes: Routes = [
     {
         path: 'admin',
-        component: AdminComponent,
-        children: [{
-            path: 'setup-organization',
-            component: SetupOrganizationComponent
-        }]
+        component: AdminComponent
     }, {
         path: 'admin-setup-organization',
         component: SetupOrganizationComponent
