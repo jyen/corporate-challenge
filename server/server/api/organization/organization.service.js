@@ -18,7 +18,6 @@ import UserService from './../user/user.service';
 
 export default class OrganizationService {
     static create(org) {
-        console.log(Organization);
         return Organization.create(org);
     }
 
@@ -107,7 +106,6 @@ export default class OrganizationService {
             .then(org => {
                 if (org) {
                     org.addEvent(eventId);
-                    console.log(org);
                     return org.save();
                 } else {
                     return Promise.reject('Organization does not exist');

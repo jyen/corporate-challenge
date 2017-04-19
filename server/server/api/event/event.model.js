@@ -7,7 +7,7 @@ var EventSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: true
+        sparse: true
     },
     info: String,
     active: Boolean,

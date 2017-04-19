@@ -1,23 +1,16 @@
 <div [ngBusy]="busy" class="container">
   <div class="row">
     <div class="col-sm-12">
-      <form class="form" (ngSubmit)="addEvent(event)" #orgForm="ngForm">
+      <form class="form">
 
         <div class="form-group">
           <label>Event Name</label>
           <input type="text"
-                 name="name"
                  class="form-control"
+                 name="name"
                  [(ngModel)]="event.name"
                  [disabled]="disabled"
                  required/>
-
-          <!--<div *ngIf="name.errors && (name.dirty || name.touched)"-->
-               <!--class="alert alert-danger">-->
-            <!--<div [hidden]="!name.errors.required">-->
-              <!--Organization Name is required-->
-            <!--</div>-->
-          <!--</div>-->
         </div>
 
         <div class="form-group">
@@ -35,7 +28,7 @@
 
         <button *ngIf="!existingEvent"
                 class="btn btn-inverse btn-lg btn-login"
-                type="submit"
+                (click)="addEvent(event)"
                 [disabled]="!orgForm.form.valid">
           Add
         </button>
@@ -46,7 +39,7 @@
         </button>
         <button *ngIf="existingEvent && !disabled"
                 class="btn btn-inverse btn-lg btn-login"
-                (click)="startEdit()">
+                (click)="editEvent(event)">
           Save
         </button>
         <button *ngIf="existingEvent"

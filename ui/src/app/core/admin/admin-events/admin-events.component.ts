@@ -21,7 +21,6 @@ export class AdminEventsComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
     this.busy = this.organizationService.getOrganization(this.currentUser.organization._id)
-        .delay(1000)
         .subscribe(r => {
           this.organization = r;
         })
@@ -31,7 +30,6 @@ export class AdminEventsComponent implements OnInit {
   onEventChange(change: boolean) {
     if (change) {
       this.busy = this.organizationService.getOrganization(this.currentUser.organization._id)
-          .delay(2000)
           .subscribe(r => {
             this.organization = r;
           });

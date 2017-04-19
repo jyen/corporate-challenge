@@ -8,74 +8,43 @@
 import User from '../api/user/user.model';
 import Organization from '../api/organization/organization.model';
 import Event from '../api/event/event.model';
+
+import UserService from '../api/user/user.service';
+import OrganizationService from '../api/organization/organization.service';
+import EventService from '../api/event/event.service';
+
+
 import mongoose from 'mongoose';
+var users = require('../data/user.json');
+var orgs = require('../data/organization.json');
+var events = require('../data/event.json');
+
 User.find({}).remove()
     .then(() => {
-        return User.create(
-            [{
-                _id: mongoose.Types.ObjectId('4edd40c86762e0fb12000000'),
-                provider: 'local',
-                name: 'Test User1',
-                email: '1@example.com',
-                password: 'test',
-                gender: 'M',
-                birthYear: 1988,
-                phone: 9724549898,
-                shirtSize: 'M',
-                participantType: 'Employee',
-                organization: mongoose.Types.ObjectId('4edd40c86762e0fb12000010')
-            }, {
-                _id: mongoose.Types.ObjectId('4edd40c86762e0fb12000001'),
-                provider: 'local',
-                name: 'Test User2',
-                email: '2@example.com',
-                password: 'test',
-                gender: 'F',
-                birthYear: 1988,
-                phone: 9724549898,
-                shirtSize: 'M',
-                participantType: 'Employee'
-            }, {
-                _id: mongoose.Types.ObjectId('4edd40c86762e0fb12000002'),
-                provider: 'local',
-                role: 'admin',
-                name: 'Test Admin1',
-                email: 'admin@example.com',
-                password: 'admin',
-                gender: 'M',
-                birthYear: 1988,
-                phone: 9724549898,
-                shirtSize: 'M',
-                participantType: 'Contractor',
-                organization: mongoose.Types.ObjectId('4edd40c86762e0fb12000010')
-            }]);
+        for (var index in users) {
+            var user = users[index];
+            UserService.create(user);
+        }
     });
+setTimeout(() => {
+    Event.find({}).remove().then(() => {
+        Organization.find({}).remove()
+            .then(() => {
+                for (var index in orgs) {
+                    var org = orgs[index];
+                    OrganizationService.create(org)
+                        .then((org) => {
+                            if (org.name === 'CA Technologies') {
+                                User.findOne({'email': 'admin@1.com'})
+                                    .then((user) => {
+                                        UserService.joinOrganization(org._id, user._id);
+                                        OrganizationService.addAdmin(org._id, user._id);
+                                    })
+                            }
+                        });
+                }
+            });
+    });
+}, 2000);
 
-Organization.find({}).remove()
-    .then(() => {
-        return Organization.create(
-            [{
-                _id: mongoose.Types.ObjectId('4edd40c86762e0fb12000010'),
-                name: 'CA Technologies',
-                division: 'B',
-                admins: [mongoose.Types.ObjectId('4edd40c86762e0fb12000001')],
-                members: [mongoose.Types.ObjectId('4edd40c86762e0fb12000003')]
-            }, {
-                _id: mongoose.Types.ObjectId('4edd40c86762e0fb12000011'),
-                name: 'Texas Instruments',
-                division: 'A',
-                admins: [],
-                members: []
-            }]);
-    });
-
-Event.find({}).remove()
-    .then(() => {
-        return Event.create(
-            [{
-                _id: mongoose.Types.ObjectId('4edd40c86762e0fb12000020'),
-                name: 'Swimming',
-                info: '4/20'
-            }]);
-    });
 

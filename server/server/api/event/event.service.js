@@ -19,8 +19,8 @@ export default class EventService {
         return Event.create(event);
     }
 
-    static update(eventId, event) {
-        return Event.findByIdAndUpdate(eventId, {$set: {
+    static update(event) {
+        return Event.findByIdAndUpdate(event._id, {$set: {
             'name': event.name,
             'info': event.info,
             'active': event.active}

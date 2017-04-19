@@ -1,0 +1,13 @@
+[
+  {
+    "name": "CA Technologies",
+    "division": "B",
+    "admins": []
+  },
+  {
+    "name": "Texas Instruments",
+    "division": "A",
+    "admins": [],
+    "members": []
+  }
+]

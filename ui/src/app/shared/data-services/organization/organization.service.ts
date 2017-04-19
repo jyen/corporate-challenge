@@ -59,4 +59,12 @@ export class OrganizationService {
             });
     }
 
+    public updateEvent(org, event) {
+        return this.http.put(`${this.orgUrl}/${org._id}/events`, event)
+            .map((r: Response) => r)
+            .catch(err => {
+                return Observable.throw(err);
+            });
+    }
+
 }

@@ -5,7 +5,7 @@
 
   <ngb-panel id="{{event.name}}" title="{{event.name}}" *ngFor="let event of organization.events">
     <template ngbPanelContent>
-      <app-event-form [event]="event"></app-event-form>
+      <app-event-form [event]="event" (onEventChange)="onEventChange($event)"></app-event-form>
     </template>
   </ngb-panel>
   <ngb-panel id="add-new">

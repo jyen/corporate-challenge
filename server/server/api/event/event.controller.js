@@ -63,10 +63,7 @@ export function create(req, res) {
 
 // Upserts the given Event in the DB at the specified ID
 export function upsert(req, res) {
-    if (req.body._id) {
-        delete req.body._id;
-    }
-    return EventService.update(req.params.id, req.body)
+    return EventService.update(req.body)
         .then(respondWithResult(res))
         .catch(handleError(res));
 }

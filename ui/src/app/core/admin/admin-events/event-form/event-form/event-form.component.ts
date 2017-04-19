@@ -23,7 +23,9 @@ export class EventFormComponent implements OnInit {
   @Output() onEventChange = new EventEmitter<boolean>();
 
 
-  constructor(private organizationService: OrganizationService, private authService: AuthService) {
+  constructor(private organizationService: OrganizationService,
+              private authService: AuthService,
+              private eventService: EventService) {
   }
 
   ngOnInit() {
@@ -53,10 +55,16 @@ export class EventFormComponent implements OnInit {
   addEvent(event) {
     var org = this.authService.getCurrentUser().organization;
     this.busy = this.organizationService.createEvent(org, event)
-        .delay(1000)
         .subscribe(() => {
           this.onEventChange.emit(true);
           this.event = new Event();
+        });
+  }
+
+  editEvent(event) {
+    this.busy = this.eventService.updateEvent(event)
+        .subscribe(() => {
+          this.onEventChange.emit(true);
         });
   }
 

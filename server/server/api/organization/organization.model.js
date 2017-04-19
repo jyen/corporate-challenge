@@ -18,14 +18,13 @@ var OrganizationSchema = new mongoose.Schema({
     },
     admins: [{
         type: mongoose.Schema.ObjectId,
-        ref: 'User',
-        required: true
+        ref: 'User'
     }],
-    members: [{
-        type: mongoose.Schema.ObjectId,
-        ref: 'User',
-        required: true
-    }],
+    // members: [{
+    //     type: mongoose.Schema.ObjectId,
+    //     ref: 'User',
+    //     required: true
+    // }],
     events: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Event'
@@ -61,19 +60,19 @@ OrganizationSchema.methods = {
         if (index > -1) {
             this.admins.splice(index, 1);
         }
-    },
-
-    addMember(id) {
-        this.members.push(id);
-        this.members = _.uniqWith(this.members, _.isEqual);
-    },
-
-    removeMember(id) {
-        var index = this.members.indexOf(id);
-        if (index > -1) {
-            this.members.splice(index, 1);
-        }
     }
+
+    // addMember(id) {
+    //     this.members.push(id);
+    //     this.members = _.uniqWith(this.members, _.isEqual);
+    // },
+    //
+    // removeMember(id) {
+    //     var index = this.members.indexOf(id);
+    //     if (index > -1) {
+    //         this.members.splice(index, 1);
+    //     }
+    // }
 };
 
 export default mongoose.model('Organization', OrganizationSchema);
