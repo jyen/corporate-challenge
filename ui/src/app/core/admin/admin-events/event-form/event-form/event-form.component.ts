@@ -18,7 +18,9 @@ export class EventFormComponent implements OnInit {
 
   disabled: boolean;
 
-  @Input() event;
+  event;
+
+  @Input() eventInput;
 
   @Output() onEventChange = new EventEmitter<boolean>();
 
@@ -29,13 +31,15 @@ export class EventFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(!this.event) {
+    if(!this.eventInput) {
       this.event = new Event();
       this.existingEvent = false;
       this.disabled = false;
     } else {
       this.existingEvent = true;
       this.disabled = true;
+      this.event = {};
+      Object.assign(this.event, this.eventInput);
     }
 
   }
@@ -46,6 +50,7 @@ export class EventFormComponent implements OnInit {
 
   cancel() {
     this.disabled = true;
+    this.event = this.eventInput;
   }
 
   save() {

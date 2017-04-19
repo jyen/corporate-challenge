@@ -1,13 +1,13 @@
 <div [ngBusy]="busy" class="container">
   <div class="row">
     <div class="col-sm-12">
-      <form class="form">
+      <form class="form" #orgForm="ngForm">
 
         <div class="form-group">
           <label>Event Name</label>
           <input type="text"
-                 class="form-control"
                  name="name"
+                 class="form-control"
                  [(ngModel)]="event.name"
                  [disabled]="disabled"
                  required/>
