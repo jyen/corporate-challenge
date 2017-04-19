@@ -42,6 +42,11 @@
                 (click)="editEvent(event)">
           Save
         </button>
+        <button *ngIf="existingEvent && !disabled"
+                class="btn btn-danger btn-lg btn-login"
+                (click)="removeEvent(event)">
+          Delete
+        </button>
         <button *ngIf="existingEvent"
                 class="btn btn-inverse btn-lg btn-login"
                 (click)="cancel()">

@@ -59,8 +59,8 @@ export class OrganizationService {
             });
     }
 
-    public updateEvent(org, event) {
-        return this.http.put(`${this.orgUrl}/${org._id}/events`, event)
+    public removeEvent(org, event) {
+        return this.http.delete(`${this.orgUrl}/${org._id}/events/${event._id}`)
             .map((r: Response) => r)
             .catch(err => {
                 return Observable.throw(err);

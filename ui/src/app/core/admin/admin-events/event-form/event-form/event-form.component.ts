@@ -73,4 +73,12 @@ export class EventFormComponent implements OnInit {
         });
   }
 
+  removeEvent(event) {
+    var org = this.authService.getCurrentUser().organization;
+    this.busy = this.organizationService.removeEvent(org, event)
+        .subscribe(() => {
+          this.onEventChange.emit(true);
+        });
+  }
+
 }
