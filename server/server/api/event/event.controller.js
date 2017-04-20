@@ -12,7 +12,6 @@
 
 'use strict';
 
-import jsonpatch from 'fast-json-patch';
 import EventService from './event.service';
 
 function respondWithResult(res, statusCode) {
@@ -25,27 +24,15 @@ function respondWithResult(res, statusCode) {
     };
 }
 
-function patchUpdates(patches) {
-    return function(entity) {
-        try {
-            jsonpatch.apply(entity, patches, /*validate*/ true);
-        } catch(err) {
-            return Promise.reject(err);
-        }
-
-        return entity.save();
-    };
-}
-
-function handleEntityNotFound(res) {
-    return function(entity) {
-        if (!entity) {
-            res.status(404).end();
-            return null;
-        }
-        return entity;
-    };
-}
+// function handleEntityNotFound(res) {
+//     return function(entity) {
+//         if (!entity) {
+//             res.status(404).end();
+//             return null;
+//         }
+//         return entity;
+//     };
+// }
 
 function handleError(res, statusCode) {
     statusCode = statusCode || 500;
@@ -67,18 +54,6 @@ export function upsert(req, res) {
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
-
-// Updates an existing Event in the DB
-// export function patch(req, res) {
-//     if (req.body._id) {
-//         delete req.body._id;
-//     }
-//     return Event.findById(req.params.id).exec()
-//         .then(handleEntityNotFound(res))
-//         .then(patchUpdates(req.body))
-//         .then(respondWithResult(res))
-//         .catch(handleError(res));
-// }
 
 // Deletes a Event from the DB
 export function destroy(req, res) {

@@ -21,9 +21,9 @@ export default class EventService {
 
     static update(event) {
         return Event.findByIdAndUpdate(event._id, {$set: {
-            'name': event.name,
-            'info': event.info,
-            'active': event.active}
+            name: event.name,
+            info: event.info,
+            active: event.active}
         }).exec();
     }
 
