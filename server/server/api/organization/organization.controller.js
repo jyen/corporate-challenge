@@ -49,7 +49,9 @@ export function create(req, res) {
     var user = req.user;
     org.admins.push(user._id);
     return UserService.setAdmin(user._id, 'admin')
-        .then(() => OrganizationService.create(org))
+        .then(() => {
+            return OrganizationService.create(org);
+        })
         .then(respondWithResult(res, 201))
         .catch(handleError(res));
 }

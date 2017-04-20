@@ -49,13 +49,15 @@ export default class OrganizationService {
         return Organization.findById(orgId).exec()
             .then(org => {
                 if (org) {
-                    org.addMember(userId);
+                    org.addMember(userId)
                     return org.save();
                 } else {
                     return Promise.reject('Organization does not exist');
                 }
             })
-            .then(() => UserService.joinOrganization(orgId, userId));
+            .then(() => {
+                return UserService.joinOrganization(orgId, userId);
+            });
     }
 
     static leave(orgId, userId) {
@@ -76,7 +78,9 @@ export default class OrganizationService {
                     return Promise.reject('Organization does not exist');
                 }
             })
-            .then(() => UserService.setAdmin(userId, 'admin'));
+            .then(() => {
+                return UserService.setAdmin(userId, 'admin');
+            });
     }
 
     static removeAdmin(orgId, userId) {
@@ -112,12 +116,16 @@ export default class OrganizationService {
 
     static getEvents(orgId) {
         return OrganizationService.getOrganization(orgId)
-            .then(org => Promise.resolve(org.events));
+            .then((org) => {
+                return Promise.resolve(org.events);
+            });
     }
 
     static removeEvent(orgId, eventId) {
         return EventService.delete(eventId)
-            .then(() => OrganizationService.getOrganization(orgId))
+            .then(() => {
+                return OrganizationService.getOrganization(orgId);
+            })
             .then(org => {
                 if (org) {
                     org.removeEvent(eventId);

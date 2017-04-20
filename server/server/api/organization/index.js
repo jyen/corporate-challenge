@@ -12,7 +12,7 @@ router.post('/', auth.isAuthenticated(), controller.create);
 router.put('/:id', auth.isAuthenticated(), controller.upsert);
 router.delete('/:id', auth.isAuthenticated(), controller.destroy);
 router.post('/:id/events', auth.isAuthenticated(), controller.createEvent);
-router.get('/:id/events', auth.isAuthenticated(), controller.listEvents);
+router.get('/:id/events',auth.isAuthenticated(),  controller.listEvents);
 router.delete('/:id/events/:eventid', auth.isAuthenticated(), controller.removeEvent);
 router.post('/:id/join', auth.isAuthenticated(), controller.joinMembers);
 

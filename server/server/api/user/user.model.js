@@ -57,7 +57,7 @@ var UserSchema = new Schema({
 // Public profile information
 UserSchema
     .virtual('profile')
-    .get(() => {
+    .get(function() {
         return {
             name: this.name,
             role: this.role
@@ -67,7 +67,7 @@ UserSchema
 // Non-sensitive info we'll be putting in the token
 UserSchema
     .virtual('token')
-    .get(() => {
+    .get(function() {
         return {
             _id: this._id,
             role: this.role
@@ -76,18 +76,18 @@ UserSchema
 
 UserSchema
     .virtual('info')
-    .get(() => {
+    .get(function () {
         return {
-            name: this.name,
-            email: this.email,
-            phone: this.phone,
-            birthYear: this.birthYear,
-            shirtSize: this.shirtSize,
-            participantType: this.participantType,
-            gender: this.gender,
-            organization: this.organization,
-            role: this.role,
-            _id: this._id
+            'name': this.name,
+            'email': this.email,
+            'phone': this.phone,
+            'birthYear': this.birthYear,
+            'shirtSize': this.shirtSize,
+            'participantType': this.participantType,
+            'gender': this.gender,
+            'organization': this.organization,
+            'role': this.role,
+            '_id': this._id
         };
     });
 
@@ -98,21 +98,21 @@ UserSchema
 // Validate empty email
 UserSchema
     .path('email')
-    .validate(function (email) {
+    .validate(function(email) {
         return email.length;
     }, 'Email cannot be blank');
 
 // Validate empty password
 UserSchema
     .path('password')
-    .validate(function (password) {
+    .validate(function(password) {
         return password.length;
     }, 'Password cannot be blank');
 
 // Validate email is not taken
 UserSchema
     .path('email')
-    .validate(function (value, respond) {
+    .validate(function(value, respond) {
         return this.constructor.findOne({email: value}).exec()
             .then(user => {
                 if (user) {
@@ -123,12 +123,12 @@ UserSchema
                 }
                 return respond(true);
             })
-            .catch(function (err) {
+            .catch(function(err) {
                 throw err;
             });
     }, 'The specified email address is already in use.');
 
-var validatePresenceOf = function (value) {
+var validatePresenceOf = function(value) {
     return value && value.length;
 };
 
@@ -136,7 +136,7 @@ var validatePresenceOf = function (value) {
  * Pre-save hook
  */
 UserSchema
-    .pre('save', function (next) {
+    .pre('save', function(next) {
         // Handle new/update passwords
         if (!this.isModified('password')) {
             return next();
