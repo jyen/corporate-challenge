@@ -12,7 +12,7 @@ router.post('/', auth.isAuthenticated(), controller.create);
 router.put('/:id', auth.isAuthenticated(), controller.upsert);
 // router.patch('/:id', auth.isAuthenticated(), controller.patch);
 router.delete('/:id', auth.isAuthenticated(), controller.destroy);
-router.post('/:id/member', auth.isAuthenticated(), controller.join);
-router.delete('/:id/member', auth.isAuthenticated(), controller.leave);
+router.post('/:id/join', auth.isAuthenticated(), controller.join);
+router.delete('/:id/leave', auth.isAuthenticated(), controller.leave);
 
 module.exports = router;

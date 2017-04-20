@@ -1,7 +1,15 @@
-<p>
-  <ngb-alert [dismissible]="false">
-    <strong>You must add corporate challenge events</strong>
-    <br/>
-    Click <a routerLink="/core/admin">here</a> to setup your events
-  </ngb-alert>
-</p>
+<div [ngBusy]="busy">
+  <span *ngIf="currentUser">
+    <ngb-alert *ngIf="currentUser.organization.events.length === 0" [dismissible]="false">
+      <strong>You must add corporate challenge events</strong>
+      <br/>
+      Click <a routerLink="/core/admin">here</a> to setup your events
+    </ngb-alert>
+
+    <ngb-alert type="info" [dismissible]="false">
+      <strong>You must add corporate challenge events</strong>
+      <br/>
+      Click <a routerLink="/core/admin">here</a> to setup your events
+    </ngb-alert>
+  </span>
+</div>

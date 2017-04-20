@@ -1,3 +1,19 @@
-<p>
-  events works!
-</p>
+  <div [ngBusy]="busy">
+
+    <div class="row">
+
+      <div class="col-3" *ngFor="let event of events">
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input class="form-check-input"
+                   name="event.name"
+                   type="checkbox"
+                   [(ngModel)]="event.selected"
+                   (change)="updateEvent(event)">
+            {{event.name}}
+          </label>
+        </div>
+      </div>
+
+    </div>
+  </div>

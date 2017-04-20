@@ -7,13 +7,15 @@ import { FormsModule } from '@angular/forms';
 
 import { SetupWorkflowComponent } from './setup-workflow/setup-workflow.component';
 import { ProfileComponent } from './profile/profile.component';
+import { BusyModule } from 'angular2-busy';
 
 @NgModule({
   imports: [
     CommonModule,
     dashboardRouting,
     NgbModule,
-    FormsModule
+    FormsModule,
+    BusyModule
   ],
   declarations: [DashboardComponent, SetupWorkflowComponent, ProfileComponent]
 })

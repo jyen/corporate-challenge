@@ -86,7 +86,8 @@ UserSchema
             'participantType': this.participantType,
             'gender': this.gender,
             'organization': this.organization,
-            'role': this.role
+            'role': this.role,
+            '_id': this._id
         };
     });
 

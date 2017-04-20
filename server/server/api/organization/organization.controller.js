@@ -78,6 +78,12 @@ export function createEvent(req, res) {
         .catch(handleError(res));
 }
 
+export function listEvents(req, res) {
+    return OrganizationService.getEvents(req.params.id)
+        .then(respondWithResult(res, 200))
+        .catch(handleError(res));
+}
+
 export function removeEvent(req, res) {
     return OrganizationService.removeEvent(req.params.id, req.params.eventid)
         .then(respondWithResult(res, 200))

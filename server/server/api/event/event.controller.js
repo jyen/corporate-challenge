@@ -83,15 +83,18 @@ export function upsert(req, res) {
 // Deletes a Event from the DB
 export function destroy(req, res) {
     return EventService.delete(req.params.id)
+        .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
 export function join(req, res) {
     return EventService.join(req.params.id, req.user._id)
+        .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
 export function leave(req, res) {
     return EventService.leave(req.params.id, req.user._id)
+        .then(respondWithResult(res))
         .catch(handleError(res));
 }

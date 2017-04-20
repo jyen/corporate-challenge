@@ -29,7 +29,7 @@ export class EventService {
   }
 
   public joinEvent(event) {
-    return this.http.post(`${this.eventUrl}/${event._id}/join`, event)
+    return this.http.post(`${this.eventUrl}/${event._id}/join`, {})
         .map((r: Response) => r)
         .catch(err => {
           return Observable.throw(err);
@@ -37,7 +37,7 @@ export class EventService {
   }
 
   public leaveEvent(event) {
-    return this.http.put(`${this.eventUrl}/${event._id}/events`, event)
+    return this.http.delete(`${this.eventUrl}/${event._id}/leave`)
         .map((r: Response) => r)
         .catch(err => {
           return Observable.throw(err);

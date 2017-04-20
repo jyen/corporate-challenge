@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { OrganizationService } from '../../shared/data-services/organization/organization.service';
+import { AuthService } from '../../shared/auth/auth.service';
+import { Subscription } from 'rxjs';
+import { EventService } from '../../shared/data-services/event/event.service';
 
 @Component({
   selector: 'app-events',
@@ -7,9 +11,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventsComponent implements OnInit {
 
-  constructor() { }
+  currentUser;
+
+  events;
+
+  busy: Subscription
+
+  constructor(private organizationService: OrganizationService,
+              private authService: AuthService,
+              private eventService: EventService) { }
 
   ngOnInit() {
+    this.currentUser = this.authService.getCurrentUser();
+    console.log(this.currentUser);
+    this.busy = this.organizationService.listEvents(this.currentUser.organization)
+        .subscribe((data) => {
+          this.events = data;
+          for(var index in this.events) {
+            console.log(this.events[index], this.currentUser._id);
+            if(this.events[index].members.includes(this.currentUser._id)) {
+              this.events[index].selected = true;
+            }
+          }
+        });
   }
+
+  updateEvent(event) {
+    if(event.selected) {
+      this.busy = this.eventService.joinEvent(event)
+          .subscribe(() => {
+
+          });
+    } else {
+      this.busy = this.eventService.leaveEvent(event)
+          .subscribe(() => {
+
+          });
+    }
+
+  }
+
 
 }

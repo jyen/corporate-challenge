@@ -59,6 +59,14 @@ export class OrganizationService {
             });
     }
 
+    public listEvents(org) {
+        return this.http.get(`${this.orgUrl}/${org._id}/events`)
+            .map((r: Response) => r)
+            .catch(err => {
+                return Observable.throw(err);
+            });
+    }
+
     public removeEvent(org, event) {
         return this.http.delete(`${this.orgUrl}/${org._id}/events/${event._id}`)
             .map((r: Response) => r)

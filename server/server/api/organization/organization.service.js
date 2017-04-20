@@ -114,6 +114,13 @@ export default class OrganizationService {
             .catch(err => Promise.reject(err));
     }
 
+    static getEvents(orgId) {
+        return OrganizationService.getOrganization(orgId)
+            .then((org) => {
+                return Promise.resolve(org.events);
+            });
+    }
+
     static removeEvent(orgId, eventId) {
         return EventService.delete(eventId)
             .then(() => {
