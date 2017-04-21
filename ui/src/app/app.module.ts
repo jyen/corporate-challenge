@@ -21,6 +21,7 @@ import {OrganizationService} from "./shared/data-services/organization/organizat
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BusyModule} from 'angular2-busy';
 import {EventService} from "./shared/data-services/event/event.service";
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
