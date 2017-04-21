@@ -1,0 +1,22 @@
+<div>
+  <h4>T-Shirt Information</h4>
+  <ul>
+    <li>S: {{counts.S}}</li>
+    <li>M: {{counts.M}}</li>
+    <li>L: {{counts.L}}</li>
+    <li>XL: {{counts.XL}}</li>
+    <li>XXL: {{counts.XXL}}</li>
+    <li>XXXL: {{counts.XXXL}}</li>
+    <li>Total: {{users.length}}</li>
+  </ul>
+
+  <h4>Individuals</h4>
+  <ul class="list-group">
+    <li class="list-group-item"
+        *ngFor="let user of users">
+      {{user.name}} : {{user.shirtSize}}
+    </li>
+  </ul>
+
+
+</div>

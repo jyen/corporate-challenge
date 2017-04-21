@@ -9,6 +9,7 @@ import { AdminOrganizationComponent } from './admin-organization/admin-organizat
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BusyModule} from 'angular2-busy';
 import { EventFormComponent } from './admin-events/event-form/event-form/event-form.component';
+import { AdminParticipantsComponent } from './admin-participants/admin-participants.component';
 
 
 @NgModule({
@@ -19,6 +20,6 @@ import { EventFormComponent } from './admin-events/event-form/event-form/event-f
       NgbModule,
       BusyModule
   ],
-  declarations: [AdminComponent, SetupOrganizationComponent, AdminEventsComponent, AdminOrganizationComponent, EventFormComponent]
+  declarations: [AdminComponent, SetupOrganizationComponent, AdminEventsComponent, AdminOrganizationComponent, EventFormComponent, AdminParticipantsComponent]
 })
 export class AdminModule { }

@@ -36,6 +36,22 @@ export function index(req, res) {
         .catch(handleError(res));
 }
 
+export function getUsers(req, res) {
+    return UserService.getUsers(req.params.id)
+        .then(users => {
+            if (users) {
+                var usersInfo = [];
+                for (var index in users) {
+                    usersInfo.push(users[index].info);
+                }
+                return res.status(200).json(usersInfo);
+            } else {
+                return res.status(200).json([]);
+            }
+        })
+        .catch(handleError(res));
+}
+
 // Gets a single Organization from the DB
 export function show(req, res) {
     return OrganizationService.getOrganization(req.params.id)

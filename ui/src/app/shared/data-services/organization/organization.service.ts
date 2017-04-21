@@ -19,6 +19,14 @@ export class OrganizationService {
             });
     }
 
+    public getUsers(id) {
+        return this.http.get(`${this.orgUrl}/${id}/participants`)
+            .map((r: Response) => r)
+            .catch(err => {
+                return Observable.throw(err);
+            });
+    }
+
     public getOrganization(id) {
         return this.http.get(`${this.orgUrl}/${id}`)
             .map((r: Response) => r)

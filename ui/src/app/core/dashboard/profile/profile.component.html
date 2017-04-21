@@ -1,6 +1,6 @@
 <div [ngBusy]="busy">
   <span *ngIf="currentUser">
-    <ngb-alert *ngIf="currentUser.organization.events.length === 0" [dismissible]="false">
+    <ngb-alert *ngIf="currentUser.organization.events.length === 0 && currentUser.role === 'admin'" [dismissible]="false">
       <strong>You must add corporate challenge events</strong>
       <br/>
       Click <a routerLink="/core/admin">here</a> to setup your events

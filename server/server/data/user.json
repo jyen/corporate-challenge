@@ -23,6 +23,39 @@
   },
   {
     "provider": "local",
+    "name": "Test User3",
+    "email": "3@1.com",
+    "password": "test",
+    "gender": "M",
+    "birthYear": 1988,
+    "phone": 9724549898,
+    "shirtSize": "XXL",
+    "participantType": "Employee"
+  },
+  {
+    "provider": "local",
+    "name": "Test User4",
+    "email": "4@1.com",
+    "password": "test",
+    "gender": "F",
+    "birthYear": 1988,
+    "phone": 9724549898,
+    "shirtSize": "S",
+    "participantType": "Employee"
+  },
+  {
+    "provider": "local",
+    "name": "Test User5",
+    "email": "5@1.com",
+    "password": "test",
+    "gender": "F",
+    "birthYear": 1988,
+    "phone": 9724549898,
+    "shirtSize": "L",
+    "participantType": "Employee"
+  },
+  {
+    "provider": "local",
     "role": "admin",
     "name": "Test Admin1",
     "email": "admin@1.com",

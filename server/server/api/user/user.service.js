@@ -34,8 +34,9 @@ export default class UserService {
             .then(user => user.remove());
     }
 
-    static getUsers() {
-        return User.find({}).exec();
+    static getUsers(orgId) {
+        console.log(orgId);
+        return User.find({organization: orgId}).exec();
     }
 
     static getUser(id) {

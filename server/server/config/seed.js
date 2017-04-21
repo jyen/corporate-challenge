@@ -37,8 +37,17 @@ setTimeout(() => {
                             if (org.name === 'CA Technologies') {
                                 User.findOne({'email': 'admin@1.com'})
                                     .then((user) => {
-                                        UserService.joinOrganization(org._id, user._id);
+                                        // UserService.joinOrganization(org._id, user._id);
                                         OrganizationService.addAdmin(org._id, user._id);
+                                    })
+                            }
+
+                            if (org.name === 'CA Technologies') {
+                                UserService.getUsers()
+                                    .then((users) => {
+                                        for (var index in users) {
+                                            UserService.joinOrganization(org._id, users[index]._id);
+                                        }
                                     })
                             }
                         });
