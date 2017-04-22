@@ -15,6 +15,7 @@ import EventService from '../api/event/event.service';
 
 
 import mongoose from 'mongoose';
+
 var users = require('../data/user.json');
 var orgs = require('../data/organization.json');
 var events = require('../data/event.json');
