@@ -1,5 +1,9 @@
   <div [ngBusy]="busy">
 
+    <ngb-alert *ngIf="displayAlert" type="danger" [dismissible]="false">
+      <strong>Contact your administrator to setup events</strong>
+    </ngb-alert>
+
     <div class="row">
 
       <div class="col-3" *ngFor="let event of events">

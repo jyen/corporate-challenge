@@ -17,18 +17,23 @@ export class EventsComponent implements OnInit {
 
   busy: Subscription
 
+  displayAlert
+
   constructor(private organizationService: OrganizationService,
               private authService: AuthService,
               private eventService: EventService) { }
 
   ngOnInit() {
+    this.displayAlert = false;
     this.currentUser = this.authService.getCurrentUser();
     console.log(this.currentUser);
     this.busy = this.organizationService.listEvents(this.currentUser.organization)
         .subscribe((data) => {
           this.events = data;
+          if (this.events.length == 0 ) {
+            this.displayAlert = true;
+          }
           for(var index in this.events) {
-            console.log(this.events[index], this.currentUser._id);
             if(this.events[index].members.includes(this.currentUser._id)) {
               this.events[index].selected = true;
             }

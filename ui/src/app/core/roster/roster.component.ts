@@ -26,11 +26,7 @@ export class RosterComponent implements OnInit {
     this.gridOptions = <GridOptions> {};
     this.gridOptions.onGridReady = () => {
       this.gridOptions.api.sizeColumnsToFit();
-      alert(this.gridOptions.api);
     }
-    // this.gridOptions.isFullWidthCell = (rowNode: RowNode)=> {
-    //   return (rowNode.id === "0") || (parseInt(rowNode.id) % 2 === 0);
-    // };
     this.gridOptions.columnDefs = [
       {
         headerName: "Name",
