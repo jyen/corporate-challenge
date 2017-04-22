@@ -8,7 +8,7 @@ mkdir dist
 mkdir dist/client
 
 cd ui
-ng build --prod
+ng build -e prod
 
 cd ../server
 gulp build

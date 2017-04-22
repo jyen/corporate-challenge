@@ -35,7 +35,7 @@
   "scripts": {
     "test": "gulp test",
     "update-webdriver": "node node_modules/protractor/bin/webdriver-manager update",
-    "start": "NODE_ENV=production MONGODB_URI=mongodb://cc:ca@ds058739.mlab.com:58739/richardson-cc node server"
+    "start": "NODE_ENV=production node server"
   },
   "private": true
 }
