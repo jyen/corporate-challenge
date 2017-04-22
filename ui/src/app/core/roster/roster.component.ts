@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrganizationService } from '../../shared/data-services/organization/organization.service';
 import { AuthService } from '../../shared/auth/auth.service';
 import { Subscription } from 'rxjs';
-import { GridOptions } from 'ag-grid';
+import { GridOptions, RowNode } from 'ag-grid/main';
 
 @Component({
   selector: 'app-roster',
@@ -19,7 +19,18 @@ export class RosterComponent implements OnInit {
 
 
   constructor(private organizationService: OrganizationService, private authService: AuthService) {
-    this.gridOptions = {};
+
+  }
+
+  ngOnInit() {
+    this.gridOptions = <GridOptions> {};
+    this.gridOptions.onGridReady = () => {
+      this.gridOptions.api.sizeColumnsToFit();
+      alert(this.gridOptions.api);
+    }
+    // this.gridOptions.isFullWidthCell = (rowNode: RowNode)=> {
+    //   return (rowNode.id === "0") || (parseInt(rowNode.id) % 2 === 0);
+    // };
     this.gridOptions.columnDefs = [
       {
         headerName: "Name",
@@ -47,10 +58,6 @@ export class RosterComponent implements OnInit {
         width: 100
       }
     ];
-
-  }
-
-  ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
     this.busy = this.organizationService.getUsers(this.currentUser.organization._id)
         .subscribe(r => {
