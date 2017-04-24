@@ -21,6 +21,7 @@ import {OrganizationService} from "./shared/data-services/organization/organizat
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BusyModule} from 'angular2-busy';
 import {EventService} from "./shared/data-services/event/event.service";
+import { ToastrModule } from 'ngx-toastr';
 import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
@@ -40,7 +41,10 @@ import { AgGridModule } from 'ag-grid-angular';
     CoreModule,
     BrowserAnimationsModule,
     BusyModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center'
+    }),
   ],
   providers: [
     AuthService,

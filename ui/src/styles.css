@@ -3,6 +3,7 @@
 @import "~ag-grid/dist/styles/ag-grid.css";
 @import '~bootstrap/dist/css/bootstrap.css';
 @import '~angular2-busy/build/style/busy.css';
+@import '~ngx-toastr/toastr.css';
 /*@import "~ag-grid/dist/styles/theme-fresh.css"*/
 /*@import "../node_modules/materialize-css/dist/css/materialize.css";*/
 /*@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';*/

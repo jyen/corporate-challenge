@@ -8,6 +8,7 @@ import 'rxjs/Rx';
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {UserService} from "../data-services/user/user.service";
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,7 @@ export class AuthService {
   public redirectUrl: string;
 
   constructor(private http: HttpService, private router: Router,
-  private userService: UserService) {
+  private userService: UserService, private toastrService: ToastrService) {
   }
 
   public login(credential) {
@@ -30,6 +31,7 @@ export class AuthService {
             return r;
         })
         .catch( err => {
+            this.toastrService.error(err.json().message, 'Login Error');
             return Observable.throw(err);
         })
         .flatMap((r: any) => {
