@@ -3,6 +3,7 @@ import { AuthService } from '../../../shared/auth/auth.service';
 import { User } from '../../../shared/data-services/user/user';
 import { UserService } from '../../../shared/data-services/user/user.service';
 import { Subscription } from 'rxjs';
+import { OrganizationService } from '../../../shared/data-services/organization/organization.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,18 +15,34 @@ export class ProfileComponent implements OnInit {
   public currentUser: User;
   public adminMessage: boolean;
   busy: Subscription;
+  events;
+  organization;
 
-  constructor(private authService: AuthService, private userService: UserService) { }
+  myEvents = [];
+
+  constructor(private authService: AuthService, private userService: UserService, private organizationService: OrganizationService) { }
 
   ngOnInit() {
 
     this.busy = this.userService.getCurrentUser()
         .subscribe(r => {
           this.currentUser = r;
+          this.organization = r.organization;
           this.authService.setCurrentUser(r);
           if (this.currentUser.role === 'admin') {
             this.adminMessage = true;
           }
+
+          this.busy = this.organizationService.listEvents(this.currentUser.organization)
+              .subscribe((data) => {
+                this.events = data;
+
+                for(var index in this.events) {
+                  if(this.events[index].members.includes(this.currentUser._id)) {
+                    this.myEvents.push(this.events);
+                  }
+                }
+              });
         });
   }
 

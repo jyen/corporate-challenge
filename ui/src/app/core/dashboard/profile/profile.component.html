@@ -1,15 +1,55 @@
-<div [ngBusy]="busy">
-  <span *ngIf="currentUser">
-    <ngb-alert *ngIf="currentUser.organization.events.length === 0 && currentUser.role === 'admin'" [dismissible]="false">
-      <strong>You must add corporate challenge events</strong>
-      <br/>
-      Click <a routerLink="/core/admin">here</a> to setup your events
-    </ngb-alert>
+<span *ngIf="currentUser">
+  <div [ngBusy]="busy">
 
-    <ngb-alert type="info" [dismissible]="false">
-      <strong>You must add corporate challenge events</strong>
+      <ngb-alert *ngIf="currentUser.organization.events.length === 0 && currentUser.role === 'admin'" [dismissible]="false">
+        <strong>You must add corporate challenge events</strong>
+        <br/>
+        Click <a routerLink="/core/admin">here</a> to setup your events
+      </ngb-alert>
+  </div>
+
+  <span  *ngIf="currentUser.organization.events.length !== 0">
+
+      <div class="card-deck-wrapper">
+        <div class="card-deck">
+          <div class="card">
+            <div class="card-block">
+              <h4 class="card-title">Profile
+                <button class="pull-right btn btn-sm btn-primary">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </button>
+              </h4>
+              <p class="card-text">Name: {{currentUser.name}}</p>
+              <p class="card-text">Email: {{currentUser.email}}</p>
+              <p class="card-text">Phone: {{currentUser.phone}}</p>
+              <p class="card-text">Participant Type: {{currentUser.participantType}}</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-block">
+              <h4 class="card-title">Organization</h4>
+              <p class="card-text">Name: {{organization.name}}</p>
+              <p class="card-text">Division: {{organization.division}}</p>
+            </div>
+          </div>
+          <!--<div class="card">-->
+            <!--<div class="card-block">-->
+              <!--<h4 class="card-title">Card title</h4>-->
+              <!--<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>-->
+              <!--<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+      </div>
+
       <br/>
-      Click <a routerLink="/core/admin">here</a> to setup your events
-    </ngb-alert>
+      <h3>Sports</h3>
+      <div class="card-group">
+          <div class="card">
+              <div class="card-block">
+                  <h4 class="card-title">Card title</h4>
+              </div>
+          </div>
+      </div>
   </span>
-</div>
+</span>
