@@ -1,5 +1,6 @@
+<div [ngBusy]="busy">
 <span *ngIf="currentUser">
-  <div [ngBusy]="busy">
+
 
       <ngb-alert *ngIf="currentUser.organization.events.length === 0 && currentUser.role === 'admin'" [dismissible]="false">
         <strong>You must add corporate challenge events</strong>
@@ -10,7 +11,6 @@
       <ngb-alert *ngIf="currentUser.organization.events.length === 0 && currentUser.role !== 'admin'" type="danger" [dismissible]="false">
         <strong>Contact your administrator to setup events</strong>
       </ngb-alert>
-  </div>
 
   <span  *ngIf="currentUser.organization.events.length !== 0">
 
@@ -68,3 +68,5 @@
 
   </span>
 </span>
+
+</div>
