@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { EventService } from '../../shared/data-services/event/event.service';
+import { OrganizationService } from '../../shared/data-services/organization/organization.service';
+import { AuthService } from '../../shared/auth/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-members',
@@ -9,15 +11,21 @@ import { EventService } from '../../shared/data-services/event/event.service';
 })
 export class MembersComponent implements OnInit {
 
+  currentUser;
+  events;
+  busy: Subscription;
+
   constructor(private router: Router, private route: ActivatedRoute,
-              private eventService: EventService) { }
+              private organizationService: OrganizationService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       let eventId = params['id'];
-      this.eventService.getEvent(eventId)
+      this.currentUser = this.authService.getCurrentUser();
+      this.busy = this.organizationService.getOrganization(this.currentUser.organization._id)
           .subscribe((data) => {
-            console.log(data);
+            this.events = data.events;
           });
     });
   }
