@@ -8,7 +8,7 @@ mkdir dist
 mkdir dist/client
 
 cd ui
-ng build -e prod
+ng build -prod -aot
 
 cd ../server
 gulp build
@@ -23,10 +23,10 @@ cp package.json dist
 echo "Copying client"
 cp ui/dist/* dist/client
 
-cd dist
-git init
-git remote add origin https://yenja01@richardson-cc.scm.azurewebsites.net:443/richardson-cc.git
-git add .
-git commit -s -a -m 'test'
-git push -f origin HEAD:master
+#cd dist
+#git init
+#git remote add origin https://yenja01@richardson-cc.scm.azurewebsites.net:443/richardson-cc.git
+#git add .
+#git commit -s -a -m 'test'
+#git push -f origin HEAD:master
 
