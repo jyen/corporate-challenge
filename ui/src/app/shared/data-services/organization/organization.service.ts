@@ -70,7 +70,7 @@ export class OrganizationService {
     public listEvents(org) {
         return this.http.get(`${this.orgUrl}/${org._id}/events`)
             .map((r: Response) => r)
-            .catch(err =>g {
+            .catch(err => {
                 return Observable.throw(err);
             });
     }

@@ -76,11 +76,10 @@ OrganizationSchema.methods = {
     // }
 };
 OrganizationSchema.plugin(deepPopulate, {
-    whitelist: [
-        'events',
-        'events.members.name',
-        'events.members.phone',
-        'events.members.email'
-    ]
+    populate: {
+        'events.members': {
+            select: 'name email phone gender participantType'
+        }
+    }
 });
 export default mongoose.model('Organization', OrganizationSchema);
