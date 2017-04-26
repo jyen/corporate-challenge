@@ -6,6 +6,10 @@
         <br/>
         Click <a routerLink="/core/admin">here</a> to setup your events
       </ngb-alert>
+
+      <ngb-alert *ngIf="currentUser.organization.events.length === 0 && currentUser.role !== 'admin'" type="danger" [dismissible]="false">
+        <strong>Contact your administrator to setup events</strong>
+      </ngb-alert>
   </div>
 
   <span  *ngIf="currentUser.organization.events.length !== 0">
@@ -44,12 +48,23 @@
 
       <br/>
       <h3>Sports</h3>
-      <div class="card-group">
-          <div class="card">
+      <div class="row">
+          <div style="cursor: pointer" class="card col-md-3"
+               *ngFor="let myEvent of myEvents"
+               (click)="getSportDetail(myEvent)">
               <div class="card-block">
-                  <h4 class="card-title">Card title</h4>
+                  <h4 class="card-title">{{myEvent.name}}</h4>
+              </div>
+          </div>
+
+          <div style="cursor: pointer" class="card col-md-2" routerLink="/core/events">
+              <div class="card-block">
+                  <h4>
+                      <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+                  </h4>
               </div>
           </div>
       </div>
+
   </span>
 </span>

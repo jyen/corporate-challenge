@@ -4,6 +4,7 @@ import { User } from '../../../shared/data-services/user/user';
 import { UserService } from '../../../shared/data-services/user/user.service';
 import { Subscription } from 'rxjs';
 import { OrganizationService } from '../../../shared/data-services/organization/organization.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -20,7 +21,8 @@ export class ProfileComponent implements OnInit {
 
   myEvents = [];
 
-  constructor(private authService: AuthService, private userService: UserService, private organizationService: OrganizationService) { }
+  constructor(private authService: AuthService, private userService: UserService,
+              private organizationService: OrganizationService, private router: Router) { }
 
   ngOnInit() {
 
@@ -39,11 +41,16 @@ export class ProfileComponent implements OnInit {
 
                 for(var index in this.events) {
                   if(this.events[index].members.includes(this.currentUser._id)) {
-                    this.myEvents.push(this.events);
+                    this.myEvents.push(this.events[index]);
                   }
                 }
               });
         });
+  }
+
+  public getSportDetail(event) {
+    this.router.navigate(['/core/members', {id: event._id}])
+    console.log('detail');
   }
 
 }

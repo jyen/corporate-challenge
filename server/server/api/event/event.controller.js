@@ -98,3 +98,10 @@ export function leave(req, res) {
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
+
+// Gets a single Organization from the DB
+export function show(req, res) {
+    return EventService.getEvent(req.params.id)
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+}

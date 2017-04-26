@@ -37,7 +37,9 @@ export default class EventService {
     }
 
     static getEvent(id) {
-        return Event.findById(id).exec();
+        return Event.findById(id)
+            .populate('members', 'name email gender phone participantType')
+            .exec();
     }
 
     static join(eventId, userId) {

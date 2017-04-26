@@ -41,7 +41,7 @@ export default class OrganizationService {
 
     static getOrganization(id) {
         return Organization.findById(id)
-            .populate('events')
+            .deepPopulate('events.members')
             .exec();
     }
 

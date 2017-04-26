@@ -11,11 +11,15 @@
       </li>
       <li class="nav-item"
           *ngIf="isLoggedIn()">
-        <a class="nav-link" routerLink="/core/events" routerLinkActive="active">Events</a>
+        <a class="nav-link" routerLink="/core/events" routerLinkActive="active">Join Events</a>
       </li>
       <li class="nav-item"
           *ngIf="isLoggedIn()">
         <a class="nav-link" routerLink="/core/roster" routerLinkActive="active">Roster</a>
+      </li>
+      <li class="nav-item"
+          *ngIf="isLoggedIn()">
+        <a class="nav-link" routerLink="/core/members" routerLinkActive="active">Event Details</a>
       </li>
     </ul>
 

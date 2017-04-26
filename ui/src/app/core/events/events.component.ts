@@ -30,7 +30,7 @@ export class EventsComponent implements OnInit {
     this.busy = this.organizationService.listEvents(this.currentUser.organization)
         .subscribe((data) => {
           this.events = data;
-          if (this.events.length == 0 ) {
+          if (this.events.length == 0) {
             this.displayAlert = true;
           }
           for(var index in this.events) {

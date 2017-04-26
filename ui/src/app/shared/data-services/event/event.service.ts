@@ -20,6 +20,14 @@ export class EventService {
         });
   }
 
+  public getEvent(id) {
+    return this.http.get(`${this.eventUrl}/${id}`)
+        .map((r: Response) => r)
+        .catch(err => {
+          return Observable.throw(err);
+        });
+  }
+
   public updateEvent(event) {
     return this.http.put(`${this.eventUrl}/${event._id}`, event)
         .map((r: Response) => r)

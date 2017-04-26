@@ -2,6 +2,7 @@
 
 import _ from 'lodash';
 import mongoose from 'mongoose';
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var OrganizationSchema = new mongoose.Schema({
     name: {
@@ -74,5 +75,12 @@ OrganizationSchema.methods = {
     //     }
     // }
 };
-
+OrganizationSchema.plugin(deepPopulate, {
+    whitelist: [
+        'events',
+        'events.members.name',
+        'events.members.phone',
+        'events.members.email'
+    ]
+});
 export default mongoose.model('Organization', OrganizationSchema);
