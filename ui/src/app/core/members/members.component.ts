@@ -14,6 +14,7 @@ export class MembersComponent implements OnInit {
   currentUser;
   events;
   busy: Subscription;
+  eventId;
 
   constructor(private router: Router, private route: ActivatedRoute,
               private organizationService: OrganizationService,
@@ -21,7 +22,7 @@ export class MembersComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      let eventId = params['id'];
+      this.eventId = params['id'];
       this.currentUser = this.authService.getCurrentUser();
       this.busy = this.organizationService.getOrganization(this.currentUser.organization._id)
           .subscribe((data) => {

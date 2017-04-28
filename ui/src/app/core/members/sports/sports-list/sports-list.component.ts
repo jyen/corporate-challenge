@@ -11,6 +11,7 @@ export class SportsListComponent implements AfterViewInit, OnInit {
   public gridOptions: GridOptions;
 
   @Input() data;
+  @Input() id;
 
   constructor() {
     this.gridOptions = <GridOptions>{};
@@ -18,7 +19,6 @@ export class SportsListComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
     if (this.data) {
       this.gridOptions.rowData = this.data;
     } else {
@@ -69,9 +69,9 @@ export class SportsListComponent implements AfterViewInit, OnInit {
         // the key is used by the default group cellRenderer
         key: record.name,
         // provide ag-Grid with the children of this group
-        children: [record.members]
+        children: [record.members],
         // for demo, expand the third row by default
-        // expanded: record.account === 177002
+        expanded: record._id === this.id
       };
     } else {
       return null;
