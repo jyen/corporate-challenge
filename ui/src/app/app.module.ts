@@ -23,14 +23,14 @@ import {BusyModule} from 'angular2-busy';
 import {EventService} from "./shared/data-services/event/event.service";
 import { ToastrModule } from 'ngx-toastr';
 import { AgGridModule } from 'ag-grid-angular';
+import { HomeModule } from './home/home.module';
+import { LoginModule } from './login/login.module';
+import { SignupModule } from './signup/signup.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-      LoginComponent,
-      SignupComponent,
-      HomeComponent
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +41,9 @@ import { AgGridModule } from 'ag-grid-angular';
     CoreModule,
     BrowserAnimationsModule,
     BusyModule,
+    HomeModule,
+    LoginModule,
+    SignupModule,
     NgbModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-top-center'
