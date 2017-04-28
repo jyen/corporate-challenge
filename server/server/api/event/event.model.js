@@ -24,6 +24,7 @@ EventSchema.methods = {
     },
 
     removeMember(id) {
+        console.log(id);
         var index = this.members.indexOf(id);
         if (index > -1) {
             this.members.splice(index, 1);

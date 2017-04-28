@@ -53,6 +53,7 @@ export default class EventService {
     static leave(eventId, userId) {
         return Event.findById(eventId).exec()
             .then(event => {
+                console.log(event);
                 event.removeMember(userId);
                 return event.save();
             });

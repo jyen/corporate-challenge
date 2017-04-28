@@ -40,7 +40,11 @@ export class ProfileComponent implements OnInit {
                 this.events = data;
 
                 for(var index in this.events) {
-                  if(this.events[index].members.includes(this.currentUser._id)) {
+
+                  let member = this.events[index].members.filter((obj) => {
+                      return obj._id === this.currentUser._id;
+                  });
+                  if (member.length !== 0) {
                     this.myEvents.push(this.events[index]);
                   }
                 }

@@ -35,6 +35,7 @@ export class MembersListComponent implements ICellRendererAngularComp, AfterView
         {headerName: 'Name', field: 'name'},
         {headerName: 'Email', field: 'email'},
         {headerName: 'Phone', field: 'phone'},
+        {headerName: 'Gender', field: 'gender'},
         {headerName: 'Participant Type', field: 'participantType'}
         ];
   }

@@ -26,7 +26,6 @@ export class EventsComponent implements OnInit {
   ngOnInit() {
     this.displayAlert = false;
     this.currentUser = this.authService.getCurrentUser();
-    console.log(this.currentUser);
     this.busy = this.organizationService.listEvents(this.currentUser.organization)
         .subscribe((data) => {
           this.events = data;
@@ -34,7 +33,11 @@ export class EventsComponent implements OnInit {
             this.displayAlert = true;
           }
           for(var index in this.events) {
-            if(this.events[index].members.includes(this.currentUser._id)) {
+
+            let member = this.events[index].members.filter((obj) => {
+              return obj._id === this.currentUser._id;
+            });
+            if (member.length !== 0) {
               this.events[index].selected = true;
             }
           }
