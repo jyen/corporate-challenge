@@ -27,7 +27,10 @@ import { AgGridModule } from 'ag-grid-angular';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+      LoginComponent,
+      SignupComponent,
+      HomeComponent
   ],
   imports: [
     BrowserModule,

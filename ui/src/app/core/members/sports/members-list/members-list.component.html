@@ -1,0 +1,12 @@
+<ag-grid-angular #agDetailGrid
+                 class="full-width-grid"
+                 [gridOptions]="gridOptions"
+
+                 enableSorting
+                 enableFilter
+                 enableColResize
+
+                 (mousewheel)="consumeMouseWheelOnDetailGrid($event)"
+                 (DOMMouseScroll)="consumeMouseWheelOnDetailGrid($event)">
+
+</ag-grid-angular>

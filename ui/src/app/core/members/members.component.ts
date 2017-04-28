@@ -26,6 +26,7 @@ export class MembersComponent implements OnInit {
       this.busy = this.organizationService.getOrganization(this.currentUser.organization._id)
           .subscribe((data) => {
             this.events = data.events;
+            console.log(this.events);
           });
     });
   }

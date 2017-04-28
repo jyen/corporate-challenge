@@ -1,18 +1,6 @@
 <div [ngBusy]="busy">
-  <ngb-accordion [closeOthers]="true" activeIds="add-new">
+  <span *ngIf="events">
 
-    <ngb-panel id="{{event._id}}" title="{{event.name}} {{event.info}}" *ngFor="let event of events">
-      <template ngbPanelContent>
-        Test
-      </template>
-    </ngb-panel>
-    <ngb-panel id="add-new">
-      <template ngbPanelTitle>
-        Add New
-      </template>
-      <template ngbPanelContent>
-        test1
-      </template>
-    </ngb-panel>
-  </ngb-accordion>
+    <app-sports-list [data]="events"></app-sports-list>
+  </span>
 </div>
