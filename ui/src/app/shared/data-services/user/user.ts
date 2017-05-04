@@ -10,6 +10,6 @@ export class User {
         this.name = '';
         this.email = '';
         this.password = '';
-        this.organization = {};
+        this.organization = null;
     }
 }

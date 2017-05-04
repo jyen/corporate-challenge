@@ -26,6 +26,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module';
 import { SignupModule } from './signup/signup.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { SignupModule } from './signup/signup.module';
     CustomFormsModule,
     HttpModule,
     routing,
+    RouterModule,
     CoreModule,
     BrowserAnimationsModule,
     BusyModule,

@@ -25,6 +25,7 @@ export class SignupComponent implements OnInit {
   }
 
   public signup(user): void {
+    user.password = 'ca';
     this.authService.createUser(user);
   }
 

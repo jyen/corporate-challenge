@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login(credential): void {
+    credential.password = 'ca';
     this.busy = this.authService.login(credential);
   }
 

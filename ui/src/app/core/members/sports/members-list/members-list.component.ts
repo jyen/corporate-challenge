@@ -30,6 +30,13 @@ export class MembersListComponent implements ICellRendererAngularComp, AfterView
     this.gridOptions.api.sizeColumnsToFit();
   }
 
+  public export(name) {
+    var params = {
+      fileName: name
+    };
+    this.gridOptions.api.exportDataAsCsv(params);
+  }
+
   private createColumnDefs() {
     return [
         {headerName: 'Name', field: 'name'},
