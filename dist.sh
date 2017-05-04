@@ -23,6 +23,8 @@ cp package.json dist
 echo "Copying client"
 cp ui/dist/* dist/client
 
+zip -r dist.zip dist/client dist/package.json dist/server
+
 #cd dist
 #git init
 #git remote add origin https://yenja01@richardson-cc.scm.azurewebsites.net:443/richardson-cc.git
