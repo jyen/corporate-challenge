@@ -23,10 +23,19 @@ export class RosterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gridOptions = <GridOptions> {};
+    this.gridOptions = <GridOptions> {
+      enableColResize: true,
+      enableSorting: true,
+      enableFilter: true
+    };
     this.gridOptions.onGridReady = () => {
       this.gridOptions.api.sizeColumnsToFit();
-    }
+    };
+
+    this.gridOptions.onGridSizeChanged = () => {
+      this.gridOptions.api.sizeColumnsToFit();
+    };
+
     this.gridOptions.columnDefs = [
       {
         headerName: "Name",
@@ -60,6 +69,10 @@ export class RosterComponent implements OnInit {
           this.users = r;
           this.gridOptions.rowData = this.users;
         });
+  }
+
+  public exportToCSV() {
+    this.gridOptions.api.exportDataAsCsv();
   }
 
 }
