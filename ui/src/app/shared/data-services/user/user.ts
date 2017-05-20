@@ -5,6 +5,8 @@ export class User {
     public role: string;
     public name: string;
     public organization: any;
+    public phone: any;
+    public participantType: string;
 
     constructor() {
         this.name = '';

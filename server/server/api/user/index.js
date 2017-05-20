@@ -12,6 +12,7 @@ router.get('/me', auth.isAuthenticated(), controller.me);
 router.post('/me/join/:id', auth.isAuthenticated(), controller.joinOrganization);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
+router.put('/me', auth.isAuthenticated(), controller.update);
 router.post('/', controller.create);
 
 module.exports = router;

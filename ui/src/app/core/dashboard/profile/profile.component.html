@@ -19,14 +19,77 @@
           <div class="card">
             <div class="card-block">
               <h4 class="card-title">Profile
-                <!--<button class="pull-right btn btn-sm btn-primary">-->
-                  <!--<i class="fa fa-pencil-square-o" aria-hidden="true"></i>-->
-                <!--</button>-->
+                <button *ngIf="!editMode"
+                        class="pull-right btn btn-sm btn-primary"
+                        (click)="edit()">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </button>
+                <button *ngIf="editMode"
+                        class="pull-right btn btn-sm btn-link"
+                        (click)="cancel()">
+                  Cancel
+                </button>
+                <button *ngIf="editMode"
+                        class="pull-right btn btn-sm btn-primary"
+                        (click)="save(tempUser)">
+                  Save
+                </button>
               </h4>
-              <p class="card-text">Name: {{currentUser.name}}</p>
-              <p class="card-text">Email: {{currentUser.email}}</p>
-              <p class="card-text">Phone: {{currentUser.phone}}</p>
-              <p class="card-text">Participant Type: {{currentUser.participantType}}</p>
+              <span *ngIf="!editMode">
+                  <p class="card-text">Name: {{currentUser.name}}</p>
+                  <p class="card-text">Email: {{currentUser.email}}</p>
+                  <p class="card-text">Phone: {{currentUser.phone}}</p>
+                  <p class="card-text">Participant Type: {{currentUser.participantType}}</p>
+              </span>
+              <form *ngIf="editMode" class="form" #profileForm="ngForm">
+                  <div class="form-group row">
+                      <label class="col-2 col-form-label">Name</label>
+                      <div class="col-10">
+                         <input type="text"
+                                name="name"
+                                class="form-control"
+                                [(ngModel)]="tempUser.name"
+                                [disabled]="disabled"
+                                required/>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label class="col-2 col-form-label">Email</label>
+                      <div class="col-10">
+                         <input type="text"
+                                name="email"
+                                class="form-control"
+                                [(ngModel)]="tempUser.email"
+                                required/>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label class="col-2 col-form-label">Phone</label>
+                      <div class="col-10">
+                         <input type="text"
+                                name="phone"
+                                class="form-control"
+                                [(ngModel)]="tempUser.phone"
+                                required/>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label class="col-4 col-form-label">Participant Type</label>
+                      <div class="col-8">
+                          <select id="participant"
+                                  class="form-control"
+                                  name="participant"
+                                  [(ngModel)]="tempUser.participantType"
+                                  required
+                                  #participant="ngModel" >
+                        <option value="Employee">Employee</option>
+                        <option value="Contractor">Contractor</option>
+                        <option value="Retiree">Retiree</option>
+                        <option value="Spouse">Spouse</option>
+                      </select>
+                      </div>
+                  </div>
+              </form>
             </div>
           </div>
           <div class="card">
@@ -36,36 +99,21 @@
               <p class="card-text">Division: {{organization.division}}</p>
             </div>
           </div>
-          <!--<div class="card">-->
-            <!--<div class="card-block">-->
-              <!--<h4 class="card-title">Card title</h4>-->
-              <!--<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>-->
-              <!--<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
-            <!--</div>-->
-          <!--</div>-->
         </div>
       </div>
 
       <br/>
-      <h3>Sports</h3>
-      <div class="row">
-          <div style="cursor: pointer" class="card col-md-3"
-               *ngFor="let myEvent of myEvents"
-               (click)="getSportDetail(myEvent)">
-              <div class="card-block">
-                  <h4 class="card-title">{{myEvent.name}}</h4>
-              </div>
-          </div>
-
-          <div style="cursor: pointer" class="card col-md-2" routerLink="/core/events">
-              <div class="card-block">
-                  <h4>
-                      <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
-                  </h4>
-              </div>
-          </div>
-      </div>
-
+      <h3>Sports
+          <span class="pull-right">
+            <button class="btn btn-primary" routerLink="/core/events">Add</button>
+          </span>
+      </h3>
+      <ul class="list-group">
+          <li class="list-group-item"
+              *ngFor="let myEvent of myEvents">
+              {{myEvent.name}}
+          </li>
+      </ul>
   </span>
 </span>
 

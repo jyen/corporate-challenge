@@ -36,7 +36,15 @@ export class UserService {
             });
     }
 
-    public createUser(user) {
+  public updateMe(user) {
+    return this.http.put(`${this.userUrl}/me`, user)
+        .map((r: Response) => r)
+        .catch(err => {
+          return Observable.throw(err);
+        });
+  }
+
+  public createUser(user) {
         return this.http.post(`${this.userUrl}`, user)
             .map((r: Response) => r)
             .catch(err => {

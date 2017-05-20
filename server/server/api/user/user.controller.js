@@ -99,6 +99,25 @@ export function changePassword(req, res) {
         });
 }
 
+export function update(req, res) {
+    var userId = req.user._id;
+
+    var modifiedUser = req.body;
+
+    return User.findById(userId).exec()
+        .then(user => {
+                user.name = modifiedUser.name;
+                user.email = modifiedUser.email;
+                user.phone = modifiedUser.phone;
+                user.participantType = modifiedUser.participantType;
+                return user.save()
+                    .then((user) => {
+                        return res.json(user.info);
+                    })
+                    .catch(validationError(res));
+        })
+}
+
 /**
  * Get my info
  */

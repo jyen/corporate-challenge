@@ -14,10 +14,12 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
 
   public currentUser: User;
+  public tempUser: any;
   public adminMessage: boolean;
   busy: Subscription;
   events;
   organization;
+  public editMode: boolean;
 
   myEvents = [];
 
@@ -25,6 +27,7 @@ export class ProfileComponent implements OnInit {
               private organizationService: OrganizationService, private router: Router) { }
 
   ngOnInit() {
+    this.tempUser = {};
 
     this.busy = this.userService.getCurrentUser()
         .subscribe(r => {
@@ -56,5 +59,23 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/core/members', {id: event._id}])
     console.log('detail');
   }
+
+  public edit() {
+    Object.assign(this.tempUser, this.currentUser);
+    this.editMode = true;
+  }
+
+  public cancel() {
+    this.editMode = false;
+  }
+
+  public save(user) {
+    this.userService.updateMe(user)
+        .subscribe((data) => {
+          this.editMode = false;
+          this.currentUser = this.tempUser;
+        });
+
+  };
 
 }
