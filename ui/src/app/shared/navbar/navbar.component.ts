@@ -25,4 +25,8 @@ export class NavbarComponent implements OnInit {
     return this.authService.isAdmin();
   }
 
+  public hasOrganization(): boolean {
+    return this.authService.currentUser.organization;
+  }
+
 }

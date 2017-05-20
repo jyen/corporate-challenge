@@ -22,8 +22,8 @@ cp package.json dist
 
 echo "Copying client"
 cp ui/dist/* dist/client
-
-zip -r dist.zip dist/client dist/package.json dist/server
+cd dist
+zip -r dist.zip *
 
 #cd dist
 #git init
